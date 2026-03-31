@@ -1,6 +1,5 @@
 /**
- * Minimal ClusterServiceVersion list page using SDK components directly.
- * Bypasses legacy factory wrappers to verify runtime functionality.
+ * Minimal InstallPlan list page using SDK components directly.
  */
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,19 +24,19 @@ import type {
 const columns: TableColumn<K8sResourceCommon>[] = [
   { title: 'Name', id: 'name', sortField: 'metadata.name' },
   { title: 'Namespace', id: 'namespace', sortField: 'metadata.namespace' },
-  { title: 'Version', id: 'version' },
+  { title: 'Approval', id: 'approval' },
   { title: 'Phase', id: 'phase' },
   { title: 'Created', id: 'created', sortField: 'metadata.creationTimestamp' },
 ];
 
-const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
+const InstallPlanRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
   <>
     <TableData id="name" activeColumnIDs={activeColumnIDs}>
       <ResourceLink
         groupVersionKind={{
           group: 'operators.coreos.com',
           version: 'v1alpha1',
-          kind: 'ClusterServiceVersion',
+          kind: 'InstallPlan',
         }}
         name={obj.metadata?.name}
         namespace={obj.metadata?.namespace}
@@ -46,8 +45,8 @@ const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
     <TableData id="namespace" activeColumnIDs={activeColumnIDs}>
       <ResourceLink kind="Namespace" name={obj.metadata?.namespace} />
     </TableData>
-    <TableData id="version" activeColumnIDs={activeColumnIDs}>
-      {(obj as any)?.spec?.version || '-'}
+    <TableData id="approval" activeColumnIDs={activeColumnIDs}>
+      {(obj as any)?.spec?.approval || '-'}
     </TableData>
     <TableData id="phase" activeColumnIDs={activeColumnIDs}>
       {(obj as any)?.status?.phase || '-'}
@@ -58,15 +57,15 @@ const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
   </>
 );
 
-export const ClusterServiceVersionsPage: FC<any> = () => {
+export const InstallPlansPage: FC<any> = () => {
   const { t } = useTranslation();
   const [activeNamespace] = useActiveNamespace();
 
-  const [csvs, loaded, loadError] = useK8sWatchResource<K8sResourceCommon[]>({
+  const [plans, loaded, loadError] = useK8sWatchResource<K8sResourceCommon[]>({
     groupVersionKind: {
       group: 'operators.coreos.com',
       version: 'v1alpha1',
-      kind: 'ClusterServiceVersion',
+      kind: 'InstallPlan',
     },
     isList: true,
     namespaced: true,
@@ -75,11 +74,11 @@ export const ClusterServiceVersionsPage: FC<any> = () => {
       : {}),
   });
 
-  const [data, filteredData, onFilterChange] = useListPageFilter(csvs);
+  const [data, filteredData, onFilterChange] = useListPageFilter(plans);
 
   return (
     <>
-      <ListPageHeader title={t('olm~Installed Operators')} />
+      <ListPageHeader title={t('olm~Install Plans')} />
       <ListPageBody>
         <ListPageFilter
           data={data}
@@ -92,14 +91,14 @@ export const ClusterServiceVersionsPage: FC<any> = () => {
           loaded={loaded}
           loadError={loadError}
           columns={columns}
-          Row={CSVRow}
+          Row={InstallPlanRow}
         />
       </ListPageBody>
     </>
   );
 };
 
-export default ClusterServiceVersionsPage;
+export default InstallPlansPage;
 
-// Re-export details page from dedicated module
-export { ClusterServiceVersionDetailsPage } from './csv-detail-page';
+// Placeholder details page
+export const InstallPlanDetailsPage = InstallPlansPage;

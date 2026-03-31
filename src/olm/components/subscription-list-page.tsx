@@ -1,6 +1,5 @@
 /**
- * Minimal ClusterServiceVersion list page using SDK components directly.
- * Bypasses legacy factory wrappers to verify runtime functionality.
+ * Minimal Subscription list page using SDK components directly.
  */
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,19 +24,20 @@ import type {
 const columns: TableColumn<K8sResourceCommon>[] = [
   { title: 'Name', id: 'name', sortField: 'metadata.name' },
   { title: 'Namespace', id: 'namespace', sortField: 'metadata.namespace' },
-  { title: 'Version', id: 'version' },
-  { title: 'Phase', id: 'phase' },
+  { title: 'Package', id: 'package' },
+  { title: 'Channel', id: 'channel' },
+  { title: 'Approval Strategy', id: 'approval' },
   { title: 'Created', id: 'created', sortField: 'metadata.creationTimestamp' },
 ];
 
-const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
+const SubscriptionRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
   <>
     <TableData id="name" activeColumnIDs={activeColumnIDs}>
       <ResourceLink
         groupVersionKind={{
           group: 'operators.coreos.com',
           version: 'v1alpha1',
-          kind: 'ClusterServiceVersion',
+          kind: 'Subscription',
         }}
         name={obj.metadata?.name}
         namespace={obj.metadata?.namespace}
@@ -46,11 +46,14 @@ const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
     <TableData id="namespace" activeColumnIDs={activeColumnIDs}>
       <ResourceLink kind="Namespace" name={obj.metadata?.namespace} />
     </TableData>
-    <TableData id="version" activeColumnIDs={activeColumnIDs}>
-      {(obj as any)?.spec?.version || '-'}
+    <TableData id="package" activeColumnIDs={activeColumnIDs}>
+      {(obj as any)?.spec?.name || '-'}
     </TableData>
-    <TableData id="phase" activeColumnIDs={activeColumnIDs}>
-      {(obj as any)?.status?.phase || '-'}
+    <TableData id="channel" activeColumnIDs={activeColumnIDs}>
+      {(obj as any)?.spec?.channel || '-'}
+    </TableData>
+    <TableData id="approval" activeColumnIDs={activeColumnIDs}>
+      {(obj as any)?.spec?.installPlanApproval || '-'}
     </TableData>
     <TableData id="created" activeColumnIDs={activeColumnIDs}>
       <Timestamp timestamp={obj.metadata?.creationTimestamp} />
@@ -58,15 +61,15 @@ const CSVRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
   </>
 );
 
-export const ClusterServiceVersionsPage: FC<any> = () => {
+export const SubscriptionsPage: FC<any> = () => {
   const { t } = useTranslation();
   const [activeNamespace] = useActiveNamespace();
 
-  const [csvs, loaded, loadError] = useK8sWatchResource<K8sResourceCommon[]>({
+  const [subs, loaded, loadError] = useK8sWatchResource<K8sResourceCommon[]>({
     groupVersionKind: {
       group: 'operators.coreos.com',
       version: 'v1alpha1',
-      kind: 'ClusterServiceVersion',
+      kind: 'Subscription',
     },
     isList: true,
     namespaced: true,
@@ -75,11 +78,11 @@ export const ClusterServiceVersionsPage: FC<any> = () => {
       : {}),
   });
 
-  const [data, filteredData, onFilterChange] = useListPageFilter(csvs);
+  const [data, filteredData, onFilterChange] = useListPageFilter(subs);
 
   return (
     <>
-      <ListPageHeader title={t('olm~Installed Operators')} />
+      <ListPageHeader title={t('olm~Subscriptions')} />
       <ListPageBody>
         <ListPageFilter
           data={data}
@@ -92,14 +95,14 @@ export const ClusterServiceVersionsPage: FC<any> = () => {
           loaded={loaded}
           loadError={loadError}
           columns={columns}
-          Row={CSVRow}
+          Row={SubscriptionRow}
         />
       </ListPageBody>
     </>
   );
 };
 
-export default ClusterServiceVersionsPage;
+export default SubscriptionsPage;
 
-// Re-export details page from dedicated module
-export { ClusterServiceVersionDetailsPage } from './csv-detail-page';
+// Placeholder details page
+export const SubscriptionDetailsPage = SubscriptionsPage;
