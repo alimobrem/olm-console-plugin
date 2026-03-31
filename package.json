@@ -60,7 +60,6 @@
       "@console/pluginAPI": ">=4.19.0-0"
     },
     "exposedModules": {
-      "CatalogRedirect": "./olm/components/catalog-redirect.tsx",
       "catalogSource": "./olm/components/catalogsource-list-page.tsx",
       "clusterServiceVersions": "./olm/components/csv-list-page.tsx",
       "createCatalogSource": "./olm/components/catalogsource-list-page.tsx",

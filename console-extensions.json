@@ -458,13 +458,10 @@
   {
     "type": "console.page/route",
     "properties": {
-      "path": [
-        "/operatorhub",
-        "/catalog"
-      ],
       "exact": true,
+      "path": "/operatorhub",
       "component": {
-        "$codeRef": "CatalogRedirect"
+        "$codeRef": "operatorHubDetails.default"
       }
     }
   },
