@@ -3,7 +3,7 @@
  * Migrated from @console/shared/src/utils/console-plugin.
  */
 import * as _ from 'lodash';
-import type { K8sResourceKind } from './k8s-shims';
+import type { K8sResourceKind } from './k8s';
 
 type Patch = {
   path: string;

@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import * as Router from 'react-router';
 import { Table, MultiListPage, DetailsPage } from '../../../lib/factory';
 import { ResourceLink } from '../../../lib/console-components';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import { LazyActionMenu } from '@openshift-console/dynamic-plugin-sdk';
 import { renderWithProviders } from '@testing-library/react';
 import {

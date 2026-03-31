@@ -22,8 +22,8 @@ import {
   prune,
 } from '../../../lib/dynamic-form-utils';
 import { PageHeading } from '../PageHeading';
-import { SyncedEditor } from '../../lib/editor-toggle';
-import { EditorType } from '../../lib/editor-toggle';
+import { SyncedEditor } from '../../../lib/editor-toggle';
+import { EditorType } from '../../../lib/editor-toggle';
 import { useCreateResourceExtension } from '@openshift-console/dynamic-plugin-sdk';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import type { RouteParams } from '../../../lib/types';

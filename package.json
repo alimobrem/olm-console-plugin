@@ -14,9 +14,11 @@
     "lint": "eslint src/ --ext .ts,.tsx"
   },
   "devDependencies": {
-    "@openshift-console/dynamic-plugin-sdk": "4.19.0-prerelease.1",
-    "@openshift-console/dynamic-plugin-sdk-webpack": "4.19.0-prerelease.1",
+    "@openshift-console/dynamic-plugin-sdk": "link:../console/frontend/packages/console-dynamic-plugin-sdk/dist/core",
+    "@openshift-console/dynamic-plugin-sdk-webpack": "link:../console/frontend/packages/console-dynamic-plugin-sdk/dist/webpack",
     "@openshift-console/olm-types": "portal:./packages/olm-types",
+    "@patternfly/react-catalog-view-extension": "^6.2.2",
+    "@patternfly/react-charts": "^7.4.6",
     "@patternfly/react-core": "^6.2.2",
     "@patternfly/react-icons": "^6.2.2",
     "@patternfly/react-styles": "^6.2.2",
@@ -33,6 +35,7 @@
     "file-loader": "6.2.0",
     "i18next": "^25.8.18",
     "immutable": "^4.3.0",
+    "js-yaml": "^4.1.1",
     "json-schema": "^0.4.0",
     "lodash": "^4.17.21",
     "react": "18.3.1",

@@ -9,7 +9,7 @@ import {
 } from '@patternfly/react-core';
 import { safeDump } from 'js-yaml';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import { ResourceLink, CopyToClipboard } from '../../../lib/console-components';
 import type { ModalComponentProps } from '../../../lib/types';
 import type { StepResource } from '../../types';

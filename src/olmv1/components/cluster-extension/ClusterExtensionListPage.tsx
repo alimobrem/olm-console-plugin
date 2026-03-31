@@ -13,10 +13,10 @@ import Status from '@openshift-console/dynamic-plugin-sdk';
 import type { TableColumn } from '@openshift-console/dynamic-plugin-sdk';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { ResourceLink } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import LazyActionMenu from '@openshift-console/dynamic-plugin-sdk';
 import PaneBody from '../../../olm/components/PaneBody';
-import { DASH } from '../../lib/constants';
+import { DASH } from '../../../lib/constants';
 import { ClusterExtensionModel } from '../../models';
 import type { ClusterExtensionKind } from '../../types';
 

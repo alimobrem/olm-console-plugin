@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { Button, Form, Modal, ModalBody, ModalHeader, ModalVariant } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { k8sPatch } from '../../../lib/k8s';
 import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';

@@ -16,7 +16,7 @@ import { css } from '@patternfly/react-styles';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useSearchParams } from 'react-router';
-import { useOverlay } from '../../lib/modals';
+import { useOverlay } from '../../../lib/modals';
 import { TileViewPage } from '../../../lib/legacy-components';
 import i18n from 'i18next';
 import { GreenCheckCircleIcon } from '@openshift-console/dynamic-plugin-sdk';

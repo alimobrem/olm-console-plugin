@@ -21,7 +21,7 @@ import {
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
+import { useOverlay } from './modals';
 export type { OverlayComponent };
 export { useOverlay };
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';

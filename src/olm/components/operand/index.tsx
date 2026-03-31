@@ -10,7 +10,7 @@ import { useParams, useLocation, useNavigate } from 'react-router';
 import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { ListPageBody } from '@openshift-console/dynamic-plugin-sdk';
 import { getResources } from '../../../lib/legacy-components';
-import { Conditions } from '../../lib/Conditions';
+import { Conditions } from '../../../lib/Conditions';
 import { ErrorPage404 } from '../../../lib/legacy-components';
 import { ResourceEventStream } from '../../../lib/legacy-components';
 import type { RowFunctionArgs, Flatten, Filter } from '../../../lib/factory';

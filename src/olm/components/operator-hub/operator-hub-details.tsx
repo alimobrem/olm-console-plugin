@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { DescriptionList, Grid, GridItem } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import { useOverlay } from '../../lib/modals';
+import { useOverlay } from '../../../lib/modals';
 import type { DetailsPageProps } from '../../../lib/factory';
 import { DetailsPage } from '../../../lib/factory';
 import {

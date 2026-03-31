@@ -26,7 +26,7 @@ export { ResourceLink, ResourceIcon } from '@openshift-console/dynamic-plugin-sd
 export { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
 
 /* Re-export path helpers already implemented in k8s-shims */
-export { resourceObjPath, resourcePath, asAccessReview } from './k8s-shims';
+export { resourceObjPath, resourcePath, asAccessReview } from './k8s';
 
 /* ------------------------------------------------------------------ */
 /*  resourcePathFromModel                                              */

@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as ReactRouter from 'react-router';
-import { DetailsPage } from '../../../lib/factory';
+import { DetailsPage } from '../../../../lib/factory';
 import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance, testClusterServiceVersion } from '../../../../mocks';
 import { ClusterServiceVersionModel } from '../../../models';

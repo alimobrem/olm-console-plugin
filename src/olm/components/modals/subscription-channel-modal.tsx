@@ -11,10 +11,10 @@ import {
   Radio,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import { ResourceLink } from '../../../lib/console-components';
 import type { K8sModel, K8sResourceKind } from '../../../lib/k8s';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';
 import { usePromiseHandler } from '../../../lib/usePromiseHandler';
 import type { ModalComponentProps } from '../../../lib/types';

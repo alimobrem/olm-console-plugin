@@ -99,4 +99,4 @@ export const ConsoleOperatorConfigModel: K8sModel = {
   plural: 'consoles',
 };
 
-export { InfrastructureModel, AuthenticationModel, CloudCredentialModel } from './k8s-shims';
+export { InfrastructureModel, AuthenticationModel, CloudCredentialModel } from './k8s';

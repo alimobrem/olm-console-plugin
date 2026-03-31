@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ChartDonut } from '@patternfly/react-charts/victory';
+import { ChartDonut } from '@patternfly/react-charts';
 /* eslint-disable camelcase */
 import { t_color_blue_50 as blue300 } from '@patternfly/react-tokens';
 import { chart_color_blue_100 as blue100 } from '@patternfly/react-tokens/dist/esm/chart_color_blue_100';

@@ -6,9 +6,9 @@
  */
 import type { FC, ReactElement, ReactNode } from 'react';
 import type { GraphElement } from '@patternfly/react-topology';
-import { SectionHeading as SidebarSectionHeading } from './utils-shims';
+import { SectionHeading as SidebarSectionHeading } from './console-components';
 import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
-import { modelFor, referenceFor } from './k8s-shims';
+import { modelFor, referenceFor } from './k8s';
 
 // ---------------------------------------------------------------------------
 // Constants

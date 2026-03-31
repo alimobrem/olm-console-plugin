@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useOverlay } from '../../lib/modals';
+import { useOverlay } from '../../../../lib/modals';
 import i18n from 'i18next';
 import type { K8sModel, K8sResourceKind } from '../../../../lib/k8s';
 import { LazyUpdateStrategyModalOverlay } from '../../modals';

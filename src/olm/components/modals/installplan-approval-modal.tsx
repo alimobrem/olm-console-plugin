@@ -12,7 +12,7 @@ import {
 } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import type { K8sModel, K8sResourceKind } from '../../../lib/k8s';
 import { modelFor, referenceFor, referenceForModel } from '../../../lib/k8s';
 import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';

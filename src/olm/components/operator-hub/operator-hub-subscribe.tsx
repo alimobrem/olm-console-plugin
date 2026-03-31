@@ -54,13 +54,13 @@ import {
   referenceFor,
   referenceForModel,
 } from '../../../lib/k8s';
-import { fromRequirements } from '../../lib/k8s';
+import { fromRequirements } from '../../../lib/k8s';
 import { DismissableAlert } from '../../../lib/status-icons';
 import { DocumentTitle } from '../DocumentTitle';
 import { PageHeading } from '../PageHeading';
 import PaneBody from '../PaneBody';
 import { ExternalLink } from '../ExternalLink';
-import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../lib/constants';
+import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../../lib/constants';
 import { SubscriptionModel, OperatorGroupModel, PackageManifestModel } from '../../models';
 import type { OperatorGroupKind, PackageManifestKind, SubscriptionKind } from '../../types';
 import { InstallPlanApproval, InstallModeType } from '../../types';

@@ -4,7 +4,7 @@ import * as Router from 'react-router';
 import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk';
 import { Table, MultiListPage, DetailsPage } from '../../../lib/factory';
 import { useAccessReview } from '../../../lib/console-components';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testInstallPlan } from '../../../mocks';
 import { InstallPlanModel, ClusterServiceVersionModel, OperatorGroupModel } from '../../models';

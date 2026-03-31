@@ -11,8 +11,8 @@ import type {
   InfrastructureKind,
   AuthenticationKind,
 } from '../../../lib/k8s';
-import { referenceForModel } from '../../lib/k8s';
-import { fromRequirements } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
+import { fromRequirements } from '../../../lib/k8s';
 const isCatalogTypeEnabled = () => true;
 const useIsSoftwareCatalogEnabled = () => true;
 import { DocumentTitle } from '../DocumentTitle';

@@ -15,7 +15,7 @@ import {
   LazyLabelsModalOverlay,
   LazyTaintsModalOverlay,
   LazyTolerationsModalOverlay,
-} from './modals-barrel-shims';
+} from './modals';
 import { useConfigureCountModal } from './modals';
 import { asAccessReview } from '@openshift-console/dynamic-plugin-sdk';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';

@@ -13,7 +13,7 @@ import {
   ModalVariant,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../lib/olm-constants';
 import { ExternalLink } from '../ExternalLink';
 import type { ModalComponentProps } from '../../../lib/types';

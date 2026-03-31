@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { JSONSchema7 } from 'json-schema';
 import * as _ from 'lodash';
-import { Conditions } from '../../lib/Conditions';
+import { Conditions } from '../../../../lib/Conditions';
 import { SectionHeading } from '../../../../lib/console-components';
 import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
 import PaneBody from '../../PaneBody';

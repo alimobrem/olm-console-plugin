@@ -1,8 +1,8 @@
 import * as Router from 'react-router';
 
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { SyncedEditor } from '../../lib/editor-toggle';
-import { EditorType } from '../../lib/editor-toggle';
+import { SyncedEditor } from '../../../../lib/editor-toggle';
+import { EditorType } from '../../../../lib/editor-toggle';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { renderWithProviders } from '@testing-library/react';
 import { testClusterServiceVersion, testModel, testCRD } from '../../../../mocks';

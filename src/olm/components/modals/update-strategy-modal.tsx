@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import { Button, Form, Modal, ModalBody, ModalHeader, ModalVariant } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
 import {
   ConfigureUpdateStrategy,
   getNumberOrPercent,

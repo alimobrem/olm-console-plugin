@@ -17,8 +17,8 @@ import {
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import type { OverlayComponent } from '../../lib/modals';
-import { useOverlay } from '../../lib/modals';
+import type { OverlayComponent } from '../../../lib/modals';
+import { useOverlay } from '../../../lib/modals';
 import { k8sGetResource } from '@openshift-console/dynamic-plugin-sdk';
 import { settleAllPromises } from '@openshift-console/dynamic-plugin-sdk';
 import { getActiveNamespace } from '../../../lib/actions';
@@ -41,7 +41,7 @@ import {
   referenceForModel,
 } from '../../../lib/k8s';
 import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';
-import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../lib/constants';
+import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../../lib/constants';
 /* ---- Inlined useOperands ---- */
 import { consoleFetchJSON as coFetchJSONForOperands } from '@openshift-console/dynamic-plugin-sdk';
 

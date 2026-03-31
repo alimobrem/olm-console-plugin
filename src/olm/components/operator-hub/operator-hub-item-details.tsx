@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { resourcePathFromModel } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import { DismissableAlert } from '../../../lib/status-icons';
 import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../lib/olm-constants';
 /* ---- Inlined CatalogPageOverlay & CatalogPageOverlayDescription ---- */

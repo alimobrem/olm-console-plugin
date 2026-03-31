@@ -6,7 +6,7 @@ import {
   useK8sWatchResource,
   useK8sWatchResources,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../lib/k8s';
+import { referenceForModel } from '../../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testCatalogSource, testPackageManifest, dummyPackageManifest } from '../../../mocks';
 import { CatalogSourceModel, PackageManifestModel } from '../../models';

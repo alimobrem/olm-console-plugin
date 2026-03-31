@@ -22,7 +22,7 @@ import {
 import type { Selector as SelectorType } from '../../../../lib/k8s';
 import { k8sPatch, k8sUpdate } from '../../../../lib/k8s';
 import { YellowExclamationTriangleIcon } from '@openshift-console/dynamic-plugin-sdk';
-import { DASH } from '../../lib/constants';
+import { DASH } from '../../../../lib/constants';
 import { DefaultCapability, K8sResourceLinkCapability, SecretCapability } from '../common';
 import type { CapabilityProps, Error } from '../types';
 import { SpecCapability } from '../types';
