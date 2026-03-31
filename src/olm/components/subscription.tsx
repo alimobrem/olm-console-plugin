@@ -22,12 +22,12 @@ import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
 import { ResourceStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import { Conditions } from '../../utils/Conditions';
-import type { RowFunctionArgs } from '../../utils/factory-shims';
-import { DetailsPage, MultiListPage, Table, TableData } from '../../utils/factory-shims';
+import { useOverlay } from '../../lib/modals';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk';
+import { Conditions } from '../../lib/Conditions';
+import type { RowFunctionArgs } from '../../lib/factory';
+import { DetailsPage, MultiListPage, Table, TableData } from '../../lib/factory';
 import {
   LoadingInline,
   ConsoleEmptyState,
@@ -36,9 +36,9 @@ import {
   resourcePathFromModel,
   ResourceSummary,
   SectionHeading,
-} from '../../utils/utils-shims';
-import type { K8sModel, K8sModel, K8sResourceCommon } from '../../utils/k8s-shims';
-import { k8sUpdate, referenceFor, referenceForModel } from '../../utils/k8s-shims';
+} from '../../lib/console-components';
+import type { K8sModel, K8sModel, K8sResourceCommon } from '../../lib/k8s';
+import { k8sUpdate, referenceFor, referenceForModel } from '../../lib/k8s';
 import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
@@ -47,15 +47,15 @@ import {
   ActionMenuVariant,
   KEBAB_COLUMN_CLASS,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { getName, getNamespace } from '../../utils/shared-utils';
+import { getName, getNamespace } from '../../lib/utils';
 import {
   BlueArrowCircleUpIcon,
   BlueInfoCircleIcon,
   WarningStatus,
-} from '../../utils/shared-components';
-import { DescriptionListTermHelp } from '../../utils/DescriptionListTermHelp';
-import PaneBody from '../../utils/PaneBody';
-import PaneBodyGroup from '../../utils/PaneBody';
+} from '../../lib/status-icons';
+import { DescriptionListTermHelp } from './DescriptionListTermHelp';
+import PaneBody from './PaneBody';
+import PaneBodyGroup from './PaneBody';
 import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
 import {
   SubscriptionModel,

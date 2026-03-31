@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import type { JSONSchema7 } from 'json-schema';
 import * as _ from 'lodash';
-import { Conditions } from '../../utils/Conditions';
-import { SectionHeading } from '../../../../utils/utils-shims';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import PaneBody from '../../../../utils/PaneBody';
+import { Conditions } from '../../lib/Conditions';
+import { SectionHeading } from '../../../../lib/console-components';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import PaneBody from '../../PaneBody';
 import type { StatusDescriptor } from '../types';
 import { DescriptorType } from '../types';
 import { useCalculatedDescriptorProperties } from '../utils';

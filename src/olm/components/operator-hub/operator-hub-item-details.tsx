@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useMemo, useEffect } from 'react';
 import { PropertiesSidePanel, PropertyItem } from '@patternfly/react-catalog-view-extension';
 import {
@@ -20,13 +20,27 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { resourcePathFromModel } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { DismissableAlert } from '../../../utils/shared-components';
-import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../utils/shared-constants';
-import CatalogPageOverlay from '../../../utils/catalog-overlay-shims';
-import { CatalogPageOverlayDescription } from '../../../utils/catalog-overlay-shims';
+import { referenceForModel } from '../../lib/k8s';
+import { DismissableAlert } from '../../../lib/status-icons';
+import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../lib/olm-constants';
+/* ---- Inlined CatalogPageOverlay & CatalogPageOverlayDescription ---- */
+const CatalogPageOverlay: FC<{ children?: ReactNode }> = ({ children }) => {
+  return (
+    <div className="co-catalog-page__overlay-body" style={{ display: 'flex' }}>
+      {children}
+    </div>
+  );
+};
+
+const CatalogPageOverlayDescription: FC<{ children?: ReactNode }> = ({ children }) => {
+  return (
+    <div className="co-catalog-page__overlay-description" style={{ flex: 1, overflow: 'auto' }}>
+      {children}
+    </div>
+  );
+};
 import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
-import { ExternalLink } from '../../utils/ExternalLink';
+import { ExternalLink } from '../ExternalLink';
 import { DefaultCatalogSource } from '../../const';
 import { useCurrentCSVDescription } from '../../hooks/useCurrentCSVDescription';
 import { ClusterServiceVersionModel, SubscriptionModel } from '../../models';

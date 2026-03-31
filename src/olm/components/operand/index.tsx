@@ -9,19 +9,19 @@ import { useTranslation } from 'react-i18next';
 import { useParams, useLocation, useNavigate } from 'react-router';
 import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { ListPageBody } from '@openshift-console/dynamic-plugin-sdk';
-import { getResources } from '../../../utils/misc-shims';
-import { Conditions } from '../../utils/Conditions';
-import { ErrorPage404 } from '../../../utils/misc-shims';
-import { ResourceEventStream } from '../../../utils/misc-shims';
-import type { RowFunctionArgs, Flatten, Filter } from '../../../utils/factory-shims';
-import { DetailsPage, Table, TableData } from '../../../utils/factory-shims';
+import { getResources } from '../../../lib/legacy-components';
+import { Conditions } from '../../lib/Conditions';
+import { ErrorPage404 } from '../../../lib/legacy-components';
+import { ResourceEventStream } from '../../../lib/legacy-components';
+import type { RowFunctionArgs, Flatten, Filter } from '../../../lib/factory';
+import { DetailsPage, Table, TableData } from '../../../lib/factory';
 import {
   useListPageFilter,
   ListPageCreateDropdown,
   ListPageCreateLink,
   ListPageHeader,
-} from '../../../utils/factory-shims';
-import ListPageFilter from '../../../utils/factory-shims';
+} from '../../../lib/factory';
+import ListPageFilter from '../../../lib/factory';
 import {
   LabelList,
   ConsoleEmptyState,
@@ -30,13 +30,13 @@ import {
   navFactory,
   ResourceLink,
   AsyncComponent,
-} from '../../../utils/utils-shims';
+} from '../../../lib/console-components';
 import {
   useK8sWatchResources,
   useK8sWatchResource,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { connectToModel } from '../../../utils/misc-shims';
-import { CustomResourceDefinitionModel } from '../../../utils/internal-models';
+import { connectToModel } from '../../../lib/legacy-components';
+import { CustomResourceDefinitionModel } from '../../../lib/models';
 import type {
   GroupVersionKind,
   K8sModel,
@@ -45,7 +45,7 @@ import type {
   OwnerReference,
   CustomResourceDefinitionKind,
   K8sResourceCommon,
-} from '../../../utils/k8s-shims';
+} from '../../../lib/k8s';
 import {
   apiVersionForReference,
   kindForReference,
@@ -53,7 +53,7 @@ import {
   referenceForModel,
   nameForModel,
   definitionFor,
-} from '../../../utils/k8s-shims';
+} from '../../../lib/k8s';
 import {
   Status,
   SuccessStatus,
@@ -68,10 +68,10 @@ import {
   useResourceDetailsPage,
   useResourceListPage,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { getNamespace } from '../../../utils/shared-utils';
-import { ErrorAlert } from '../../../utils/shared-components';
-import PaneBody from '../../../utils/PaneBody';
-import type { RouteParams } from '../../../utils/shared-types';
+import { getNamespace } from '../../../lib/utils';
+import { ErrorAlert } from '../../../lib/status-icons';
+import PaneBody from '../PaneBody';
+import type { RouteParams } from '../../../lib/types';
 import { ClusterServiceVersionModel } from '../../models';
 import type { ClusterServiceVersionKind, ProvidedAPI } from '../../types';
 import { useClusterServiceVersion } from '../../utils/useClusterServiceVersion';

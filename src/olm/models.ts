@@ -1,4 +1,4 @@
-import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk/src/api/common-types';
+import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
 
 export const OperatorSourceModel: K8sModel = {
   kind: 'OperatorSource',

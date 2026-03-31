@@ -6,7 +6,7 @@ import {
   resourcePathFromModel,
   resourcePath,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
+import { referenceForModel } from '../../lib/k8s';
 import Status from '@openshift-console/dynamic-plugin-sdk';
 import { ClusterServiceVersionModel } from '../../models';
 import type { ClusterServiceVersionKind } from '../../types';

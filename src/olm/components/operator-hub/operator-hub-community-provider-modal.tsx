@@ -13,10 +13,10 @@ import {
   ModalVariant,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../utils/shared-constants';
-import { ExternalLink } from '../../utils/ExternalLink';
-import type { ModalComponentProps } from '../../../utils/shared-types';
+import type { OverlayComponent } from '../../lib/modals';
+import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '../../../lib/olm-constants';
+import { ExternalLink } from '../ExternalLink';
+import type { ModalComponentProps } from '../../../lib/types';
 
 export const OperatorHubCommunityProviderModal: FC<OperatorHubCommunityProviderModalProps> = ({
   close,

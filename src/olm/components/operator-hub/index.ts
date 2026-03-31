@@ -4,7 +4,7 @@ import type {
   AuthenticationKind,
   K8sResourceKind,
   ObjectMetadata,
-} from '../../../utils/k8s-shims';
+} from '../../../lib/k8s';
 import type { PackageManifestKind, SubscriptionKind } from '../../types';
 
 export enum InstalledState {

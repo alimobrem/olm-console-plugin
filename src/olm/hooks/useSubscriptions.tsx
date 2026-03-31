@@ -1,8 +1,8 @@
 import {
   useK8sWatchResource,
   getGroupVersionKindForModel,
-} from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import type { WatchK8sResult } from '../../utils/k8s-shims';
+} from '@openshift-console/dynamic-plugin-sdk';
+import type { WatchK8sResult } from '../../lib/k8s';
 import { SubscriptionModel } from '../models';
 import type { SubscriptionKind } from '../types';
 

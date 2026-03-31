@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import * as _ from 'lodash';
-import type { CatalogCategory } from '@openshift-console/dynamic-plugin-sdk/src/extensions/catalog';
+import type { CatalogCategory } from '@openshift-console/dynamic-plugin-sdk';
 import useCatalogItems from './useCatalogItems';
 
 type UseCatalogCategories = () => [CatalogCategory[], boolean, string];

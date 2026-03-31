@@ -1,5 +1,5 @@
-import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import { LabelSelector } from '../../utils/k8s-shims';
+import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
+import { LabelSelector } from '../../lib/k8s';
 import { OLMAnnotation } from '../components/operator-hub';
 import { NON_STANDALONE_ANNOTATION_VALUE } from '../const';
 import type { CSVDescription, PackageManifestKind } from '../types';

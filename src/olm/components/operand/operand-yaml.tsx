@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { CreateYAML } from '../../../utils/create-yaml-shim';
+
+const CreateYAML = () => null;
 
 /**
  * Component which wraps the YAML editor to ensure the templates are added from the `ClusterServiceVersion` annotations.

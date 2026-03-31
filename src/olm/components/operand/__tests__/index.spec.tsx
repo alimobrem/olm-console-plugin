@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as ReactRouter from 'react-router';
-import { DetailsPage } from '../../../utils/factory-shims';
+import { DetailsPage } from '../../../lib/factory';
 import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance, testClusterServiceVersion } from '../../../../mocks';
 import { ClusterServiceVersionModel } from '../../../models';
@@ -63,8 +63,8 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useConsoleDispatch: () => jest.fn(),
 }));
 
-jest.mock('../../../../utils/factory-shims', () => ({
-  ...jest.requireActual('../../../utils/factory-shims'),
+jest.mock('../../../../lib/factory', () => ({
+  ...jest.requireActual('../../../lib/factory'),
   DetailsPage: jest.fn(() => null),
 }));
 

@@ -29,13 +29,13 @@ import {
   useAccessReviewAllowed,
   useAccessReview,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import { Conditions, ConditionTypes } from '../../utils/Conditions';
-import { ResourceEventStream } from '../../utils/misc-shims';
-import type { RowFunctionArgs, Flatten } from '../../utils/factory-shims';
-import { DetailsPage, Table, TableData, MultiListPage } from '../../utils/factory-shims';
-import type { Page } from '../../utils/factory-shims';
+import { useOverlay } from '../../lib/modals';
+import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk';
+import { Conditions, ConditionTypes } from '../../lib/Conditions';
+import { ResourceEventStream } from '../../lib/legacy-components';
+import type { RowFunctionArgs, Flatten } from '../../lib/factory';
+import { DetailsPage, Table, TableData, MultiListPage } from '../../lib/factory';
+import type { Page } from '../../lib/factory';
 import {
   AsyncComponent,
   DOC_URL_OPERATORFRAMEWORK_SDK,
@@ -52,12 +52,12 @@ import {
   SectionHeading,
   StatusBox,
   getBreadcrumbPath,
-} from '../../utils/utils-shims';
+} from '../../lib/console-components';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { ConsoleOperatorConfigModel } from '../../utils/internal-models';
-import type { K8sResourceCommon, K8sResourceKind } from '../../utils/k8s-shims';
-import { referenceForModel, referenceFor } from '../../utils/k8s-shims';
-import { ALL_NAMESPACES_KEY } from '../../utils/constants';
+import { ConsoleOperatorConfigModel } from '../../lib/models';
+import type { K8sResourceCommon, K8sResourceKind } from '../../lib/k8s';
+import { referenceForModel, referenceFor } from '../../lib/k8s';
+import { ALL_NAMESPACES_KEY } from '../../lib/constants';
 import {
   Status,
   LazyActionMenu,
@@ -68,15 +68,15 @@ import {
   useActiveNamespace,
   useK8sModel,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { getNamespace } from '../../utils/shared-utils';
-import { DescriptionListTermHelp } from '../../utils/DescriptionListTermHelp';
-import { DocumentTitle } from '../../utils/DocumentTitle';
-import { withFallback } from '../../utils/error-components';
-import PaneBody from '../../utils/PaneBody';
-import { ExternalLink } from '../../utils/ExternalLink';
-import { LazyConsolePluginModalOverlay } from '../../utils/modal-shims';
-import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../utils/constants';
-import { isPluginEnabled } from '../../utils/console-plugin-utils';
+import { getNamespace } from '../../lib/utils';
+import { DescriptionListTermHelp } from './DescriptionListTermHelp';
+import { DocumentTitle } from './DocumentTitle';
+import { withFallback } from './error-components';
+import PaneBody from './PaneBody';
+import { ExternalLink } from './ExternalLink';
+import { LazyConsolePluginModalOverlay } from '../../lib/modals';
+import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../lib/constants';
+import { isPluginEnabled } from '../../lib/console-plugin-utils';
 import { GLOBAL_OPERATOR_NAMESPACES, GLOBAL_COPIED_CSV_NAMESPACE } from '../const';
 import {
   ClusterServiceVersionModel,
@@ -838,7 +838,7 @@ export const MarkdownView = (props: {
   return (
     <AsyncComponent
       loader={() =>
-        import('../../utils/markdown-shims').then((c) => c.SyncMarkdownView)
+        import('../../lib/MarkdownView').then((c) => c.SyncMarkdownView)
       }
       {...props}
     />

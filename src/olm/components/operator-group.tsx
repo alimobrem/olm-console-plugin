@@ -3,10 +3,10 @@ import { Component as ReactComponent } from 'react';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { getActiveNamespace } from '../../utils/action-shims';
-import { AsyncComponent } from '../../utils/utils-shims';
-import type { K8sResourceKind, GroupVersionKind } from '../../utils/k8s-shims';
-import { referenceForModel, referenceForGroupVersionKind } from '../../utils/k8s-shims';
+import { getActiveNamespace } from '../../lib/actions';
+import { AsyncComponent } from '../../lib/console-components';
+import type { K8sResourceKind, GroupVersionKind } from '../../lib/k8s';
+import { referenceForModel, referenceForGroupVersionKind } from '../../lib/k8s';
 import { EmptyState, EmptyStateBody } from '@patternfly/react-core';
 import { OPERATOR_NAMESPACE_ANNOTATION } from '../const';
 import { OperatorGroupModel } from '../models';
@@ -47,7 +47,7 @@ export const OperatorGroupSelector: FC<OperatorGroupSelectorProps> = (props) => 
   return (
     <AsyncComponent
       loader={() =>
-        import('../../utils/utils-shims').then((m) => m.ListDropdown)
+        import('../../lib/console-components').then((m) => m.ListDropdown)
       }
       onChange={
         props.onChange ||

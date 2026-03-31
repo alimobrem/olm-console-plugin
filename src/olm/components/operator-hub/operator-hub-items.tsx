@@ -16,11 +16,11 @@ import { css } from '@patternfly/react-styles';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useSearchParams } from 'react-router';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import { TileViewPage } from '../../../utils/misc-shims';
+import { useOverlay } from '../../lib/modals';
+import { TileViewPage } from '../../../lib/legacy-components';
 import i18n from 'i18next';
 import { GreenCheckCircleIcon } from '@openshift-console/dynamic-plugin-sdk';
-import { COMMUNITY_PROVIDERS_WARNING_USER_PREFERENCE_KEY as ignoreWarningPreferenceKey } from '../../../utils/shared-constants';
+import { COMMUNITY_PROVIDERS_WARNING_USER_PREFERENCE_KEY as ignoreWarningPreferenceKey } from '../../../lib/olm-constants';
 const getURLWithParams = (key: string, value: string): string => {
   const params = new URLSearchParams(window.location.search);
   params.set(key, value);
@@ -28,7 +28,7 @@ const getURLWithParams = (key: string, value: string): string => {
 };
 import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
 import { useUserPreference } from '@openshift-console/dynamic-plugin-sdk';
-import { isModifiedEvent } from '../../../utils/shared-utils';
+import { isModifiedEvent } from '../../../lib/utils';
 import { DefaultCatalogSource } from '../../const';
 import { SubscriptionModel } from '../../models';
 import { DeprecatedOperatorWarningBadge } from '../deprecated-operator-warnings/deprecated-operator-warnings';

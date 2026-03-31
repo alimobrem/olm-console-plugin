@@ -6,8 +6,8 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sWatchResource: jest.fn(() => [null, false]),
 }));
 
-jest.mock('../../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   NsDropdown: ({ selectedKey, onChange }) => (
     <div data-testid="ns-dropdown">
       <div data-testid="ns-selected">{selectedKey}</div>
@@ -19,10 +19,7 @@ jest.mock('../../../../utils/utils-shims', () => ({
   resourcePathFromModel: jest.fn(),
 }));
 
-jest.mock('../../../../utils/useTextInputModal', () => ({
-  ...jest.requireActual('../../../utils/useTextInputModal'),
-  useTextInputModal: jest.fn(() => jest.fn()),
-}));
+// useTextInputModal is now inlined in ClusterExtensionForm
 
 jest.mock('../ServiceAccountDropdown', () => ({
   ServiceAccountDropdown: ({ selectedKey, onChange }) => (

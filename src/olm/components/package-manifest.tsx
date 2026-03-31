@@ -5,17 +5,17 @@ import { sortable } from '@patternfly/react-table';
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useParams, Link } from 'react-router';
-import type { Flatten, Filter, RowFunctionArgs } from '../../utils/factory-shims';
-import { MultiListPage, Table, TableData } from '../../utils/factory-shims';
+import type { Flatten, Filter, RowFunctionArgs } from '../../lib/factory';
+import { MultiListPage, Table, TableData } from '../../lib/factory';
 import {
   ConsoleEmptyState,
   ResourceLink,
   resourcePathFromModel,
-} from '../../utils/utils-shims';
+} from '../../lib/console-components';
 import i18n from 'i18next';
-import type { MatchExpression } from '../../utils/k8s-shims';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { OPERATOR_HUB_LABEL } from '../../utils/shared-constants';
+import type { MatchExpression } from '../../lib/k8s';
+import { referenceForModel } from '../../lib/k8s';
+import { OPERATOR_HUB_LABEL } from '../../lib/olm-constants';
 import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
 import { PackageManifestModel, CatalogSourceModel } from '../models';
 import type { PackageManifestKind, CatalogSourceKind } from '../types';

@@ -4,7 +4,7 @@ import type {
   K8sResourceKind,
   ObjectReference,
   Selector,
-} from '../utils/k8s-shims';
+} from '../lib/k8s';
 import type { Descriptor } from './components/descriptors/types';
 
 export enum AppCatalog {

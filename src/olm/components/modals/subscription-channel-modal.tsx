@@ -11,13 +11,13 @@ import {
   Radio,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { ResourceLink } from '../../../utils/utils-shims';
-import type { K8sModel, K8sResourceKind } from '../../../utils/k8s-shims';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { ModalFooterWithAlerts } from '../../../utils/ModalFooterWithAlerts';
-import { usePromiseHandler } from '../../../utils/usePromiseHandler';
-import type { ModalComponentProps } from '../../../utils/shared-types';
+import type { OverlayComponent } from '../../lib/modals';
+import { ResourceLink } from '../../../lib/console-components';
+import type { K8sModel, K8sResourceKind } from '../../../lib/k8s';
+import { referenceForModel } from '../../lib/k8s';
+import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';
+import { usePromiseHandler } from '../../../lib/usePromiseHandler';
+import type { ModalComponentProps } from '../../../lib/types';
 import { SubscriptionModel, ClusterServiceVersionModel } from '../../models';
 import type { SubscriptionKind, PackageManifestKind } from '../../types';
 import { DeprecatedOperatorWarningIcon } from '../deprecated-operator-warnings/deprecated-operator-warnings';

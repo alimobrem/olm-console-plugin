@@ -9,8 +9,8 @@ import type {
   CatalogExtensionHookOptions,
   ExtensionHook,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { ALL_NAMESPACES_KEY } from '../../utils/constants';
-import { parseList, strConcat } from '../../utils/shared-utils';
+import { ALL_NAMESPACES_KEY } from '../../lib/constants';
+import { parseList, strConcat } from '../../lib/utils';
 import { iconFor } from '../components';
 import { subscriptionFor } from '../components/operator-group';
 import type { CSVAnnotations, TokenizedAuthProvider } from '../components/operator-hub/index';

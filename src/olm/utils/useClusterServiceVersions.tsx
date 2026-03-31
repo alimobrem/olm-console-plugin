@@ -9,11 +9,21 @@ import type {
   CatalogItemDetailsDescription,
   CatalogItemDetailsProperty,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { SyncMarkdownView } from '../../utils/markdown-shims';
-import { ExpandCollapse } from '../../utils/utils-shims';
+import { SyncMarkdownView } from '../../lib/MarkdownView';
+import { ExpandCollapse } from '../../lib/console-components';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { getImageForCSVIcon } from '../../utils/icon-utils';
+import { referenceForModel } from '../../lib/k8s';
+/**
+ * Utility for getting an image URL from a CSV icon descriptor.
+ */
+const getImageForCSVIcon = (
+  icon: { base64data?: string; mediatype?: string } | undefined,
+): string => {
+  if (!icon?.base64data || !icon?.mediatype) {
+    return '';
+  }
+  return `data:${icon.mediatype};base64,${icon.base64data}`;
+};
 import { providedAPIsForCSV, referenceForProvidedAPI } from '../components';
 import { GLOBAL_COPIED_CSV_NAMESPACE, GLOBAL_OPERATOR_NAMESPACES } from '../const';
 import { ClusterServiceVersionModel } from '../models';

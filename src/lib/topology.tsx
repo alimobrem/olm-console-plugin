@@ -7,7 +7,7 @@
 import type { FC, ReactElement, ReactNode } from 'react';
 import type { GraphElement } from '@patternfly/react-topology';
 import { SectionHeading as SidebarSectionHeading } from './utils-shims';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
 import { modelFor, referenceFor } from './k8s-shims';
 
 // ---------------------------------------------------------------------------

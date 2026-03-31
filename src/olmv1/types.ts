@@ -1,4 +1,4 @@
-import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
+import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
 
 export type ClusterExtensionKind = K8sResourceCommon & {
   spec?: {

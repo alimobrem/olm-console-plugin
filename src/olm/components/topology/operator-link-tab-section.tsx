@@ -1,7 +1,7 @@
 import type { GraphElement } from '@patternfly/react-topology';
-import type { DetailsTabSectionExtensionHook } from '@openshift-console/dynamic-plugin-sdk/src/extensions/topology-details';
-import { ManagedByOperatorLink } from '../../../utils/misc-shims';
-import { TopologySideBarTabSection, TYPE_WORKLOAD, getResource } from '../../../utils/topology-shims';
+import type { DetailsTabSectionExtensionHook } from '@openshift-console/dynamic-plugin-sdk';
+import { ManagedByOperatorLink } from '../../../lib/legacy-components';
+import { TopologySideBarTabSection, TYPE_WORKLOAD, getResource } from '../../../lib/topology';
 
 export const useManagedByOperatorLinkSideBarTabSection: DetailsTabSectionExtensionHook = (
   element: GraphElement,

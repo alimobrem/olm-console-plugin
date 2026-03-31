@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ExternalLink } from '../../utils/ExternalLink';
+import { ExternalLink } from '../ExternalLink';
 import { useCurrentChannel } from '../../hooks/useCurrentChannel';
 import type { PackageManifestKind } from '../../types';
 

@@ -15,26 +15,26 @@ import type { LinkProps } from 'react-router';
 import { useParams, Link } from 'react-router';
 import type { WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
 import { ResourceStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
-import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk/src/api/core-api';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import { SyncMarkdownView } from '../../utils/markdown-shims';
-import { ErrorModal } from '../../utils/modal-shims';
+import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
+import { useOverlay } from '../../lib/modals';
+import { SyncMarkdownView } from '../../lib/MarkdownView';
+import { ErrorModal } from '../../lib/modals';
 import {
   LoadingInline,
   ResourceLink,
   resourcePathFromModel,
   useAccessReview,
-} from '../../utils/utils-shims';
+} from '../../lib/console-components';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import { k8sPatch, referenceForModel, referenceFor } from '../../utils/k8s-shims';
-import { DocumentTitle } from '../../utils/DocumentTitle';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import { k8sPatch, referenceForModel, referenceFor } from '../../lib/k8s';
+import { DocumentTitle } from './DocumentTitle';
 import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
 } from '@openshift-console/dynamic-plugin-sdk';
-import type { RouteParams } from '../../utils/shared-types';
+import type { RouteParams } from '../../lib/types';
 import {
   ClusterServiceVersionModel,
   InstallPlanModel,

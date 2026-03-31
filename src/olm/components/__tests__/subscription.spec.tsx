@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as Router from 'react-router';
-import { Table, MultiListPage, DetailsPage } from '../../../utils/factory-shims';
-import { ResourceLink } from '../../../utils/utils-shims';
-import { referenceForModel } from '../../utils/k8s-shims';
+import { Table, MultiListPage, DetailsPage } from '../../../lib/factory';
+import { ResourceLink } from '../../../lib/console-components';
+import { referenceForModel } from '../../lib/k8s';
 import { LazyActionMenu } from '@openshift-console/dynamic-plugin-sdk';
 import { renderWithProviders } from '@testing-library/react';
 import {
@@ -34,8 +34,8 @@ jest.mock('react-router', () => ({
   useParams: jest.fn(),
 }));
 
-jest.mock('../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   ResourceLink: jest.fn(() => null),
 }));
 
@@ -44,19 +44,19 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   LazyActionMenu: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/factory-shims', () => ({
-  ...jest.requireActual('../../../utils/factory-shims'),
+jest.mock('../../../lib/factory', () => ({
+  ...jest.requireActual('../../../lib/factory'),
   Table: jest.fn(() => null),
   MultiListPage: jest.fn(() => null),
   DetailsPage: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   ResourceSummary: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/Conditions', () => ({
+jest.mock('../../../lib/Conditions', () => ({
   Conditions: jest.fn(() => null),
 }));
 

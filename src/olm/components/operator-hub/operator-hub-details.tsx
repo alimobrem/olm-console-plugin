@@ -1,17 +1,17 @@
 import type { FC } from 'react';
 import { DescriptionList, Grid, GridItem } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import type { DetailsPageProps } from '../../../utils/factory-shims';
-import { DetailsPage } from '../../../utils/factory-shims';
+import { useOverlay } from '../../lib/modals';
+import type { DetailsPageProps } from '../../../lib/factory';
+import { DetailsPage } from '../../../lib/factory';
 import {
   navFactory,
   SectionHeading,
   ResourceSummary,
   DetailsItem,
   useAccessReview,
-} from '../../../utils/utils-shims';
-import PaneBody from '../../../utils/PaneBody';
+} from '../../../lib/console-components';
+import PaneBody from '../PaneBody';
 import { OperatorHubModel } from '../../models';
 import type { CatalogSourceListPageProps } from '../catalog-source';
 import { CatalogSourceListPage } from '../catalog-source';

@@ -4,9 +4,9 @@ import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import { css } from '@patternfly/react-styles';
 import { Table, Thead, Tr, Th, Td, Tbody } from '@patternfly/react-table';
 import { useTranslation } from 'react-i18next';
-import { ConsoleSelect } from '../../../../utils/utils-shims';
-import type { MatchExpression } from '../../../../utils/k8s-shims';
-import { Operator } from '../../../../utils/k8s-shims';
+import { ConsoleSelect } from '../../../../lib/console-components';
+import type { MatchExpression } from '../../../../lib/k8s';
+import { Operator } from '../../../../lib/k8s';
 
 const UNARY_OPERATORS = [Operator.Exists, Operator.DoesNotExist];
 const ALL_OPERATORS: MatchExpression['operator'][] = [

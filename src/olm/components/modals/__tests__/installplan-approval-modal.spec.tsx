@@ -1,6 +1,6 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
-import { modelFor } from '../../../../utils/k8s-shims';
+import { modelFor } from '../../../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testSubscription, testInstallPlan } from '../../../../mocks';
 import { SubscriptionModel, InstallPlanModel } from '../../../models';
@@ -8,12 +8,12 @@ import { InstallPlanApproval } from '../../../types';
 import type { InstallPlanApprovalModalProps } from '../installplan-approval-modal';
 import { InstallPlanApprovalModal } from '../installplan-approval-modal';
 
-jest.mock('../../../../utils/k8s-shims', () => ({
-  ...jest.requireActual('../../../utils/k8s-shims'),
+jest.mock('../../../../lib/k8s', () => ({
+  ...jest.requireActual('../../../lib/k8s'),
   modelFor: jest.fn(),
 }));
 
-jest.mock('../../../../utils/ModalFooterWithAlerts', () => ({
+jest.mock('../../ModalFooterWithAlerts', () => ({
   ModalFooterWithAlerts: jest.fn(({ children }) => <div>{children}</div>),
 }));
 

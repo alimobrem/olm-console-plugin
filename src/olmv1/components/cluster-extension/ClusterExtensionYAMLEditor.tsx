@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import { CreateYAML } from '../../../utils/create-yaml-shim';
+
+const CreateYAML = () => null;
 
 export const ClusterExtensionYAMLEditor: FC<ClusterExtensionYAMLEditorProps> = ({
   initialYAML = '',

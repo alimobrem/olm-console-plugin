@@ -1,10 +1,10 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as Router from 'react-router';
-import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
-import { Table, MultiListPage, DetailsPage } from '../../../utils/factory-shims';
-import { useAccessReview } from '../../../utils/utils-shims';
-import { referenceForModel } from '../../utils/k8s-shims';
+import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk';
+import { Table, MultiListPage, DetailsPage } from '../../../lib/factory';
+import { useAccessReview } from '../../../lib/console-components';
+import { referenceForModel } from '../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testInstallPlan } from '../../../mocks';
 import { InstallPlanModel, ClusterServiceVersionModel, OperatorGroupModel } from '../../models';
@@ -29,8 +29,8 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   asAccessReview: jest.fn(() => ({})),
 }));
 
-jest.mock('../../../utils/factory-shims', () => ({
-  ...jest.requireActual('../../../utils/factory-shims'),
+jest.mock('../../../lib/factory', () => ({
+  ...jest.requireActual('../../../lib/factory'),
   Table: jest.fn(() => null),
   MultiListPage: jest.fn(() => null),
   DetailsPage: jest.fn(() => null),

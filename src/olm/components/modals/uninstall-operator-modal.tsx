@@ -17,38 +17,67 @@ import {
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import { k8sGetResource } from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s';
-import { settleAllPromises } from '@openshift-console/dynamic-plugin-sdk/src/utils/promise';
-import { getActiveNamespace } from '../../../utils/action-shims';
-import { coFetchJSON } from '../../../utils/misc-shims';
+import type { OverlayComponent } from '../../lib/modals';
+import { useOverlay } from '../../lib/modals';
+import { k8sGetResource } from '@openshift-console/dynamic-plugin-sdk';
+import { settleAllPromises } from '@openshift-console/dynamic-plugin-sdk';
+import { getActiveNamespace } from '../../../lib/actions';
+import { coFetchJSON } from '../../../lib/legacy-components';
 import {
   LinkifyExternal,
   ResourceLink,
   resourceListPathFromModel,
   StatusBox,
-} from '../../../utils/utils-shims';
+} from '../../../lib/console-components';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
-import { ConsoleOperatorConfigModel } from '../../../utils/internal-models';
-import type { K8sResourceCommon, K8sResourceKind } from '../../../utils/k8s-shims';
+import { ConsoleOperatorConfigModel } from '../../../lib/models';
+import type { K8sResourceCommon, K8sResourceKind } from '../../../lib/k8s';
 import {
   k8sKill,
   modelFor,
   referenceFor,
   k8sPatch,
   referenceForModel,
-} from '../../../utils/k8s-shims';
-import { ModalFooterWithAlerts } from '../../../utils/ModalFooterWithAlerts';
-import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../utils/constants';
-import { useOperands } from '../../../utils/useOperands';
-import { usePromiseHandler } from '../../../utils/usePromiseHandler';
-import type { ModalComponentProps } from '../../../utils/shared-types';
+} from '../../../lib/k8s';
+import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';
+import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../lib/constants';
+/* ---- Inlined useOperands ---- */
+import { consoleFetchJSON as coFetchJSONForOperands } from '@openshift-console/dynamic-plugin-sdk';
+
+const useOperands = (
+  operatorName: string,
+  operatorNamespace: string,
+): [K8sResourceCommon[], boolean, string] => {
+  const [operands, setOperands] = useState<K8sResourceCommon[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const url = `${window.SERVER_FLAGS.basePath}api/olm/list-operands?name=${operatorName}&namespace=${operatorNamespace}`;
+    coFetchJSONForOperands(url)
+      .then((data) => {
+        setOperands(data?.items ?? []);
+        setLoaded(true);
+        setErrorMessage('');
+      })
+      .catch((err) => {
+        setOperands([]);
+        setLoaded(true);
+        setErrorMessage(
+          `Error loading Operands for ${operatorName} in ${operatorNamespace}: ${err}`,
+        );
+      });
+  }, [operatorName, operatorNamespace]);
+
+  return [operands, loaded, errorMessage];
+};
+import { usePromiseHandler } from '../../../lib/usePromiseHandler';
+import type { ModalComponentProps } from '../../../lib/types';
 import {
   getPatchForRemovingPlugins,
   isPluginEnabled,
-} from '../../../utils/console-plugin-utils';
+} from '../../../lib/console-plugin-utils';
 import { DEFAULT_GLOBAL_OPERATOR_INSTALLATION_NAMESPACE } from '../../const';
 import { ClusterServiceVersionModel, SubscriptionModel } from '../../models';
 import { OperandLink } from '../operand/operand-link';

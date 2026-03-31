@@ -1,6 +1,6 @@
-import { getReferenceForModel } from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s';
-import { resourceObjPath, resourcePath } from '../../utils/utils-shims';
-import { ALL_NAMESPACES_KEY } from '../../utils/constants';
+import { getReferenceForModel } from '@openshift-console/dynamic-plugin-sdk';
+import { resourceObjPath, resourcePath } from '../../lib/console-components';
+import { ALL_NAMESPACES_KEY } from '../../lib/constants';
 import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk';
 import { ClusterServiceVersionModel } from '../models';
 import type { ClusterServiceVersionKind } from '../types';

@@ -2,7 +2,7 @@ import type {
   AuthenticationKind,
   CloudCredentialKind,
   InfrastructureKind,
-} from '../../../../utils/k8s-shims';
+} from '../../../../lib/k8s';
 import type { PackageManifestKind } from '../../../types';
 import { InfrastructureFeature, OLMAnnotation, ValidSubscriptionValue } from '../index';
 import {

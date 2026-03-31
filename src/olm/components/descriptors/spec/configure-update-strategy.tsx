@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
+import { useOverlay } from '../../lib/modals';
 import i18n from 'i18next';
-import type { K8sModel, K8sResourceKind } from '../../../../utils/k8s-shims';
+import type { K8sModel, K8sResourceKind } from '../../../../lib/k8s';
 import { LazyUpdateStrategyModalOverlay } from '../../modals';
 import type { Descriptor } from '../types';
 import { getPatchPathFromDescriptor } from '../utils';

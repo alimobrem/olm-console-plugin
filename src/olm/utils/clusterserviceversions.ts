@@ -1,5 +1,5 @@
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import { referenceFor, referenceForModel } from '../../utils/k8s-shims';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import { referenceFor, referenceForModel } from '../../lib/k8s';
 import { OLMAnnotation } from '../components/operator-hub';
 import { NON_STANDALONE_ANNOTATION_VALUE } from '../const';
 import { ClusterServiceVersionModel } from '../models';

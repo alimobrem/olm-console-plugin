@@ -3,12 +3,12 @@ import * as Immutable from 'immutable';
 import type { JSONSchema7 } from 'json-schema';
 import * as _ from 'lodash';
 import i18n from 'i18next';
-import { modelFor } from '../../../utils/k8s-shims';
+import { modelFor } from '../../../lib/k8s';
 import {
   getJSONSchemaOrder,
   stringPathToUISchemaPath,
-} from '../../../utils/dynamic-form-utils';
-import { getSchemaAtPath } from '../../../utils/shared-utils';
+} from '../../../lib/dynamic-form-utils';
+import { getSchemaAtPath } from '../../../lib/utils';
 import {
   REGEXP_K8S_RESOURCE_SUFFIX,
   REGEXP_FIELD_DEPENDENCY_PATH_VALUE,

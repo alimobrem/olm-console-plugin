@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ErrorPage404 } from '../../utils/misc-shims';
-import type { GroupVersionKind } from '../../utils/k8s-shims';
-import { kindForReference } from '../../utils/k8s-shims';
+import { ErrorPage404 } from '../../lib/legacy-components';
+import type { GroupVersionKind } from '../../lib/k8s';
+import { kindForReference } from '../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 
 type ModelStatusBoxProps = {

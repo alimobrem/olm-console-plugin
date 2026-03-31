@@ -16,7 +16,7 @@ import type {
   PodAffinity as PodAffinityType,
   PodAffinityTerm,
   Selector,
-} from '../../../../utils/k8s-shims';
+} from '../../../../lib/k8s';
 import { MatchExpressions } from './match-expressions';
 
 import './affinity.scss';

@@ -1,4 +1,4 @@
-import { alphanumericCompare } from '../../utils/shared-utils';
+import { alphanumericCompare } from '../../lib/utils';
 import {
   capabilityLevelSort,
   infraFeaturesSort,

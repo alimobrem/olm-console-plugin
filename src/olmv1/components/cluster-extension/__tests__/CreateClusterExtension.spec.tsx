@@ -6,7 +6,7 @@ const mockSyncedEditor = jest.fn();
 const mockFormEditor = jest.fn();
 const mockUseLocation = jest.fn(() => ({ search: '' }));
 
-jest.mock('../../../../utils/editor-toggle', () => ({
+jest.mock('../../../../lib/editor-toggle', () => ({
   SyncedEditor: (props) => {
     mockSyncedEditor(props);
     return <div data-test="synced-editor">Mocked SyncedEditor</div>;

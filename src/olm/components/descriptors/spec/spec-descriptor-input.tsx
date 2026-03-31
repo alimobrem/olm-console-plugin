@@ -4,7 +4,7 @@ import {
   PodAffinityField,
   ResourceRequirementsField,
   UpdateStrategyField,
-} from '../../../../utils/dynamic-form-fields';
+} from '../../../../lib/dynamic-form-fields';
 import {
   CheckboxWidget,
   ImagePullPolicyWidget,
@@ -14,7 +14,7 @@ import {
   TextWidget,
   PodCountWidget,
   SelectWidget,
-} from '../../../../utils/dynamic-form-widgets';
+} from '../../../../lib/dynamic-form-widgets';
 import { SpecCapability } from '../types';
 
 export const capabilityFieldMap = Immutable.Map({

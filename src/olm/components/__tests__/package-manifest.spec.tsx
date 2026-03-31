@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
-import * as UIActions from '../../../utils/action-shims';
-import { ResourceLink } from '../../../utils/utils-shims';
+import * as UIActions from '../../../lib/actions';
+import { ResourceLink } from '../../../lib/console-components';
 import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
 import { renderWithProviders } from '@testing-library/react';
 import { testPackageManifest, testCatalogSource } from '../../../mocks';
@@ -19,13 +19,13 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   Timestamp: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   ResourceLink: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/action-shims', () => ({
-  ...jest.requireActual('../../../utils/action-shims'),
+jest.mock('../../../lib/actions', () => ({
+  ...jest.requireActual('../../../lib/actions'),
   getActiveNamespace: jest.fn(),
 }));
 

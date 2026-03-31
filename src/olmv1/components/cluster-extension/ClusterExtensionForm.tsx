@@ -18,18 +18,198 @@ import {
   Alert,
   PageSection,
 } from '@patternfly/react-core';
-import { PencilAltIcon } from '@patternfly/react-icons';
+import { Alert, Popover } from '@patternfly/react-core';
+import type { TextInputProps } from '@patternfly/react-core';
+import { HelpIcon, PencilAltIcon } from '@patternfly/react-icons';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { k8sCreateResource } from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s';
-import { NsDropdown, resourcePathFromModel } from '../../../utils/utils-shims';
+import { k8sCreateResource } from '@openshift-console/dynamic-plugin-sdk';
+import { NsDropdown, resourcePathFromModel } from '../../../lib/console-components';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { NamespaceModel, ServiceAccountModel } from '../../../utils/internal-models';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import SwitchToYAMLAlert from '../../../utils/SwitchToYAMLAlert';
-import { SchemaFieldHelp } from '../../../utils/SchemaFieldHelp';
-import { useTextInputModal } from '../../../utils/useTextInputModal';
+import { NamespaceModel, ServiceAccountModel } from '../../../lib/models';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import type { OverlayComponent } from '../../../lib/modals';
+import { useOverlay } from '../../../lib/modals';
+
+/* ---- Inlined SwitchToYAMLAlert ---- */
+const SwitchToYAMLAlert: FC = () => {
+  const { t } = useTranslation();
+  return (
+    <Alert variant="info" isInline title={t('public~Switch to YAML')}>
+      {t(
+        'public~Some fields may not be represented in this form view. Please select "YAML view" for full control.',
+      )}
+    </Alert>
+  );
+};
+
+/* ---- Inlined SchemaFieldHelp ---- */
+const SCROLLABLE_POPOVER_BODY_STYLE = {
+  maxHeight: '300px',
+  overflowY: 'auto' as const,
+};
+
+const SchemaFieldHelp: FC<{
+  model: any;
+  propertyPath: string | string[];
+  headerContent: string;
+  ariaLabel: string;
+  fallbackDescription?: string;
+}> = ({ headerContent, ariaLabel, fallbackDescription }) => {
+  const description = fallbackDescription;
+  if (!description) {
+    return null;
+  }
+  return (
+    <Popover
+      headerContent={headerContent}
+      bodyContent={<div style={SCROLLABLE_POPOVER_BODY_STYLE}>{description}</div>}
+    >
+      <Button variant="plain" aria-label={ariaLabel}>
+        <HelpIcon />
+      </Button>
+    </Popover>
+  );
+};
+
+/* ---- Inlined TextInputModal & useTextInputModal ---- */
+import {
+  TextInput as PFTextInput,
+  FormHelperText as PFFormHelperText,
+  HelperText as PFHelperText,
+  HelperTextItem as PFHelperTextItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form as PFForm,
+} from '@patternfly/react-core';
+
+interface TextInputModalProps {
+  title: string;
+  label: string;
+  initialValue: string;
+  onSubmit: (value: string) => void;
+  validator?: (value: string) => string | null;
+  submitButtonText?: string;
+  cancelButtonText?: string;
+  inputType?: TextInputProps['type'];
+  placeholder?: string;
+  helpText?: string;
+  isRequired?: boolean;
+}
+
+const TextInputModal: OverlayComponent<TextInputModalProps> = ({
+  closeOverlay,
+  title,
+  label,
+  initialValue,
+  onSubmit,
+  validator,
+  submitButtonText,
+  cancelButtonText,
+  inputType = 'text',
+  placeholder,
+  helpText,
+  isRequired = false,
+}) => {
+  const { t } = useTranslation();
+  const [value, setValue] = useState(initialValue);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const submit = useCallback(
+    (event: React.FormEvent | React.MouseEvent) => {
+      event.preventDefault();
+      if (isRequired && !value) {
+        setErrorMessage(t('olm~This field is required'));
+        return;
+      }
+      if (validator) {
+        const validationError = validator(value);
+        if (validationError) {
+          setErrorMessage(validationError);
+          return;
+        }
+      }
+      onSubmit(value);
+      closeOverlay();
+    },
+    [validator, onSubmit, closeOverlay, value, isRequired, t],
+  );
+
+  return (
+    <Modal variant="small" isOpen onClose={closeOverlay}>
+      <ModalHeader title={title} />
+      <ModalBody>
+        <PFForm onSubmit={submit}>
+          <FormGroup label={label} isRequired={isRequired} fieldId="input-value">
+            <PFTextInput
+              id="input-value"
+              data-test="input-value"
+              name="value"
+              type={inputType}
+              onChange={(_event, val) => {
+                setValue(val);
+              }}
+              value={value}
+              isRequired={isRequired}
+              autoFocus
+              placeholder={placeholder}
+            />
+            {helpText && (
+              <PFFormHelperText>
+                <PFHelperText>
+                  <PFHelperTextItem>{helpText}</PFHelperTextItem>
+                </PFHelperText>
+              </PFFormHelperText>
+            )}
+          </FormGroup>
+          {errorMessage && (
+            <Alert
+              isInline
+              className="co-alert co-alert--scrollable"
+              variant="danger"
+              title={t('olm~An error occurred')}
+              data-test="alert-error"
+            >
+              <div className="co-pre-line">{errorMessage}</div>
+            </Alert>
+          )}
+        </PFForm>
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          key="confirm-action"
+          type="submit"
+          variant="primary"
+          disabled={isRequired && !value}
+          onClick={submit}
+          data-test="confirm-action"
+          id="confirm-action"
+        >
+          {submitButtonText || t('olm~Save')}
+        </Button>
+        <Button
+          key="cancel-action"
+          type="button"
+          variant="secondary"
+          onClick={closeOverlay}
+          data-test-id="modal-cancel-action"
+        >
+          {cancelButtonText || t('olm~Cancel')}
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+};
+
+type UseTextInputModal = () => (props: TextInputModalProps) => void;
+
+const useTextInputModal: UseTextInputModal = () => {
+  const launcher = useOverlay();
+  return useCallback((props) => launcher(TextInputModal, props), [launcher]);
+};
 import { CATALOG_LABEL_KEY } from '../../const';
 import { ClusterExtensionModel } from '../../models';
 import { ServiceAccountDropdown } from './ServiceAccountDropdown';

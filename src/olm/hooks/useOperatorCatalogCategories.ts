@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import * as _ from 'lodash';
 import type { CatalogCategory } from '@openshift-console/dynamic-plugin-sdk/src';
-import { ALL_NAMESPACES_KEY } from '../../utils/constants';
+import { ALL_NAMESPACES_KEY } from '../../lib/constants';
 import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk';
 import { OLMAnnotation } from '../components/operator-hub';
 import { getCurrentCSVDescription } from '../utils/packagemanifests';

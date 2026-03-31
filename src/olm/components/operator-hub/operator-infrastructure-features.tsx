@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { PlainList } from '../../../utils/shared-components';
+import { PlainList } from '../../../lib/status-icons';
 import { useCurrentChannel } from '../../hooks/useCurrentChannel';
 import type { PackageManifestKind } from '../../types';
 import { getInfrastructureFeatures } from './operator-hub-utils';

@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
-import type { GroupVersionKind, K8sModel, K8sResourceKind } from '../../utils/k8s-shims';
+import type { GroupVersionKind, K8sModel, K8sResourceKind } from '../../lib/k8s';
 import {
   referenceForGroupVersionKind,
   resourceURL,
   referenceFor,
   referenceForModel,
   apiVersionCompare,
-} from '../../utils/k8s-shims';
+} from '../../lib/k8s';
 import { PackageManifestModel } from '../models';
 import type {
   APIServiceDefinition,

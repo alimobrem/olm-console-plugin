@@ -1,5 +1,5 @@
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
+import { referenceForModel } from '../../lib/k8s';
 import type { OperatorHubKind } from '../components/operator-hub';
 import { OperatorHubModel } from '../models';
 

@@ -1,1 +1,1 @@
-export { useDefaultActionsProvider } from '../../../utils/app-shims';
+export { useDefaultActionsProvider } from '../../../lib/action-hooks';

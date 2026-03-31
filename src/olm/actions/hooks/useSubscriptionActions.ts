@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CommonActionCreator } from '../../../utils/app-shims';
-import { useCommonActions } from '../../../utils/app-shims';
+import { CommonActionCreator } from '../../../lib/action-hooks';
+import { useCommonActions } from '../../../lib/action-hooks';
 import type { Action } from '@openshift-console/dynamic-plugin-sdk';
-import { useDeepCompareMemoize } from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s/hooks/useDeepCompareMemoize';
-import { asAccessReview } from '../../../utils/k8s-shims';
-import { referenceFor } from '../../../utils/k8s-shims';
+import { useDeepCompareMemoize } from '@openshift-console/dynamic-plugin-sdk';
+import { asAccessReview } from '../../../lib/k8s';
+import { referenceFor } from '../../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { useUninstallOperatorModal } from '../../components/modals/uninstall-operator-modal';
 import { ClusterServiceVersionModel } from '../../models';

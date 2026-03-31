@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { DetailsItem } from '../../../../utils/utils-shims';
+import { DetailsItem } from '../../../../lib/console-components';
 import { Status, SuccessStatus } from '@openshift-console/dynamic-plugin-sdk';
 import { DefaultCapability, Invalid, K8sResourceLinkCapability, SecretCapability } from '../common';
 import type { CapabilityProps } from '../types';

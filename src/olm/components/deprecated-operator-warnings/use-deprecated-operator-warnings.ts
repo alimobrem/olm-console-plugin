@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import * as UIActions from '../../../utils/action-shims';
+import * as UIActions from '../../../lib/actions';
 import type { DeprecatedOperatorWarning } from '../../types';
 import { useConsoleDispatch } from '@openshift-console/dynamic-plugin-sdk';
 import { useConsoleSelector } from '@openshift-console/dynamic-plugin-sdk';

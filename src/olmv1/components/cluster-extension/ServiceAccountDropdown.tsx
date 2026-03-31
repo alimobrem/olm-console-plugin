@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ListDropdownProps } from '../../../utils/utils-shims';
-import { ListDropdown } from '../../../utils/utils-shims';
-import { ServiceAccountModel } from '../../../utils/internal-models';
+import type { ListDropdownProps } from '../../../lib/console-components';
+import { ListDropdown } from '../../../lib/console-components';
+import { ServiceAccountModel } from '../../../lib/models';
 import { useCreateServiceAccountModal } from '../../hooks/useCreateServiceAccountModal';
 
 interface ServiceAccountDropdownProps {

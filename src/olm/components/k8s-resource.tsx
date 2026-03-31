@@ -4,10 +4,10 @@ import { sortable } from '@patternfly/react-table';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import type { WatchK8sResourceWithProp } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import type { Flatten, RowFunctionArgs } from '../../utils/factory-shims';
-import { MultiListPage, Table, TableData } from '../../utils/factory-shims';
-import { ResourceLink, ConsoleEmptyState } from '../../utils/utils-shims';
+import type { WatchK8sResourceWithProp } from '@openshift-console/dynamic-plugin-sdk';
+import type { Flatten, RowFunctionArgs } from '../../lib/factory';
+import { MultiListPage, Table, TableData } from '../../lib/factory';
+import { ResourceLink, ConsoleEmptyState } from '../../lib/console-components';
 import {
   ConfigMapModel,
   DeploymentModel,
@@ -16,15 +16,15 @@ import {
   ReplicaSetModel,
   SecretModel,
   ServiceModel,
-} from '../../utils/internal-models';
-import type { K8sResourceKind, K8sResourceCommon } from '../../utils/k8s-shims';
+} from '../../lib/models';
+import type { K8sResourceKind, K8sResourceCommon } from '../../lib/k8s';
 import {
   kindForReference,
   modelFor,
   referenceForGroupVersionKind,
-} from '../../utils/k8s-shims';
+} from '../../lib/k8s';
 import { Status, Timestamp } from '@openshift-console/dynamic-plugin-sdk';
-import type { RouteParams } from '../../utils/shared-types';
+import type { RouteParams } from '../../lib/types';
 import type { CRDDescription, ProvidedAPI } from '../types';
 import { OperandLink } from './operand/operand-link';
 import { providedAPIForReference } from './index';

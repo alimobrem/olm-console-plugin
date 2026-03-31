@@ -1,5 +1,5 @@
 import type { CatalogItem } from '@openshift-console/dynamic-plugin-sdk';
-import { SyncMarkdownView } from '../../utils/markdown-shims';
+import { SyncMarkdownView } from '../../lib/MarkdownView';
 import { CapabilityLevel } from '../../olm/components/operator-hub/operator-hub-item-details';
 import {
   getClusterCatalogSource,
@@ -7,8 +7,8 @@ import {
   validSubscriptionReducer,
 } from '../../olm/components/operator-hub/operator-hub-utils';
 import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
-import { ExternalLink } from '../../utils/ExternalLink';
-import { PlainList } from '../../utils/shared-components';
+import { ExternalLink } from '../../olm/components/ExternalLink';
+import { PlainList } from '../../lib/status-icons';
 import type { OLMCatalogItem, OLMCatalogItemData } from '../types';
 
 type NormalizeExtensionCatalogItem = (item: OLMCatalogItem) => CatalogItem<OLMCatalogItemData>;

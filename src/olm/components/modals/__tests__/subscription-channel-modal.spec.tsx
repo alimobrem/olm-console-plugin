@@ -7,7 +7,7 @@ import type { SubscriptionKind, PackageManifestKind } from '../../../types';
 import type { SubscriptionChannelModalProps } from '../subscription-channel-modal';
 import { SubscriptionChannelModal } from '../subscription-channel-modal';
 
-jest.mock('../../../../utils/ModalFooterWithAlerts', () => ({
+jest.mock('../../ModalFooterWithAlerts', () => ({
   ModalFooterWithAlerts: jest.fn(({ children }) => <div>{children}</div>),
 }));
 

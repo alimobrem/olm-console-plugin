@@ -12,10 +12,10 @@ import {
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk/src';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { k8sCreateResource } from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s';
-import { LoadingInline } from '../../../utils/utils-shims';
-import { ServiceAccountModel } from '../../../utils/internal-models';
+import type { OverlayComponent } from '../../lib/modals';
+import { k8sCreateResource } from '@openshift-console/dynamic-plugin-sdk';
+import { LoadingInline } from '../../../lib/console-components';
+import { ServiceAccountModel } from '../../../lib/models';
 
 export interface CreateServiceAccountModalProps {
   namespace: string;

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
+import { useOverlay } from '../../lib/modals';
 import type { CreateServiceAccountModalProps } from '../components/cluster-extension/CreateServiceAccountModal';
 import { CreateServiceAccountModal } from '../components/cluster-extension/CreateServiceAccountModal';
 

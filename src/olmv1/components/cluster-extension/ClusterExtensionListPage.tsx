@@ -7,16 +7,16 @@ import {
   cellIsStickyProps,
   getNameCellProps,
   ConsoleDataView,
-} from '@openshift-console/dynamic-plugin-sdk/src/api/internal-api';
-import type { GetDataViewRows } from '@openshift-console/dynamic-plugin-sdk/src/api/internal-types';
-import Status from '@openshift-console/dynamic-plugin-sdk/src/app/components/status/Status';
-import type { TableColumn } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
+} from '@openshift-console/dynamic-plugin-sdk';
+import type { GetDataViewRows } from '@openshift-console/dynamic-plugin-sdk';
+import Status from '@openshift-console/dynamic-plugin-sdk';
+import type { TableColumn } from '@openshift-console/dynamic-plugin-sdk';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { ResourceLink } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
+import { referenceForModel } from '../../lib/k8s';
 import LazyActionMenu from '@openshift-console/dynamic-plugin-sdk';
-import PaneBody from '../../../utils/PaneBody';
-import { DASH } from '../../utils/constants';
+import PaneBody from '../../../olm/components/PaneBody';
+import { DASH } from '../../lib/constants';
 import { ClusterExtensionModel } from '../../models';
 import type { ClusterExtensionKind } from '../../types';
 

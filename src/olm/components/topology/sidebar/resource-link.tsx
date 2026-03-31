@@ -1,6 +1,6 @@
 import type { GraphElement } from '@patternfly/react-topology';
-import { ManagedByOperatorResourceLink } from '../../../../utils/misc-shims';
-import { TYPE_OPERATOR_BACKED_SERVICE } from '../../../../utils/topology-shims';
+import { ManagedByOperatorResourceLink } from '../../../../lib/legacy-components';
+import { TYPE_OPERATOR_BACKED_SERVICE } from '../../../../lib/topology';
 
 export const getOperatorBackedPanelResourceLink = (element: GraphElement) => {
   if (element.getType() !== TYPE_OPERATOR_BACKED_SERVICE) return undefined;

@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import type { GraphElement } from '@patternfly/react-topology';
-import type { DetailsTabSectionExtensionHook } from '@openshift-console/dynamic-plugin-sdk/src/extensions/topology-details';
-import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk/src/extensions/topology-types';
-import { StatusBox } from '../../../../utils/utils-shims';
+import type { DetailsTabSectionExtensionHook } from '@openshift-console/dynamic-plugin-sdk';
+import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk';
+import { StatusBox } from '../../../../lib/console-components';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { TYPE_OPERATOR_BACKED_SERVICE } from '../../../../utils/topology-shims';
+import { referenceForModel } from '../../lib/k8s';
+import { TYPE_OPERATOR_BACKED_SERVICE } from '../../../../lib/topology';
 import { ClusterServiceVersionModel } from '../../../models';
 import type { ClusterServiceVersionKind } from '../../../types';
 import TopologyOperatorBackedResources from './TopologyOperatorBackedResources';

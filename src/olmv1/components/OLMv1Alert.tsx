@@ -1,7 +1,7 @@
 // TODO(CONSOLE-4823): Remove when OLMv1 GAs
 import { Alert } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import { ExternalLink } from '../../utils/ExternalLink';
+import { ExternalLink } from '../../olm/components/ExternalLink';
 
 const OLMv1Alert = () => {
   const { t } = useTranslation();

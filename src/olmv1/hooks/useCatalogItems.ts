@@ -1,11 +1,11 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
-import type { CatalogItem } from '@openshift-console/dynamic-plugin-sdk/src/extensions/catalog';
-import { consoleFetch } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
+import type { CatalogItem } from '@openshift-console/dynamic-plugin-sdk';
+import { consoleFetch } from '@openshift-console/dynamic-plugin-sdk';
 import {
   getConsoleRequestHeaders,
   normalizeConsoleHeaders,
-} from '@openshift-console/dynamic-plugin-sdk/src/utils/fetch';
-import { ONE_SECOND } from '../../utils/constants';
+} from '@openshift-console/dynamic-plugin-sdk';
+import { ONE_SECOND } from '../../lib/constants';
 import { usePoll } from '@openshift-console/dynamic-plugin-sdk';
 import type { OLMCatalogItem } from '../types';
 import { normalizeCatalogItem } from '../utils/catalog-item';

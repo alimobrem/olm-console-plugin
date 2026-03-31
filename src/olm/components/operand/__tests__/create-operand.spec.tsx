@@ -1,8 +1,8 @@
 import * as Router from 'react-router';
-import { CreateYAML } from '../../../utils/create-yaml-shim';
+
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { SyncedEditor } from '../../utils/editor-toggle';
-import { EditorType } from '../../utils/editor-toggle';
+import { SyncedEditor } from '../../lib/editor-toggle';
+import { EditorType } from '../../lib/editor-toggle';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { renderWithProviders } from '@testing-library/react';
 import { testClusterServiceVersion, testModel, testCRD } from '../../../../mocks';
@@ -24,15 +24,13 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useActivePerspective: jest.fn(() => ['admin']),
 }));
 
-jest.mock('../../../../utils/editor-toggle', () => ({
+jest.mock('../../../../lib/editor-toggle', () => ({
   SyncedEditor: jest.fn(() => null),
 }));
 
-jest.mock('../../../../utils/create-yaml-shim', () => ({
-  CreateYAML: jest.fn(() => null),
-}));
+// CreateYAML is now inlined as `const CreateYAML = () => null;` in the consumer
 
-jest.mock('../../../../utils/PageHeading', () => ({
+jest.mock('../../PageHeading', () => ({
   PageHeading: jest.fn(() => null),
 }));
 

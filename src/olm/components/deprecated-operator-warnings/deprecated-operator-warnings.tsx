@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { Label, Alert, Tooltip, AlertActionCloseButton } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import { YellowExclamationTriangleIcon } from '@openshift-console/dynamic-plugin-sdk/src/api/core-api';
+import { YellowExclamationTriangleIcon } from '@openshift-console/dynamic-plugin-sdk';
 import type { DeprecatedOperatorWarning, SubscriptionKind } from '../../types';
 
 export enum DeprecatedOperatorType {

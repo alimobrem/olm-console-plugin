@@ -11,18 +11,18 @@ import {
 } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import type { LabelListProps } from '../../../../utils/utils-shims';
+import type { LabelListProps } from '../../../../lib/console-components';
 import {
   LoadingInline,
   ResourceLink,
   Selector,
   DetailsItem,
   LabelList,
-} from '../../../../utils/utils-shims';
-import type { Selector as SelectorType } from '../../../../utils/k8s-shims';
-import { k8sPatch, k8sUpdate } from '../../../../utils/k8s-shims';
+} from '../../../../lib/console-components';
+import type { Selector as SelectorType } from '../../../../lib/k8s';
+import { k8sPatch, k8sUpdate } from '../../../../lib/k8s';
 import { YellowExclamationTriangleIcon } from '@openshift-console/dynamic-plugin-sdk';
-import { DASH } from '../../utils/constants';
+import { DASH } from '../../lib/constants';
 import { DefaultCapability, K8sResourceLinkCapability, SecretCapability } from '../common';
 import type { CapabilityProps, Error } from '../types';
 import { SpecCapability } from '../types';

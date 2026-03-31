@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { K8S_VERB_DELETE, K8S_VERB_UPDATE } from '@openshift-console/dynamic-plugin-sdk/src/api/constants';
-import type { Action } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
-import type { DeleteModalProps } from '../../utils/modal-shims';
-import { DeleteModalOverlay } from '../../utils/modal-shims';
+import { K8S_VERB_DELETE, K8S_VERB_UPDATE } from '@openshift-console/dynamic-plugin-sdk';
+import type { Action } from '@openshift-console/dynamic-plugin-sdk';
+import { useOverlay } from '../../lib/modals';
+import type { DeleteModalProps } from '../../lib/modals';
+import { DeleteModalOverlay } from '../../lib/modals';
 import { asAccessReview } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceFor } from '../../utils/k8s-shims';
+import { referenceFor } from '../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { csvNameFromWindow } from '../components/operand/operand-link';
 import { ClusterServiceVersionModel } from '../models';

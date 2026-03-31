@@ -9,9 +9,9 @@ import {
 } from '@patternfly/react-core';
 import { safeDump } from 'js-yaml';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { ResourceLink, CopyToClipboard } from '../../../utils/utils-shims';
-import type { ModalComponentProps } from '../../../utils/shared-types';
+import type { OverlayComponent } from '../../lib/modals';
+import { ResourceLink, CopyToClipboard } from '../../../lib/console-components';
+import type { ModalComponentProps } from '../../../lib/types';
 import type { StepResource } from '../../types';
 import { referenceForStepResource } from '../index';
 

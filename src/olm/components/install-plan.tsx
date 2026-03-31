@@ -21,11 +21,11 @@ import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, Link, useNavigate } from 'react-router';
 import { getUser, GreenCheckCircleIcon } from '@openshift-console/dynamic-plugin-sdk';
-import { useOverlay } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/useOverlay';
-import { Conditions } from '../../utils/Conditions';
-import type { RowFunctionArgs } from '../../utils/factory-shims';
-import { MultiListPage, DetailsPage, Table, TableData } from '../../utils/factory-shims';
-import { ErrorModal } from '../../utils/modal-shims';
+import { useOverlay } from '../../lib/modals';
+import { Conditions } from '../../lib/Conditions';
+import type { RowFunctionArgs } from '../../lib/factory';
+import { MultiListPage, DetailsPage, Table, TableData } from '../../lib/factory';
+import { ErrorModal } from '../../lib/modals';
 import {
   SectionHeading,
   ConsoleEmptyState,
@@ -34,9 +34,9 @@ import {
   navFactory,
   ResourceSummary,
   useAccessReview,
-} from '../../utils/utils-shims';
-import { authSvc } from '../../utils/misc-shims';
-import type { UserInfo } from '../../utils/k8s-shims';
+} from '../../lib/console-components';
+import { authSvc } from '../../lib/legacy-components';
+import type { UserInfo } from '../../lib/k8s';
 import {
   apiGroupForReference,
   referenceFor,
@@ -44,13 +44,13 @@ import {
   referenceForOwnerRef,
   k8sPatch,
   apiVersionForReference,
-} from '../../utils/k8s-shims';
+} from '../../lib/k8s';
 import LazyActionMenu, {
   KEBAB_COLUMN_CLASS,
 } from '@openshift-console/dynamic-plugin-sdk';
-import PaneBody from '../../utils/PaneBody';
+import PaneBody from './PaneBody';
 import { Status } from '@openshift-console/dynamic-plugin-sdk';
-import { FLAGS } from '../../utils/constants';
+import { FLAGS } from '../../lib/constants';
 import { useConsoleSelector } from '@openshift-console/dynamic-plugin-sdk';
 import { useFlag } from '@openshift-console/dynamic-plugin-sdk';
 import {

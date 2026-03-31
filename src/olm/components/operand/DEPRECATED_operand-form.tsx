@@ -26,8 +26,8 @@ import type { JSONSchema6, JSONSchema6TypeName } from 'json-schema';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router';
-import { SyncMarkdownView } from '../../../utils/markdown-shims';
-import { ConfigureUpdateStrategy } from '../../../utils/modal-shims';
+import { SyncMarkdownView } from '../../../lib/MarkdownView';
+import { ConfigureUpdateStrategy } from '../../../lib/modals';
 import { Radio as RadioGroup } from '@patternfly/react-core';
 import {
   NumberSpinner,
@@ -35,20 +35,20 @@ import {
   ListDropdown,
   useScrollToTopOnMount,
   ConsoleSelect,
-} from '../../../utils/utils-shims';
+} from '../../../lib/console-components';
 import { ExpandableSection as ExpandCollapse } from '@patternfly/react-core';
 import type {
   GroupVersionKind,
   K8sResourceKind,
   NodeAffinity as NodeAffinityType,
-} from '../../../utils/k8s-shims';
+} from '../../../lib/k8s';
 import {
   ImagePullPolicy,
   k8sCreate,
   kindForReference,
   modelFor,
-} from '../../../utils/k8s-shims';
-import PaneBody from '../../../utils/PaneBody';
+} from '../../../lib/k8s';
+import PaneBody from '../PaneBody';
 import { useResourceConnectionHandler } from '@openshift-console/dynamic-plugin-sdk';
 import type { ProvidedAPI } from '../../types';
 import { ClusterServiceVersionLogo } from '../cluster-service-version-logo';

@@ -5,8 +5,25 @@ import type {
   AuthenticationKind,
   K8sResourceKind,
   ObjectMetadata,
-} from '../../../utils/k8s-shims';
-import { parseJSONAnnotation } from '../../../utils/annotation-utils';
+} from '../../../lib/k8s';
+/**
+ * Parse a JSON string from an annotation value, returning a default value on failure.
+ */
+const parseJSONAnnotation = <T = unknown>(
+  annotations: Record<string, string> | undefined,
+  key: string,
+  defaultValue?: T,
+): T | undefined => {
+  const value = annotations?.[key];
+  if (!value) return defaultValue;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    // eslint-disable-next-line no-console
+    console.warn(`Failed to parse annotation ${key}:`, value);
+    return defaultValue;
+  }
+};
 import { DefaultCatalogSource, DefaultClusterCatalog, OperatorSource } from '../../const';
 import type { PackageManifestKind } from '../../types';
 import {

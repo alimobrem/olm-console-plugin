@@ -1,4 +1,4 @@
-import { ALL_NAMESPACES_KEY } from '../../utils/constants';
+import { ALL_NAMESPACES_KEY } from '../../lib/constants';
 
 export enum Flags {
   OPERATOR_LIFECYCLE_MANAGER = 'OPERATOR_LIFECYCLE_MANAGER',

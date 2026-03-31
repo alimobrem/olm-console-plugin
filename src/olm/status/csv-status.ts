@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import { getName } from '../../utils/shared-utils';
+import { getName } from '../../lib/utils';
 import { operatorNamespaceFor } from '../components/operator-group';
 import type { ClusterServiceVersionKind, SubscriptionKind } from '../types';
 import {

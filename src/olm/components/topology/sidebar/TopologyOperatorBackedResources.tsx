@@ -2,16 +2,16 @@ import type { ReactElement, FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk/src/extensions/topology-types';
-import { ResourceIcon, StatusBox } from '../../../../utils/utils-shims';
+import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk';
+import { ResourceIcon, StatusBox } from '../../../../lib/console-components';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
-import type { GroupVersionKind, K8sResourceKind } from '../../../../utils/k8s-shims';
+import type { GroupVersionKind, K8sResourceKind } from '../../../../lib/k8s';
 import {
   modelFor,
   referenceFor,
   referenceForGroupVersionKind,
   referenceForModel,
-} from '../../../../utils/k8s-shims';
+} from '../../../../lib/k8s';
 import type {
   ClusterServiceVersionKind,
   CRDDescription,
@@ -22,7 +22,7 @@ import {
   flattenCsvResources,
   linkForCsvResource,
 } from '../../k8s-resource';
-import { TopologyGroupResourcesPanel } from '../../../../utils/topology-shims';
+import { TopologyGroupResourcesPanel } from '../../../../lib/topology';
 import type { OperatorGroupData } from './types';
 
 type OperatorResourcesProps = {

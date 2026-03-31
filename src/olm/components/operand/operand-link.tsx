@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { css } from '@patternfly/react-styles';
 import { Link } from 'react-router';
-import { ResourceIcon } from '../../../utils/utils-shims';
-import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import { referenceForModel, referenceFor } from '../../../utils/k8s-shims';
+import { ResourceIcon } from '../../../lib/console-components';
+import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
+import { referenceForModel, referenceFor } from '../../../lib/k8s';
 import { ClusterServiceVersionModel } from '../../models';
 
 export const csvNameFromWindow = () =>

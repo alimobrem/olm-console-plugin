@@ -1,6 +1,6 @@
 const FLAG_TECH_PREVIEW = 'TECH_PREVIEW';
-import type { SetFeatureFlag } from '@openshift-console/dynamic-plugin-sdk/src/extensions/feature-flags';
-import { useFlag } from '@openshift-console/dynamic-plugin-sdk/src/utils/flags';
+import type { SetFeatureFlag } from '@openshift-console/dynamic-plugin-sdk';
+import { useFlag } from '@openshift-console/dynamic-plugin-sdk';
 import { useUserPreference } from '@openshift-console/dynamic-plugin-sdk';
 import { FLAG_OLMV1_ENABLED, OLMV1_ENABLED_USER_PREFERENCE_KEY } from '../const';
 

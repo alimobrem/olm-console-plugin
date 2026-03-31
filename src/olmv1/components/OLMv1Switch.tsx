@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import type { FC, FormEvent } from 'react';
 import { Flex, FlexItem, Switch } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import { useFlag } from '@openshift-console/dynamic-plugin-sdk/src/utils/flags';
+import { useFlag } from '@openshift-console/dynamic-plugin-sdk';
 import { useUserPreference } from '@openshift-console/dynamic-plugin-sdk';
 import { OLMV1_ENABLED_USER_PREFERENCE_KEY } from '../const';
 import { OLMv1TechPreviewBadge } from './OLMv1TechPreviewBadge';

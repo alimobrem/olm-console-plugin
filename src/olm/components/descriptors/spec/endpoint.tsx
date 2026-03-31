@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Table, Thead, Tr, Th, Td, Tbody } from '@patternfly/react-table';
 import { useTranslation } from 'react-i18next';
-import { ResourceIcon } from '../../../../utils/utils-shims';
+import { ResourceIcon } from '../../../../lib/console-components';
 
 export const EndpointRow: FC<EndpointRowProps> = ({ endpoint }) => {
   const { t } = useTranslation('olm');

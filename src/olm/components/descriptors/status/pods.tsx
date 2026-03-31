@@ -6,8 +6,18 @@ import { chart_color_blue_100 as blue100 } from '@patternfly/react-tokens/dist/e
 import { chart_color_blue_200 as blue200 } from '@patternfly/react-tokens/dist/esm/chart_color_blue_200';
 import * as _ from 'lodash';
 /* eslint-enable camelcase */
-import { useRefWidth } from '../../../../utils/utils-shims';
-import { calculateRadius } from '../../../../utils/pod-utils';
+import { useRefWidth } from '../../../../lib/console-components';
+/**
+ * Calculate the radius for a pod donut chart based on container width.
+ */
+const calculateRadius = (
+  size: number,
+): { podStatusInnerRadius: number; podStatusOuterRadius: number; decoratorRadius: number } => {
+  const podStatusOuterRadius = size / 2;
+  const podStatusInnerRadius = podStatusOuterRadius * 0.72;
+  const decoratorRadius = podStatusOuterRadius * 0.3;
+  return { podStatusInnerRadius, podStatusOuterRadius, decoratorRadius };
+};
 
 const colorScale = [blue300.value, blue200.value, blue100.value];
 

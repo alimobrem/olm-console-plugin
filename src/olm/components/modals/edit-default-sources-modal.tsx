@@ -12,11 +12,11 @@ import {
   ModalVariant,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { k8sPatch } from '../../../utils/k8s-shims';
-import { ModalFooterWithAlerts } from '../../../utils/ModalFooterWithAlerts';
-import { usePromiseHandler } from '../../../utils/usePromiseHandler';
-import type { ModalComponentProps } from '../../../utils/shared-types';
+import type { OverlayComponent } from '../../lib/modals';
+import { k8sPatch } from '../../../lib/k8s';
+import { ModalFooterWithAlerts } from '../ModalFooterWithAlerts';
+import { usePromiseHandler } from '../../../lib/usePromiseHandler';
+import type { ModalComponentProps } from '../../../lib/types';
 import { OperatorHubModel } from '../../models';
 import type { OperatorHubKind } from '../operator-hub';
 

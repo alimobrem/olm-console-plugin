@@ -16,9 +16,9 @@ import type { SimpleSelectOption } from '@patternfly/react-templates';
 import { SimpleSelect } from '@patternfly/react-templates';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { DetailsItem } from '../../utils/utils-shims';
-import { k8sPatch } from '../../utils/k8s-shims';
-import { usePromiseHandler } from '../../utils/usePromiseHandler';
+import { DetailsItem } from '../../lib/console-components';
+import { k8sPatch } from '../../lib/k8s';
+import { usePromiseHandler } from '../../lib/usePromiseHandler';
 import { CatalogSourceModel } from '../models';
 import type { CatalogSourceKind } from '../types';
 

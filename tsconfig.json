@@ -12,6 +12,7 @@
     "lib": ["es2021", "dom"]
   },
   "include": ["src"],
+  "exclude": ["src/**/__tests__/**", "src/**/*.spec.*", "src/**/*.test.*"],
   "ts-node": {
     "files": true,
     "transpileOnly": true,

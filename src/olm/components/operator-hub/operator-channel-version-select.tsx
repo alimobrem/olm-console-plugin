@@ -5,7 +5,7 @@ import { Alert, MenuToggle, Select, SelectList, SelectOption } from '@patternfly
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
-import { alphanumericCompare } from '../../../utils/shared-utils';
+import { alphanumericCompare } from '../../../lib/utils';
 import type { PackageManifestKind } from '../../types';
 import { DeprecatedOperatorWarningIcon } from '../deprecated-operator-warnings/deprecated-operator-warnings';
 import { useDeprecatedOperatorWarnings } from '../deprecated-operator-warnings/use-deprecated-operator-warnings';

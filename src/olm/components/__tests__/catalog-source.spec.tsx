@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as Router from 'react-router';
-import { DetailsPage } from '../../../utils/factory-shims';
+import { DetailsPage } from '../../../lib/factory';
 import {
   useK8sWatchResource,
   useK8sWatchResources,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { referenceForModel } from '../../utils/k8s-shims';
+import { referenceForModel } from '../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testCatalogSource, testPackageManifest, dummyPackageManifest } from '../../../mocks';
 import { CatalogSourceModel, PackageManifestModel } from '../../models';
@@ -28,15 +28,15 @@ jest.mock('react-router', () => ({
   useLocation: jest.fn(),
 }));
 
-jest.mock('../../../utils/factory-shims', () => ({
+jest.mock('../../../lib/factory', () => ({
   DetailsPage: jest.fn(() => null),
   Table: jest.fn(() => null),
   TableData: jest.fn(({ children }) => children),
   MultiListPage: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   LoadingBox: jest.fn(() => 'Loading...'),
   ResourceSummary: jest.fn(() => null),
   SectionHeading: jest.fn(() => null),
@@ -50,15 +50,13 @@ jest.mock('../../../utils/utils-shims', () => ({
   }),
 }));
 
-jest.mock('../../../utils/create-yaml-shim', () => ({
-  CreateYAML: jest.fn(({ template }) => template),
-}));
+// CreateYAML is now inlined as `const CreateYAML = () => null;` in the consumer
 
 jest.mock('../operator-group', () => ({
   requireOperatorGroup: jest.fn((component) => component),
 }));
 
-jest.mock('../../../utils/error-components', () => ({
+jest.mock('../error-components', () => ({
   ErrorBoundary: jest.fn(({ children }) => children),
   withFallback: jest.fn((successComponent) => (props) => successComponent(props)),
 }));
@@ -71,7 +69,7 @@ jest.mock('../registry-poll-interval-details', () => ({
   RegistryPollIntervalDetailItem: jest.fn(() => null),
 }));
 
-jest.mock('../../../utils/PaneBody', () => ({
+jest.mock('../PaneBody', () => ({
   __esModule: true,
   default: jest.fn(({ children }) => children),
 }));

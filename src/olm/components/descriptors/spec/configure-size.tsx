@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { useConfigureCountModal } from '../../../../utils/modal-shims';
-import type { K8sResourceKind, K8sModel } from '../../../../utils/k8s-shims';
+import { useConfigureCountModal } from '../../../../lib/modals';
+import type { K8sResourceKind, K8sModel } from '../../../../lib/k8s';
 import type { Descriptor } from '../types';
 import { getPatchPathFromDescriptor } from '../utils';
 

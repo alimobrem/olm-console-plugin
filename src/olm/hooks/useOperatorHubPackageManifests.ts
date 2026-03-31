@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import type { WatchK8sResult } from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
-import { strConcat } from '../../utils/shared-utils';
+import type { WatchK8sResult } from '@openshift-console/dynamic-plugin-sdk';
+import { strConcat } from '../../lib/utils';
 import type { PackageManifestKind } from '../types';
 import { operatorHubPackageFilter } from '../utils/packagemanifests';
 import { useMarketplacePackageManifests } from './useMarketplacePackageManifests';

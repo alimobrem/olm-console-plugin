@@ -1,4 +1,4 @@
-import type { K8sModel, K8sResourceKind } from '../../../utils/k8s-shims';
+import type { K8sModel, K8sResourceKind } from '../../../lib/k8s';
 
 export enum DescriptorType {
   spec = 'spec',

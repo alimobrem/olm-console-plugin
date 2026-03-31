@@ -1,6 +1,6 @@
 import { screen, waitFor, fireEvent } from '@testing-library/react';
-import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
-import type { K8sModel, K8sResourceKind } from '../../../../../utils/k8s-shims';
+import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk';
+import type { K8sModel, K8sResourceKind } from '../../../../../lib/k8s';
 import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance, testModel } from '../../../../../mocks';
 import type { ResourceRequirementsModalProps } from '../resource-requirements';

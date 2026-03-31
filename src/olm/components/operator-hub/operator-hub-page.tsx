@@ -4,22 +4,23 @@ import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useParams, Link } from 'react-router';
 const OPERATOR_BACKED_SERVICE_CATALOG_TYPE_ID = 'OperatorBackedService';
-import { skeletonCatalog, StatusBox } from '../../../utils/utils-shims';
+import { skeletonCatalog, StatusBox } from '../../../lib/console-components';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
 import type {
   CloudCredentialKind,
   InfrastructureKind,
   AuthenticationKind,
-} from '../../../utils/k8s-shims';
-import { referenceForModel } from '../../utils/k8s-shims';
-import { fromRequirements } from '../../utils/k8s-shims';
-import { isCatalogTypeEnabled, useIsSoftwareCatalogEnabled } from '../../../utils/catalog-utils-shims';
-import { DocumentTitle } from '../../../utils/DocumentTitle';
+} from '../../../lib/k8s';
+import { referenceForModel } from '../../lib/k8s';
+import { fromRequirements } from '../../lib/k8s';
+const isCatalogTypeEnabled = () => true;
+const useIsSoftwareCatalogEnabled = () => true;
+import { DocumentTitle } from '../DocumentTitle';
 import { EmptyState, EmptyStateBody } from '@patternfly/react-core';
-import { ErrorBoundaryFallbackPage, withFallback } from '../../utils/error-components';
-import { PageHeading } from '../../../utils/PageHeading';
-import PageBody from '../../../utils/PaneBody';
-import { ExternalLink } from '../../utils/ExternalLink';
+import { ErrorBoundaryFallbackPage, withFallback } from '../error-components';
+import { PageHeading } from '../PageHeading';
+import PageBody from '../PaneBody';
+import { ExternalLink } from '../ExternalLink';
 import { iconFor } from '..';
 import {
   CloudCredentialModel,

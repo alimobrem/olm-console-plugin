@@ -2,7 +2,7 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
-import { useOperands } from '../../../utils/useOperands';
+// useOperands is now inlined in uninstall-operator-modal
 import { renderWithProviders } from '@testing-library/react';
 import { testSubscription, dummyPackageManifest } from '../../../../mocks';
 import { ClusterServiceVersionModel, SubscriptionModel } from '../../../models';
@@ -17,11 +17,13 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useAccessReview: jest.fn(),
 }));
 
-jest.mock('../../../../utils/useOperands', () => ({
-  useOperands: jest.fn(),
+// useOperands is now inlined in the consumer module
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
+  ...jest.requireActual('@openshift-console/dynamic-plugin-sdk'),
+  consoleFetchJSON: jest.fn(),
 }));
 
-jest.mock('../../../../utils/ModalFooterWithAlerts', () => ({
+jest.mock('../../ModalFooterWithAlerts', () => ({
   ModalFooterWithAlerts: jest.fn(({ children }) => <div>{children}</div>),
 }));
 

@@ -35,7 +35,7 @@ export type {
   K8sResourceKind,
   MatchExpression,
   UserInfo,
-} from '@openshift-console/dynamic-plugin-sdk/src/extensions/console-types';
+} from '@openshift-console/dynamic-plugin-sdk';
 
 /**
  * Build a reference string from a K8s resource object.

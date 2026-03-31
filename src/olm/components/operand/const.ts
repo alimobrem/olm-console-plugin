@@ -1,5 +1,5 @@
 import type { JSONSchema7 } from 'json-schema';
-import { JSONSchemaType } from '../../../utils/dynamic-form-types';
+import { JSONSchemaType } from '../../../lib/dynamic-form-types';
 
 export const DEFAULT_K8S_SCHEMA: JSONSchema7 = {
   type: JSONSchemaType.object,

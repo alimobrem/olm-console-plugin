@@ -56,17 +56,17 @@ jest.mock('../../utils/useClusterServiceVersionPath', () => ({
   useClusterServiceVersionPath: jest.fn(() => '/test-path'),
 }));
 
-jest.mock('../../../utils/utils-shims', () => ({
-  ...jest.requireActual('../../../utils/utils-shims'),
+jest.mock('../../../lib/console-components', () => ({
+  ...jest.requireActual('../../../lib/console-components'),
   AsyncComponent: ({ children }) => children || null,
 }));
 
-jest.mock('../../../utils/Conditions', () => ({
+jest.mock('../../../lib/Conditions', () => ({
   Conditions: () => 'Conditions',
   ConditionTypes: { ClusterServiceVersion: 'ClusterServiceVersion' },
 }));
 
-jest.mock('../../../utils/misc-shims', () => ({
+jest.mock('../../../lib/legacy-components', () => ({
   ResourceEventStream: () => 'ResourceEventStream',
 }));
 

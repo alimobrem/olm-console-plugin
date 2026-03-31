@@ -17,7 +17,7 @@ import {
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, Link, useNavigate } from 'react-router';
-import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
+import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk';
 import { Radio as RadioGroup } from '@patternfly/react-core';
 import {
   documentationURLs,
@@ -30,7 +30,7 @@ import {
   ResourceIcon,
   resourcePathFromModel,
   StatusBox,
-} from '../../../utils/utils-shims';
+} from '../../../lib/console-components';
 import {
   useK8sWatchResource,
   useK8sWatchResources,
@@ -41,8 +41,8 @@ import {
   NamespaceModel,
   RoleBindingModel,
   RoleModel,
-} from '../../../utils/internal-models';
-import type { K8sResourceCommon, K8sResourceKind } from '../../../utils/k8s-shims';
+} from '../../../lib/models';
+import type { K8sResourceCommon, K8sResourceKind } from '../../../lib/k8s';
 import {
   apiVersionForModel,
   apiVersionForReference,
@@ -53,14 +53,14 @@ import {
   kindForReference,
   referenceFor,
   referenceForModel,
-} from '../../../utils/k8s-shims';
-import { fromRequirements } from '../../utils/k8s-shims';
-import { DismissableAlert } from '../../../utils/shared-components';
-import { DocumentTitle } from '../../../utils/DocumentTitle';
-import { PageHeading } from '../../../utils/PageHeading';
-import PaneBody from '../../../utils/PaneBody';
-import { ExternalLink } from '../../utils/ExternalLink';
-import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../utils/constants';
+} from '../../../lib/k8s';
+import { fromRequirements } from '../../lib/k8s';
+import { DismissableAlert } from '../../../lib/status-icons';
+import { DocumentTitle } from '../DocumentTitle';
+import { PageHeading } from '../PageHeading';
+import PaneBody from '../PaneBody';
+import { ExternalLink } from '../ExternalLink';
+import { CONSOLE_OPERATOR_CONFIG_NAME } from '../../lib/constants';
 import { SubscriptionModel, OperatorGroupModel, PackageManifestModel } from '../../models';
 import type { OperatorGroupKind, PackageManifestKind, SubscriptionKind } from '../../types';
 import { InstallPlanApproval, InstallModeType } from '../../types';

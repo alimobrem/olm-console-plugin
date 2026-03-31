@@ -8,13 +8,13 @@ import { useTranslation } from 'react-i18next';
 import { useParams, useLocation } from 'react-router';
 import type { K8sResourceKind, WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
 import { PopoverStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
-import { CreateYAML } from '../../utils/create-yaml-shim';
+const CreateYAML = () => null;
 import type {
   TableProps,
   MultiListPageProps,
   RowFunctionArgs,
-} from '../../utils/factory-shims';
-import { DetailsPage, Table, TableData, MultiListPage } from '../../utils/factory-shims';
+} from '../../lib/factory';
+import { DetailsPage, Table, TableData, MultiListPage } from '../../lib/factory';
 import {
   LoadingBox,
   ConsoleEmptyState,
@@ -23,19 +23,19 @@ import {
   SectionHeading,
   ResourceSummary,
   DetailsItem,
-} from '../../utils/utils-shims';
-import { asAccessReview } from '../../utils/k8s-shims';
+} from '../../lib/console-components';
+import { asAccessReview } from '../../lib/k8s';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
 import i18n from 'i18next';
-import { ConfigMapModel } from '../../utils/internal-models';
-import type { K8sModel, K8sModel } from '../../utils/k8s-shims';
-import { referenceForModel, k8sPatch } from '../../utils/k8s-shims';
+import { ConfigMapModel } from '../../lib/models';
+import type { K8sModel, K8sModel } from '../../lib/k8s';
+import { referenceForModel, k8sPatch } from '../../lib/k8s';
 import LazyActionMenu, {
   KEBAB_COLUMN_CLASS,
 } from '@openshift-console/dynamic-plugin-sdk';
 import { ActionMenuVariant } from '@openshift-console/dynamic-plugin-sdk';
-import { withFallback } from '../../utils/error-components';
-import PaneBody from '../../utils/PaneBody';
+import { withFallback } from './error-components';
+import PaneBody from './PaneBody';
 import { DEFAULT_SOURCE_NAMESPACE } from '../const';
 import {
   SubscriptionModel,

@@ -12,14 +12,14 @@ import {
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import type { RadioGroupItems } from '../../utils/misc-shims';
+import type { RadioGroupItems } from '../../lib/legacy-components';
 import { Radio as RadioGroup } from '@patternfly/react-core';
-import { ButtonBar, NsDropdown } from '../../utils/utils-shims';
-import { k8sCreate } from '../../utils/k8s-shims';
-import { DocumentTitle } from '../../utils/DocumentTitle';
-import { PageHeading } from '../../utils/PageHeading';
-import PaneBody from '../../utils/PaneBody';
-import { usePromiseHandler } from '../../utils/usePromiseHandler';
+import { ButtonBar, NsDropdown } from '../../lib/console-components';
+import { k8sCreate } from '../../lib/k8s';
+import { DocumentTitle } from './DocumentTitle';
+import { PageHeading } from './PageHeading';
+import PaneBody from './PaneBody';
+import { usePromiseHandler } from '../../lib/usePromiseHandler';
 import { CatalogSourceModel } from '../models';
 
 enum AvailabilityValue {

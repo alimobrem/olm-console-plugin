@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk/src/lib-core';
+import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { GLOBAL_COPIED_CSV_NAMESPACE } from '../const';
 import { ClusterServiceVersionModel } from '../models';
 import type { ClusterServiceVersionKind } from '../types';
