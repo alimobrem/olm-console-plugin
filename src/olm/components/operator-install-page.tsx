@@ -14,7 +14,8 @@ import { useTranslation } from 'react-i18next';
 import type { LinkProps } from 'react-router';
 import { useParams, Link } from 'react-router';
 import type { WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
-import { ResourceStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
+import { ResourceStatus } from '@openshift-console/dynamic-plugin-sdk';
+import { StatusIconAndText } from '../../lib/sdk-compat';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { useOverlay } from '../../lib/modals';
 import { SyncMarkdownView } from '../../lib/MarkdownView';
@@ -33,7 +34,7 @@ import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
-} from '@openshift-console/dynamic-plugin-sdk';
+} from '../../lib/sdk-compat';
 import type { RouteParams } from '../../lib/types';
 import {
   ClusterServiceVersionModel,

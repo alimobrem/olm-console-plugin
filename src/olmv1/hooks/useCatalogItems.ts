@@ -6,7 +6,7 @@ import {
   normalizeConsoleHeaders,
 } from '@openshift-console/dynamic-plugin-sdk';
 import { ONE_SECOND } from '../../lib/constants';
-import { usePoll } from '@openshift-console/dynamic-plugin-sdk';
+import { usePoll } from '../../lib/sdk-compat';
 import type { OLMCatalogItem } from '../types';
 import { normalizeCatalogItem } from '../utils/catalog-item';
 

@@ -25,12 +25,14 @@ import { useParams, useLocation, Link } from 'react-router';
 import type { WatchK8sResource, WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
 import {
   ResourceStatus,
-  StatusIconAndText,
   useAccessReviewAllowed,
-  useAccessReview,
 } from '@openshift-console/dynamic-plugin-sdk';
+import {
+  StatusIconAndText,
+  useAccessReview,
+} from '../../lib/sdk-compat';
 import { useOverlay } from '../../lib/modals';
-import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk';
+import { getGroupVersionKindForModel } from '../../lib/sdk-compat';
 import { Conditions, ConditionTypes } from '../../lib/Conditions';
 import { ResourceEventStream } from '../../lib/legacy-components';
 import type { RowFunctionArgs, Flatten } from '../../lib/factory';
@@ -63,8 +65,10 @@ import {
   LazyActionMenu,
   ActionMenuVariant,
   KEBAB_COLUMN_CLASS,
-  Timestamp,
   RedExclamationCircleIcon,
+} from '../../lib/sdk-compat';
+import {
+  Timestamp,
   useActiveNamespace,
   useK8sModel,
 } from '@openshift-console/dynamic-plugin-sdk';

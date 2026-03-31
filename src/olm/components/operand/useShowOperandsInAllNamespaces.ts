@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import * as UIActions from '../../../lib/actions';
-import { useConsoleDispatch } from '@openshift-console/dynamic-plugin-sdk';
-import { useConsoleSelector } from '@openshift-console/dynamic-plugin-sdk';
+import { useConsoleDispatch, useConsoleSelector } from '../../../lib/sdk-compat';
 
 type UseShowOperandsInAllNamespaces = () => [boolean, (value: boolean) => void];
 

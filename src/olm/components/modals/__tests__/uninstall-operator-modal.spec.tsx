@@ -1,7 +1,7 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+import { useAccessReview } from '../../../../lib/sdk-compat';
 // useOperands is now inlined in uninstall-operator-modal
 import { renderWithProviders } from '@testing-library/react';
 import { testSubscription, dummyPackageManifest } from '../../../../mocks';

@@ -110,7 +110,7 @@ export const asAccessReview = (
   model: K8sModel,
   obj: K8sResourceCommon,
   verb: string,
-): { group: string; resource: string; namespace?: string; name?: string; verb: string } => ({
+): { group: string; resource: string; namespace?: string; name?: string; verb: any } => ({
   group: model.apiGroup || '',
   resource: model.plural,
   namespace: obj?.metadata?.namespace,

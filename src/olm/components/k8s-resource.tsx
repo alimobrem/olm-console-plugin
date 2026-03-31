@@ -23,7 +23,8 @@ import {
   modelFor,
   referenceForGroupVersionKind,
 } from '../../lib/k8s';
-import { Status, Timestamp } from '@openshift-console/dynamic-plugin-sdk';
+import { Status } from '../../lib/sdk-compat';
+import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
 import type { RouteParams } from '../../lib/types';
 import type { CRDDescription, ProvidedAPI } from '../types';
 import { OperandLink } from './operand/operand-link';

@@ -10,21 +10,23 @@ import {
   InfoCircleIcon,
 } from '@patternfly/react-icons';
 
-// Re-export SDK icons that are available there
+// Re-export compat icons (not available from the SDK at runtime)
 export {
   GreenCheckCircleIcon,
   YellowExclamationTriangleIcon,
   RedExclamationCircleIcon,
-} from '@openshift-console/dynamic-plugin-sdk';
+} from './sdk-compat';
+// Also import YellowExclamationTriangleIcon for local use in WarningStatus
+import { YellowExclamationTriangleIcon } from './sdk-compat';
 
-// Re-export SDK components
+// Re-export compat components (not available from the SDK at runtime)
 export {
   Status,
   SuccessStatus,
   LazyActionMenu,
-} from '@openshift-console/dynamic-plugin-sdk';
+} from './sdk-compat';
 
-export { ActionMenuVariant } from '@openshift-console/dynamic-plugin-sdk';
+export { ActionMenuVariant } from './sdk-compat';
 
 /**
  * Blue arrow circle up icon.

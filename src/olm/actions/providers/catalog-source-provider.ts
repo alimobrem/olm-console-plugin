@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { CommonActionCreator, useCommonActions, useCommonResourceActions } from '../../../lib/action-hooks';
 import type { Action } from '@openshift-console/dynamic-plugin-sdk/src';
 import { useOverlay } from '../../../lib/modals';
-import { asAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+import { asAccessReview } from '../../../lib/sdk-compat';
 import { referenceFor } from '../../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { LazyDisableDefaultSourceModalOverlay } from '../../components/modals';

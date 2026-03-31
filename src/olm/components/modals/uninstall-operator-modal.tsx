@@ -19,8 +19,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import type { OverlayComponent } from '../../../lib/modals';
 import { useOverlay } from '../../../lib/modals';
-import { k8sGetResource } from '@openshift-console/dynamic-plugin-sdk';
-import { settleAllPromises } from '@openshift-console/dynamic-plugin-sdk';
+import { k8sGetResource, settleAllPromises } from '../../../lib/sdk-compat';
 import { getActiveNamespace } from '../../../lib/actions';
 import { coFetchJSON } from '../../../lib/legacy-components';
 import {
@@ -30,7 +29,7 @@ import {
   StatusBox,
 } from '../../../lib/console-components';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
-import { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+import { useAccessReview } from '../../../lib/sdk-compat';
 import { ConsoleOperatorConfigModel } from '../../../lib/models';
 import type { K8sResourceCommon, K8sResourceKind } from '../../../lib/k8s';
 import {

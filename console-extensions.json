@@ -115,6 +115,54 @@
     }
   },
   {
+    "type": "console.navigation/section",
+    "properties": {
+      "id": "operators",
+      "name": "%olm~Operators%",
+      "insertAfter": "workloads",
+      "perspective": "admin"
+    },
+    "flags": {
+      "required": [
+        "OPERATOR_LIFECYCLE_MANAGER"
+      ]
+    }
+  },
+  {
+    "type": "console.navigation/href",
+    "properties": {
+      "id": "operatorhub",
+      "section": "operators",
+      "name": "%olm~OperatorHub%",
+      "href": "/operatorhub",
+      "perspective": "admin"
+    },
+    "flags": {
+      "required": [
+        "OPERATOR_LIFECYCLE_MANAGER"
+      ]
+    }
+  },
+  {
+    "type": "console.navigation/resource-ns",
+    "properties": {
+      "id": "installed-operators",
+      "section": "operators",
+      "name": "%olm~Installed Operators%",
+      "model": {
+        "group": "operators.coreos.com",
+        "version": "v1alpha1",
+        "kind": "ClusterServiceVersion"
+      },
+      "perspective": "admin"
+    },
+    "flags": {
+      "required": [
+        "OPERATOR_LIFECYCLE_MANAGER"
+      ]
+    }
+  },
+  {
     "type": "console.page/route",
     "properties": {
       "exact": true,
@@ -305,7 +353,8 @@
     },
     "flags": {
       "required": [
-        "OPERATOR_LIFECYCLE_MANAGER"
+        "OPERATOR_LIFECYCLE_MANAGER",
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -321,7 +370,8 @@
     },
     "flags": {
       "required": [
-        "OPERATOR_LIFECYCLE_MANAGER"
+        "OPERATOR_LIFECYCLE_MANAGER",
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -431,6 +481,9 @@
     "flags": {
       "disallowed": [
         "OLMV1_ENABLED"
+      ],
+      "required": [
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -483,6 +536,11 @@
           }
         }
       ]
+    },
+    "flags": {
+      "required": [
+        "DISABLED_FOR_TESTING"
+      ]
     }
   },
   {
@@ -496,6 +554,9 @@
     "flags": {
       "disallowed": [
         "OLMV1_ENABLED"
+      ],
+      "required": [
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -524,7 +585,8 @@
     },
     "flags": {
       "required": [
-        "CAN_LIST_OPERATOR_GROUP"
+        "CAN_LIST_OPERATOR_GROUP",
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -616,7 +678,8 @@
       "required": [
         "CLUSTER_CATALOG_API",
         "TECH_PREVIEW",
-        "OLMV1_ENABLED"
+        "OLMV1_ENABLED",
+        "DISABLED_FOR_TESTING"
       ]
     }
   },
@@ -633,7 +696,8 @@
       "required": [
         "CLUSTER_CATALOG_API",
         "TECH_PREVIEW",
-        "OLMV1_ENABLED"
+        "OLMV1_ENABLED",
+        "DISABLED_FOR_TESTING"
       ]
     }
   },

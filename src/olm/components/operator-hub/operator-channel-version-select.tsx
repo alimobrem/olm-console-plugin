@@ -4,7 +4,7 @@ import type { MenuToggleElement } from '@patternfly/react-core';
 import { Alert, MenuToggle, Select, SelectList, SelectOption } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
+import { useQueryParamsMutator } from '../../../lib/sdk-compat';
 import { alphanumericCompare } from '../../../lib/utils';
 import type { PackageManifestKind } from '../../types';
 import { DeprecatedOperatorWarningIcon } from '../deprecated-operator-warnings/deprecated-operator-warnings';

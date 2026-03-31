@@ -1,7 +1,5 @@
-import {
-  useK8sWatchResource,
-  getGroupVersionKindForModel,
-} from '@openshift-console/dynamic-plugin-sdk';
+import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
+import { getGroupVersionKindForModel } from '../../lib/sdk-compat';
 import type { WatchK8sResult } from '../../lib/k8s';
 import { fromRequirements } from '../../lib/k8s';
 import { PackageManifestModel } from '../models';

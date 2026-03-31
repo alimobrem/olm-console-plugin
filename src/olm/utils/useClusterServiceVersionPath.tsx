@@ -1,4 +1,4 @@
-import { getReferenceForModel } from '@openshift-console/dynamic-plugin-sdk';
+import { getReferenceForModel } from '../../lib/sdk-compat';
 import { resourceObjPath, resourcePath } from '../../lib/console-components';
 import { ALL_NAMESPACES_KEY } from '../../lib/constants';
 import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk';

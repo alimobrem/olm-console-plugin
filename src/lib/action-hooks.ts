@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Action, K8sModel, K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
 import { useOverlay } from './modals';
-import { useDeepCompareMemoize } from '@openshift-console/dynamic-plugin-sdk';
+import { useDeepCompareMemoize } from './sdk-compat';
 import {
   LazyAnnotationsModalOverlay,
   LazyDeleteModalOverlay,
@@ -17,7 +17,7 @@ import {
   LazyTolerationsModalOverlay,
 } from './modals';
 import { useConfigureCountModal } from './modals';
-import { asAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+import { asAccessReview } from './sdk-compat';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { referenceFor, resourceObjPath } from './k8s';
 

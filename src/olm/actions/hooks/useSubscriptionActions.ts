@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { CommonActionCreator } from '../../../lib/action-hooks';
 import { useCommonActions } from '../../../lib/action-hooks';
 import type { Action } from '@openshift-console/dynamic-plugin-sdk';
-import { useDeepCompareMemoize } from '@openshift-console/dynamic-plugin-sdk';
+import { useDeepCompareMemoize } from '../../../lib/sdk-compat';
 import { asAccessReview } from '../../../lib/k8s';
 import { referenceFor } from '../../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';

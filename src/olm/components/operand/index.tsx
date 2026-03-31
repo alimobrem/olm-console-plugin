@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, useLocation, useNavigate } from 'react-router';
 import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
-import { ListPageBody } from '@openshift-console/dynamic-plugin-sdk';
+import { ListPageBody } from '../../../lib/sdk-compat';
 import { getResources } from '../../../lib/legacy-components';
 import { Conditions } from '../../../lib/Conditions';
 import { ErrorPage404 } from '../../../lib/legacy-components';
@@ -60,9 +60,11 @@ import {
   LazyActionMenu,
   ActionMenuVariant,
   KEBAB_COLUMN_CLASS,
+  useConsoleDispatch,
+} from '../../../lib/sdk-compat';
+import {
   Timestamp,
   useActiveNamespace,
-  useConsoleDispatch,
   useK8sModel,
   useK8sModels,
   useResourceDetailsPage,

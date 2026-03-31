@@ -35,7 +35,7 @@ import {
   useK8sWatchResource,
   useK8sWatchResources,
 } from '@openshift-console/dynamic-plugin-sdk';
-import { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+import { useAccessReview } from '../../../lib/sdk-compat';
 import {
   ConsoleOperatorConfigModel,
   NamespaceModel,

@@ -20,7 +20,7 @@ import { Map as ImmutableMap, Set as ImmutableSet, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, Link, useNavigate } from 'react-router';
-import { getUser, GreenCheckCircleIcon } from '@openshift-console/dynamic-plugin-sdk';
+import { getUser, GreenCheckCircleIcon } from '../../lib/sdk-compat';
 import { useOverlay } from '../../lib/modals';
 import { Conditions } from '../../lib/Conditions';
 import type { RowFunctionArgs } from '../../lib/factory';
@@ -45,13 +45,9 @@ import {
   k8sPatch,
   apiVersionForReference,
 } from '../../lib/k8s';
-import LazyActionMenu, {
-  KEBAB_COLUMN_CLASS,
-} from '@openshift-console/dynamic-plugin-sdk';
+import { LazyActionMenu, KEBAB_COLUMN_CLASS, Status, useConsoleSelector } from '../../lib/sdk-compat';
 import PaneBody from './PaneBody';
-import { Status } from '@openshift-console/dynamic-plugin-sdk';
 import { FLAGS } from '../../lib/constants';
-import { useConsoleSelector } from '@openshift-console/dynamic-plugin-sdk';
 import { useFlag } from '@openshift-console/dynamic-plugin-sdk';
 import {
   SubscriptionModel,

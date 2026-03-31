@@ -49,7 +49,7 @@ import {
   modelFor,
 } from '../../../lib/k8s';
 import PaneBody from '../PaneBody';
-import { useResourceConnectionHandler } from '@openshift-console/dynamic-plugin-sdk';
+import { useResourceConnectionHandler } from '../../../lib/sdk-compat';
 import type { ProvidedAPI } from '../../types';
 import { ClusterServiceVersionLogo } from '../cluster-service-version-logo';
 import {

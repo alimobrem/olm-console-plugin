@@ -21,10 +21,10 @@ import { sortable } from '@patternfly/react-table';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
-import { ResourceStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
+import { StatusIconAndText, getGroupVersionKindForModel } from '../../lib/sdk-compat';
+import { ResourceStatus } from '@openshift-console/dynamic-plugin-sdk';
 import { useOverlay } from '../../lib/modals';
 import type { K8sResourceKind } from '@openshift-console/dynamic-plugin-sdk';
-import { getGroupVersionKindForModel } from '@openshift-console/dynamic-plugin-sdk';
 import { Conditions } from '../../lib/Conditions';
 import type { RowFunctionArgs } from '../../lib/factory';
 import { DetailsPage, MultiListPage, Table, TableData } from '../../lib/factory';
@@ -46,7 +46,7 @@ import {
   LazyActionMenu,
   ActionMenuVariant,
   KEBAB_COLUMN_CLASS,
-} from '@openshift-console/dynamic-plugin-sdk';
+} from '../../lib/sdk-compat';
 import { getName, getNamespace } from '../../lib/utils';
 import {
   BlueArrowCircleUpIcon,
@@ -56,7 +56,7 @@ import {
 import { DescriptionListTermHelp } from './DescriptionListTermHelp';
 import PaneBody from './PaneBody';
 import PaneBodyGroup from './PaneBody';
-import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
+import { useQueryParamsMutator } from '../../lib/sdk-compat';
 import {
   SubscriptionModel,
   ClusterServiceVersionModel,

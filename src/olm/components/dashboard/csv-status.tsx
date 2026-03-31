@@ -2,12 +2,10 @@ import type { FC } from 'react';
 import { pluralize } from '@patternfly/react-core';
 import { Link } from 'react-router';
 import type { OperatorRowProps } from '@openshift-console/dynamic-plugin-sdk';
-import {
-  resourcePathFromModel,
-  resourcePath,
-} from '@openshift-console/dynamic-plugin-sdk';
+import { resourcePathFromModel } from '../../../lib/sdk-compat';
+import { resourcePath } from '../../../lib/console-components';
 import { referenceForModel } from '../../../lib/k8s';
-import Status from '@openshift-console/dynamic-plugin-sdk';
+import { Status } from '../../../lib/sdk-compat';
 import { ClusterServiceVersionModel } from '../../models';
 import type { ClusterServiceVersionKind } from '../../types';
 

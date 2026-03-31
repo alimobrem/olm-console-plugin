@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CamelCaseWrap, Timestamp } from '@openshift-console/dynamic-plugin-sdk';
+import { CamelCaseWrap } from './sdk-compat';
+import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
 import { Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import { EmptyState, EmptyStateBody } from '@patternfly/react-core';
 

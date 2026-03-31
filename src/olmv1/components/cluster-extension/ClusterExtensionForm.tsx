@@ -24,7 +24,7 @@ import { HelpIcon, PencilAltIcon } from '@patternfly/react-icons';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { k8sCreateResource } from '@openshift-console/dynamic-plugin-sdk';
+import { k8sCreateResource } from '../../../lib/sdk-compat';
 import { NsDropdown, resourcePathFromModel } from '../../../lib/console-components';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { NamespaceModel, ServiceAccountModel } from '../../../lib/models';

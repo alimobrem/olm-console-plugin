@@ -9,12 +9,12 @@ import {
   ConsoleDataView,
 } from '@openshift-console/dynamic-plugin-sdk';
 import type { GetDataViewRows } from '@openshift-console/dynamic-plugin-sdk';
-import Status from '@openshift-console/dynamic-plugin-sdk';
+import { Status } from '../../../lib/sdk-compat';
 import type { TableColumn } from '@openshift-console/dynamic-plugin-sdk';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { ResourceLink } from '@openshift-console/dynamic-plugin-sdk';
 import { referenceForModel } from '../../../lib/k8s';
-import LazyActionMenu from '@openshift-console/dynamic-plugin-sdk';
+import { LazyActionMenu } from '../../../lib/sdk-compat';
 import PaneBody from '../../../olm/components/PaneBody';
 import { DASH } from '../../../lib/constants';
 import { ClusterExtensionModel } from '../../models';

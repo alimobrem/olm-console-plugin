@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, useLocation } from 'react-router';
 import type { K8sResourceKind, WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
-import { PopoverStatus, StatusIconAndText } from '@openshift-console/dynamic-plugin-sdk';
+import { PopoverStatus, StatusIconAndText } from '../../lib/sdk-compat';
 const CreateYAML = () => null;
 import type {
   TableProps,
@@ -30,10 +30,7 @@ import i18n from 'i18next';
 import { ConfigMapModel } from '../../lib/models';
 import type { K8sModel, K8sModel } from '../../lib/k8s';
 import { referenceForModel, k8sPatch } from '../../lib/k8s';
-import LazyActionMenu, {
-  KEBAB_COLUMN_CLASS,
-} from '@openshift-console/dynamic-plugin-sdk';
-import { ActionMenuVariant } from '@openshift-console/dynamic-plugin-sdk';
+import { LazyActionMenu, KEBAB_COLUMN_CLASS, ActionMenuVariant } from '../../lib/sdk-compat';
 import { withFallback } from './error-components';
 import PaneBody from './PaneBody';
 import { DEFAULT_SOURCE_NAMESPACE } from '../const';

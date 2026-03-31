@@ -11,7 +11,7 @@ import { k8sCreate } from '../../../lib/k8s';
 // TODO: migrate DynamicForm - requires full DynamicForm framework (rjsf Form, custom fields, widgets, templates, styles)
 import { DynamicForm } from '../../../lib/DynamicForm';
 import PaneBody from '../PaneBody';
-import { useResourceConnectionHandler } from '@openshift-console/dynamic-plugin-sdk';
+import { useResourceConnectionHandler } from '../../../lib/sdk-compat';
 import { ClusterServiceVersionModel } from '../../models';
 import type { ClusterServiceVersionKind, CRDDescription, APIServiceDefinition } from '../../types';
 import { ClusterServiceVersionLogo } from '../cluster-service-version-logo';

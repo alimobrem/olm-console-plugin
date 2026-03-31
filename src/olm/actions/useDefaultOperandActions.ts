@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { K8S_VERB_DELETE, K8S_VERB_UPDATE } from '@openshift-console/dynamic-plugin-sdk';
+import { K8S_VERB_DELETE, K8S_VERB_UPDATE, asAccessReview } from '../../lib/sdk-compat';
 import type { Action } from '@openshift-console/dynamic-plugin-sdk';
 import { useOverlay } from '../../lib/modals';
 import type { DeleteModalProps } from '../../lib/modals';
 import { DeleteModalOverlay } from '../../lib/modals';
-import { asAccessReview } from '@openshift-console/dynamic-plugin-sdk';
 import { referenceFor } from '../../lib/k8s';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { csvNameFromWindow } from '../components/operand/operand-link';

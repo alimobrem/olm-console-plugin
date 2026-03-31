@@ -4,7 +4,7 @@ import type { JSONSchema7 } from 'json-schema';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { useActivePerspective } from '@openshift-console/dynamic-plugin-sdk';
+import { useActivePerspective } from '../../../lib/sdk-compat';
 import {
   StatusBox,
   resourcePathFromModel,
@@ -24,7 +24,7 @@ import {
 import { PageHeading } from '../PageHeading';
 import { SyncedEditor } from '../../../lib/editor-toggle';
 import { EditorType } from '../../../lib/editor-toggle';
-import { useCreateResourceExtension } from '@openshift-console/dynamic-plugin-sdk';
+import { useCreateResourceExtension } from '../../../lib/sdk-compat';
 import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import type { RouteParams } from '../../../lib/types';
 import { exampleForModel, providedAPIForModel } from '..';

@@ -62,7 +62,7 @@
     "exposedModules": {
       "CatalogRedirect": "./olm/components/catalog-redirect.tsx",
       "catalogSource": "./olm/components/catalog-source.tsx",
-      "clusterServiceVersions": "./olm/components/clusterserviceversion.tsx",
+      "clusterServiceVersions": "./olm/components/csv-list-page.tsx",
       "createCatalogSource": "./olm/components/create-catalog-source.tsx",
       "createOperand": "./olm/components/operand/create-operand.tsx",
       "csvStatus": "./olm/components/dashboard/csv-status.tsx",

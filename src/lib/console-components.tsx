@@ -23,7 +23,7 @@ import { ResourceLink, ResourceIcon, Timestamp } from '@openshift-console/dynami
 
 /* Re-export SDK primitives so consumers can import from one place */
 export { ResourceLink, ResourceIcon } from '@openshift-console/dynamic-plugin-sdk';
-export { useAccessReview } from '@openshift-console/dynamic-plugin-sdk';
+export { useAccessReview } from './sdk-compat';
 
 /* Re-export path helpers already implemented in k8s-shims */
 export { resourceObjPath, resourcePath, asAccessReview } from './k8s';

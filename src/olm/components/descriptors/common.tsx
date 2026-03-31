@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { SecretValue } from '../../../lib/legacy-components';
 import { DetailsItem, ResourceLink } from '../../../lib/console-components';
-import { YellowExclamationTriangleIcon } from '@openshift-console/dynamic-plugin-sdk';
+import { YellowExclamationTriangleIcon } from '../../../lib/sdk-compat';
 import { REGEXP_K8S_RESOURCE_SUFFIX } from './const';
 import type { CapabilityProps, SpecCapability, StatusCapability } from './types';
 

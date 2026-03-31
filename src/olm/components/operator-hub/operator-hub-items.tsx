@@ -19,14 +19,14 @@ import { Link, useNavigate, useSearchParams } from 'react-router';
 import { useOverlay } from '../../../lib/modals';
 import { TileViewPage } from '../../../lib/legacy-components';
 import i18n from 'i18next';
-import { GreenCheckCircleIcon } from '@openshift-console/dynamic-plugin-sdk';
+import { GreenCheckCircleIcon } from '../../../lib/sdk-compat';
 import { COMMUNITY_PROVIDERS_WARNING_USER_PREFERENCE_KEY as ignoreWarningPreferenceKey } from '../../../lib/olm-constants';
 const getURLWithParams = (key: string, value: string): string => {
   const params = new URLSearchParams(window.location.search);
   params.set(key, value);
   return `${window.location.pathname}?${params.toString()}`;
 };
-import { useQueryParamsMutator } from '@openshift-console/dynamic-plugin-sdk';
+import { useQueryParamsMutator } from '../../../lib/sdk-compat';
 import { useUserPreference } from '@openshift-console/dynamic-plugin-sdk';
 import { isModifiedEvent } from '../../../lib/utils';
 import { DefaultCatalogSource } from '../../const';
