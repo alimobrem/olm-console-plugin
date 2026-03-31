@@ -1,15 +1,15 @@
 import * as Router from 'react-router';
-import { CreateYAML } from '@console/internal/components/create-yaml';
+import { CreateYAML } from '../../../utils/create-yaml-shim';
 import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { SyncedEditor } from '../../utils/editor-toggle';
 import { EditorType } from '../../utils/editor-toggle';
-import { useK8sModel } from '@console/shared/src/hooks/useK8sModel';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { useK8sModel } from '@openshift-console/dynamic-plugin-sdk';
+import { renderWithProviders } from '@testing-library/react';
 import { testClusterServiceVersion, testModel, testCRD } from '../../../../mocks';
 import { CreateOperand } from '../create-operand';
 import { OperandYAML } from '../operand-yaml';
 
-jest.mock('@console/shared/src/hooks/useK8sModel', () => ({ useK8sModel: jest.fn() }));
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({ useK8sModel: jest.fn() }));
 
 jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sWatchResource: jest.fn(),
@@ -24,15 +24,15 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useActivePerspective: jest.fn(() => ['admin']),
 }));
 
-jest.mock('@console/shared/src/components/synced-editor', () => ({
+jest.mock('../../../../utils/editor-toggle', () => ({
   SyncedEditor: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/components/create-yaml', () => ({
+jest.mock('../../../../utils/create-yaml-shim', () => ({
   CreateYAML: jest.fn(() => null),
 }));
 
-jest.mock('@console/shared/src/components/heading/PageHeading', () => ({
+jest.mock('../../../../utils/PageHeading', () => ({
   PageHeading: jest.fn(() => null),
 }));
 

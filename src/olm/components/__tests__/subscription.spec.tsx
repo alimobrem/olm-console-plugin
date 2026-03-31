@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as Router from 'react-router';
-import { Table, MultiListPage, DetailsPage } from '@console/internal/components/factory';
-import { ResourceLink } from '@console/internal/components/utils';
+import { Table, MultiListPage, DetailsPage } from '../../../utils/factory-shims';
+import { ResourceLink } from '../../../utils/utils-shims';
 import { referenceForModel } from '../../utils/k8s-shims';
-import { LazyActionMenu } from '@console/shared/src';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { LazyActionMenu } from '@openshift-console/dynamic-plugin-sdk';
+import { renderWithProviders } from '@testing-library/react';
 import {
   testSubscription,
   testSubscriptions,
@@ -34,29 +34,29 @@ jest.mock('react-router', () => ({
   useParams: jest.fn(),
 }));
 
-jest.mock('@console/internal/components/utils', () => ({
-  ...jest.requireActual('@console/internal/components/utils'),
+jest.mock('../../../utils/utils-shims', () => ({
+  ...jest.requireActual('../../../utils/utils-shims'),
   ResourceLink: jest.fn(() => null),
 }));
 
-jest.mock('@console/shared/src', () => ({
-  ...jest.requireActual('@console/shared/src'),
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
+  ...jest.requireActual('@openshift-console/dynamic-plugin-sdk'),
   LazyActionMenu: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/components/factory', () => ({
-  ...jest.requireActual('@console/internal/components/factory'),
+jest.mock('../../../utils/factory-shims', () => ({
+  ...jest.requireActual('../../../utils/factory-shims'),
   Table: jest.fn(() => null),
   MultiListPage: jest.fn(() => null),
   DetailsPage: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/components/utils/details-page', () => ({
-  ...jest.requireActual('@console/internal/components/utils/details-page'),
+jest.mock('../../../utils/utils-shims', () => ({
+  ...jest.requireActual('../../../utils/utils-shims'),
   ResourceSummary: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/components/conditions', () => ({
+jest.mock('../../../utils/Conditions', () => ({
   Conditions: jest.fn(() => null),
 }));
 

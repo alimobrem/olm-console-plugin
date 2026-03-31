@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
-import operatorLogo from '@console/internal/imgs/operator.svg';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import operatorLogo from '../../operator.svg';
+import { renderWithProviders } from '@testing-library/react';
 import {
   testClusterServiceVersion,
   testSubscription,
@@ -20,11 +20,11 @@ import type {
 import { ClusterServiceVersionTableRow, CRDCard, CSVSubscription } from '../clusterserviceversion';
 
 // Mock hooks
-jest.mock('@console/shared/src/hooks/useK8sModel', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sModel: () => [testModel],
 }));
 
-jest.mock('@console/internal/components/utils/rbac', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useAccessReview: () => true,
 }));
 
@@ -34,7 +34,7 @@ jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useAccessReviewAllowed: () => true,
 }));
 
-jest.mock('@console/shared/src/hooks/redux-selectors', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useActiveNamespace: jest.fn(),
 }));
 
@@ -56,17 +56,17 @@ jest.mock('../../utils/useClusterServiceVersionPath', () => ({
   useClusterServiceVersionPath: jest.fn(() => '/test-path'),
 }));
 
-jest.mock('@console/internal/components/utils', () => ({
-  ...jest.requireActual('@console/internal/components/utils'),
+jest.mock('../../../utils/utils-shims', () => ({
+  ...jest.requireActual('../../../utils/utils-shims'),
   AsyncComponent: ({ children }) => children || null,
 }));
 
-jest.mock('@console/internal/components/conditions', () => ({
+jest.mock('../../../utils/Conditions', () => ({
   Conditions: () => 'Conditions',
   ConditionTypes: { ClusterServiceVersion: 'ClusterServiceVersion' },
 }));
 
-jest.mock('@console/internal/components/events', () => ({
+jest.mock('../../../utils/misc-shims', () => ({
   ResourceEventStream: () => 'ResourceEventStream',
 }));
 

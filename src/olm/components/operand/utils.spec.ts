@@ -1,5 +1,5 @@
 import { ServiceAccountModel } from '../../../utils/internal-models';
-import { getJSONSchemaOrder } from '@console/shared/src/components/dynamic-form/utils';
+import { getJSONSchemaOrder } from '../../../utils/dynamic-form-utils';
 import { SpecCapability } from '../descriptors/types';
 import { capabilitiesToUISchema } from './utils';
 

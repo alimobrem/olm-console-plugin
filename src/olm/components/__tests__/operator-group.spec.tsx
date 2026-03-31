@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import {
   testOperatorGroup,
   testSubscription,

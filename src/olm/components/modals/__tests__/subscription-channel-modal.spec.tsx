@@ -1,13 +1,13 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import { testSubscription, testPackageManifest } from '../../../../mocks';
 import { SubscriptionModel } from '../../../models';
 import type { SubscriptionKind, PackageManifestKind } from '../../../types';
 import type { SubscriptionChannelModalProps } from '../subscription-channel-modal';
 import { SubscriptionChannelModal } from '../subscription-channel-modal';
 
-jest.mock('@console/shared/src/components/modals/ModalFooterWithAlerts', () => ({
+jest.mock('../../../../utils/ModalFooterWithAlerts', () => ({
   ModalFooterWithAlerts: jest.fn(({ children }) => <div>{children}</div>),
 }));
 

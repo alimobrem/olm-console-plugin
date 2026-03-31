@@ -2,10 +2,10 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as Router from 'react-router';
 import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
-import { Table, MultiListPage, DetailsPage } from '@console/internal/components/factory';
-import { useAccessReview } from '@console/internal/components/utils';
+import { Table, MultiListPage, DetailsPage } from '../../../utils/factory-shims';
+import { useAccessReview } from '../../../utils/utils-shims';
 import { referenceForModel } from '../../utils/k8s-shims';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import { testInstallPlan } from '../../../mocks';
 import { InstallPlanModel, ClusterServiceVersionModel, OperatorGroupModel } from '../../models';
 import type { InstallPlanKind } from '../../types';
@@ -24,13 +24,13 @@ jest.mock('react-router', () => ({
   useParams: jest.fn(),
 }));
 
-jest.mock('@console/internal/components/utils/rbac', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useAccessReview: jest.fn(),
   asAccessReview: jest.fn(() => ({})),
 }));
 
-jest.mock('@console/internal/components/factory', () => ({
-  ...jest.requireActual('@console/internal/components/factory'),
+jest.mock('../../../utils/factory-shims', () => ({
+  ...jest.requireActual('../../../utils/factory-shims'),
   Table: jest.fn(() => null),
   MultiListPage: jest.fn(() => null),
   DetailsPage: jest.fn(() => null),

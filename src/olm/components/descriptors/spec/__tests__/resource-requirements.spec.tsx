@@ -1,7 +1,7 @@
 import { screen, waitFor, fireEvent } from '@testing-library/react';
 import * as k8sResourceModule from '@openshift-console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource';
 import type { K8sModel, K8sResourceKind } from '../../../../../utils/k8s-shims';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance, testModel } from '../../../../../mocks';
 import type { ResourceRequirementsModalProps } from '../resource-requirements';
 import { ResourceRequirementsModal, ResourceRequirementsModalLink } from '../resource-requirements';
@@ -14,7 +14,7 @@ jest.mock('@openshift-console/dynamic-plugin-sdk/src/utils/k8s/k8s-resource', ()
   k8sUpdate: jest.fn(),
 }));
 
-jest.mock('@console/shared/src/hooks/useK8sModel', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sModel: (...args) => useK8sModelMock(...args),
 }));
 

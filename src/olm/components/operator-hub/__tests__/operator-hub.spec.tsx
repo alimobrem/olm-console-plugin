@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import { operatorHubDetailsProps, itemWithLongDescription } from '../../../../mocks';
 import type { OperatorHubItem } from '../index';
 import { OperatorHubItemDetails } from '../operator-hub-item-details';

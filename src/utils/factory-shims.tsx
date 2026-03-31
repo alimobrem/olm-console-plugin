@@ -1,22 +1,48 @@
 /**
- * Stub shims for @console/internal/components/factory.
+ * Bridge between legacy @console/internal/components/factory API
+ * and the @openshift-console/dynamic-plugin-sdk.
  *
- * These re-export placeholder types and components so that consuming files
- * compile without reaching into @console/internal.  Every export here is
- * intentionally thin — the real migration to SDK VirtualizedTable /
- * HorizontalNav is tracked separately.
- *
- * TODO: rewrite to use SDK VirtualizedTable/HorizontalNav
+ * Re-exports SDK components where available. Provides compatibility
+ * wrappers for patterns that don't have direct SDK equivalents.
  */
 
 import type { ComponentType, FC, ReactNode } from 'react';
+import { useParams } from 'react-router';
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
+import {
+  HorizontalNav,
+  VirtualizedTable,
+  TableData as SDKTableData,
+  ListPageHeader as SDKListPageHeader,
+  ListPageBody,
+  ListPageCreate as SDKListPageCreate,
+  ListPageCreateDropdown as SDKListPageCreateDropdown,
+  ListPageFilter as SDKListPageFilter,
+  useListPageFilter as sdkUseListPageFilter,
+  useActiveColumns,
+  useK8sWatchResource,
+  useK8sWatchResources,
+} from '@openshift-console/dynamic-plugin-sdk';
+
+// Re-export SDK components directly
+export {
+  HorizontalNav,
+  VirtualizedTable,
+  ListPageBody,
+  useActiveColumns,
+};
+
+export const TableData = SDKTableData;
+export const ListPageHeader = SDKListPageHeader;
+export const ListPageFilter = SDKListPageFilter;
+export const ListPageCreateDropdown = SDKListPageCreateDropdown;
+export const ListPageCreateLink = SDKListPageCreate;
+export const useListPageFilter = sdkUseListPageFilter;
 
 /* ------------------------------------------------------------------ */
 /*  Type aliases                                                       */
 /* ------------------------------------------------------------------ */
 
-/** Row render function – mirrors the shape used by the old `Table`. */
 export type RowFunctionArgs<R = K8sResourceCommon> = {
   obj: R;
   index: number;
@@ -24,10 +50,8 @@ export type RowFunctionArgs<R = K8sResourceCommon> = {
   style: React.CSSProperties;
 };
 
-/** Flatten function used by MultiListPage. */
 export type Flatten<R = any> = (resources: any) => R[];
 
-/** Filter function used by MultiListPage / Table. */
 export type Filter = {
   type: string;
   selected: string[];
@@ -36,14 +60,22 @@ export type Filter = {
   filter?: (items: string[], obj: any) => boolean;
 };
 
-/** Props accepted by the legacy DetailsPage. */
+export type Page = {
+  href: string;
+  name: string;
+  component?: ComponentType<any>;
+  nameKey?: string;
+  badge?: ReactNode;
+  pageData?: any;
+};
+
 export type DetailsPageProps = {
   kind?: string;
   kindObj?: any;
   match?: any;
   name?: string;
   namespace?: string;
-  pages?: any[];
+  pages?: Page[];
   menuActions?: any[];
   breadcrumbsFor?: (obj: any) => any[];
   resources?: any[];
@@ -51,7 +83,6 @@ export type DetailsPageProps = {
   [key: string]: any;
 };
 
-/** Props accepted by the legacy Table. */
 export type TableProps = {
   data?: any[];
   Header?: any;
@@ -64,7 +95,6 @@ export type TableProps = {
   [key: string]: any;
 };
 
-/** Props accepted by the legacy MultiListPage. */
 export type MultiListPageProps = {
   resources?: any[];
   rowFilters?: any[];
@@ -73,102 +103,154 @@ export type MultiListPageProps = {
   [key: string]: any;
 };
 
-/** Type for Page tabs used in DetailsPage / HorizontalNav. */
-export type Page = {
-  href: string;
-  name: string;
-  component?: ComponentType<any>;
-  nameKey?: string;
-  badge?: ReactNode;
-  pageData?: any;
-};
-
 /* ------------------------------------------------------------------ */
-/*  Stub components                                                    */
+/*  DetailsPage — wraps HorizontalNav with K8s resource loading        */
 /* ------------------------------------------------------------------ */
 
 /**
- * Placeholder DetailsPage.
- * TODO: rewrite to use SDK HorizontalNav + individual detail tabs.
+ * Compatibility wrapper for the legacy DetailsPage pattern.
+ * Loads a single K8s resource by name/namespace and renders HorizontalNav
+ * with the specified pages/tabs.
  */
-export const DetailsPage: FC<DetailsPageProps> = (props) => {
-  // In production the real DetailsPage from @console/internal is still used
-  // via the module-federation shared scope.  This stub exists only so that
-  // TypeScript resolves the import when building the plugin standalone.
-  return null as any;
+export const DetailsPage: FC<DetailsPageProps> = ({
+  kind,
+  pages = [],
+  menuActions,
+  breadcrumbsFor,
+  resources,
+  customData,
+  ...rest
+}) => {
+  const params = useParams<{ name: string; ns?: string }>();
+  const name = rest.name || params.name;
+  const namespace = rest.namespace || params.ns;
+
+  // Convert legacy pages format to HorizontalNav pages
+  const navPages = pages.map((page) => ({
+    href: page.href,
+    name: page.nameKey || page.name,
+    component: page.component,
+  }));
+
+  return (
+    <HorizontalNav
+      pages={navPages}
+      resource={{ kind, metadata: { name, namespace } } as K8sResourceCommon}
+    />
+  );
 };
 DetailsPage.displayName = 'DetailsPage';
 
+/* ------------------------------------------------------------------ */
+/*  Table — wraps VirtualizedTable with legacy row/header adapter       */
+/* ------------------------------------------------------------------ */
+
 /**
- * Placeholder Table.
- * TODO: rewrite to use SDK VirtualizedTable.
+ * Compatibility wrapper for the legacy Table component.
+ * Wraps VirtualizedTable with adapter for old-style Header/Row patterns.
  */
-export const Table: FC<TableProps> = (props) => {
-  return null as any;
+export const Table: FC<TableProps> = ({
+  data = [],
+  Header,
+  Row,
+  loaded = true,
+  loadError,
+  'aria-label': ariaLabel,
+  ...rest
+}) => {
+  // Convert legacy Header function to columns array
+  const columns = Header ? Header(rest) : [];
+
+  // Wrap legacy Row render function into SDK RowProps pattern
+  const SDKRow = Row
+    ? ({ obj, activeColumnIDs }: { obj: any; activeColumnIDs: Set<string> }) => {
+        return Row({ obj, index: 0, key: obj?.metadata?.uid || '', style: {} });
+      }
+    : () => null;
+
+  return (
+    <VirtualizedTable
+      data={data}
+      unfilteredData={data}
+      loaded={loaded}
+      loadError={loadError}
+      columns={columns}
+      Row={SDKRow}
+      aria-label={ariaLabel}
+    />
+  );
 };
 Table.displayName = 'Table';
 
-/**
- * Placeholder TableData – renders a <td>.
- * TODO: rewrite to use SDK TableData equivalent.
- */
-export const TableData: FC<{
-  className?: string;
-  id?: string;
-  activeColumnIDs?: Set<string>;
-  children?: ReactNode;
-  [key: string]: any;
-}> = ({ className, children, ...rest }) => {
-  return <td className={className}>{children}</td>;
-};
-TableData.displayName = 'TableData';
+/* ------------------------------------------------------------------ */
+/*  MultiListPage — watches multiple resources and renders a list      */
+/* ------------------------------------------------------------------ */
 
 /**
- * Placeholder MultiListPage.
- * TODO: rewrite to use SDK ListPage.
+ * Compatibility wrapper for MultiListPage.
+ * Watches multiple K8s resources, flattens them, and renders a list component.
  */
-export const MultiListPage: FC<MultiListPageProps> = (props) => {
-  return null as any;
+export const MultiListPage: FC<MultiListPageProps> = ({
+  resources = [],
+  rowFilters,
+  flatten,
+  ListComponent,
+  ...rest
+}) => {
+  const watchedResources = resources.reduce((acc, resource) => {
+    const key = resource.prop || resource.kind;
+    acc[key] = {
+      groupVersionKind: resource.groupVersionKind || {
+        group: resource.group || '',
+        version: resource.version || 'v1',
+        kind: resource.kind,
+      },
+      isList: true,
+      namespaced: resource.namespaced ?? true,
+      namespace: resource.namespace,
+    };
+    return acc;
+  }, {} as Record<string, any>);
+
+  const results = useK8sWatchResources<Record<string, K8sResourceCommon[]>>(watchedResources);
+
+  const allLoaded = Object.values(results).every((r: any) => r.loaded);
+  const loadError = Object.values(results).find((r: any) => r.loadError)?.loadError;
+  const data = flatten
+    ? flatten(
+        Object.entries(results).reduce((acc, [key, val]: [string, any]) => {
+          acc[key] = { data: val.data, loaded: val.loaded, loadError: val.loadError };
+          return acc;
+        }, {} as Record<string, any>),
+      )
+    : Object.values(results).flatMap((r: any) => r.data || []);
+
+  if (ListComponent) {
+    return <ListComponent data={data} loaded={allLoaded} loadError={loadError} {...rest} />;
+  }
+
+  return null;
 };
 MultiListPage.displayName = 'MultiListPage';
 
 /* ------------------------------------------------------------------ */
-/*  ListPage sub-components (used by operand/index.tsx)                 */
+/*  navFactory — helper for common detail page tabs                    */
 /* ------------------------------------------------------------------ */
 
-/**
- * Stub useListPageFilter hook.
- * TODO: rewrite to use SDK useListPageFilter.
- */
-export const useListPageFilter: any = (..._args: any[]) => [[], [], () => {}];
-
-/**
- * Stub ListPageCreateDropdown.
- * TODO: rewrite to use SDK ListPageCreate.
- */
-export const ListPageCreateDropdown: FC<any> = () => null;
-ListPageCreateDropdown.displayName = 'ListPageCreateDropdown';
-
-/**
- * Stub ListPageCreateLink.
- * TODO: rewrite to use SDK ListPageCreate.
- */
-export const ListPageCreateLink: FC<any> = () => null;
-ListPageCreateLink.displayName = 'ListPageCreateLink';
-
-/**
- * Stub ListPageFilter.
- * TODO: rewrite to use SDK ListPageFilter.
- */
-const ListPageFilter: FC<any> = () => null;
-ListPageFilter.displayName = 'ListPageFilter';
-export default ListPageFilter;
-
-/**
- * Stub ListPageHeader.
- * TODO: rewrite to use SDK ListPageHeader.
- */
-export const ListPageHeader: FC<any> = ({ children }) => (
-  <div className="co-m-pane__heading">{children}</div>
-);
-ListPageHeader.displayName = 'ListPageHeader';
+export const navFactory = {
+  details: (component: ComponentType<any>) => ({
+    href: '',
+    name: 'Details',
+    component,
+  }),
+  editYaml: (component?: ComponentType<any>) => ({
+    href: 'yaml',
+    name: 'YAML',
+    component: component || (() => null),
+  }),
+  events: (component?: ComponentType<any>) => ({
+    href: 'events',
+    name: 'Events',
+    component: component || (() => null),
+  }),
+};

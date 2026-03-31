@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import CreateClusterExtension from '../CreateClusterExtension';
 
 const mockSyncedEditor = jest.fn();
 const mockFormEditor = jest.fn();
 const mockUseLocation = jest.fn(() => ({ search: '' }));
 
-jest.mock('@console/shared/src/components/synced-editor', () => ({
+jest.mock('../../../../utils/editor-toggle', () => ({
   SyncedEditor: (props) => {
     mockSyncedEditor(props);
     return <div data-test="synced-editor">Mocked SyncedEditor</div>;

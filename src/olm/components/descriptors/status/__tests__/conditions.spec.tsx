@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance } from '../../../../../mocks';
 import { StatusCapability } from '../../types';
 import { DescriptorConditions } from '../conditions';

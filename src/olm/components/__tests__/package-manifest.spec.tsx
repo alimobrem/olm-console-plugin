@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
-import * as UIActions from '@console/internal/actions/ui';
-import { ResourceLink } from '@console/internal/components/utils';
-import { Timestamp } from '@console/shared/src/components/datetime/Timestamp';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import * as UIActions from '../../../utils/action-shims';
+import { ResourceLink } from '../../../utils/utils-shims';
+import { Timestamp } from '@openshift-console/dynamic-plugin-sdk';
+import { renderWithProviders } from '@testing-library/react';
 import { testPackageManifest, testCatalogSource } from '../../../mocks';
 import { ClusterServiceVersionLogo } from '../cluster-service-version-logo';
 import {
@@ -15,17 +15,17 @@ jest.mock('../cluster-service-version-logo', () => ({
   ClusterServiceVersionLogo: jest.fn(() => null),
 }));
 
-jest.mock('@console/shared/src/components/datetime/Timestamp', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   Timestamp: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/components/utils', () => ({
-  ...jest.requireActual('@console/internal/components/utils'),
+jest.mock('../../../utils/utils-shims', () => ({
+  ...jest.requireActual('../../../utils/utils-shims'),
   ResourceLink: jest.fn(() => null),
 }));
 
-jest.mock('@console/internal/actions/ui', () => ({
-  ...jest.requireActual('@console/internal/actions/ui'),
+jest.mock('../../../utils/action-shims', () => ({
+  ...jest.requireActual('../../../utils/action-shims'),
   getActiveNamespace: jest.fn(),
 }));
 

@@ -1,13 +1,13 @@
 import { screen, fireEvent } from '@testing-library/react';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { renderWithProviders } from '@testing-library/react';
 import ClusterExtensionForm from '../ClusterExtensionForm';
 
 jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sWatchResource: jest.fn(() => [null, false]),
 }));
 
-jest.mock('@console/internal/components/utils', () => ({
-  ...jest.requireActual('@console/internal/components/utils'),
+jest.mock('../../../../utils/utils-shims', () => ({
+  ...jest.requireActual('../../../utils/utils-shims'),
   NsDropdown: ({ selectedKey, onChange }) => (
     <div data-testid="ns-dropdown">
       <div data-testid="ns-selected">{selectedKey}</div>
@@ -19,8 +19,8 @@ jest.mock('@console/internal/components/utils', () => ({
   resourcePathFromModel: jest.fn(),
 }));
 
-jest.mock('@console/shared/src/hooks/useTextInputModal', () => ({
-  ...jest.requireActual('@console/shared/src/hooks/useTextInputModal'),
+jest.mock('../../../../utils/useTextInputModal', () => ({
+  ...jest.requireActual('../../../utils/useTextInputModal'),
   useTextInputModal: jest.fn(() => jest.fn()),
 }));
 

@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import * as ReactRouter from 'react-router';
-import { DetailsPage } from '@console/internal/components/factory';
-import { renderWithProviders } from '@console/shared/src/test-utils/unit-test-utils';
+import { DetailsPage } from '../../../utils/factory-shims';
+import { renderWithProviders } from '@testing-library/react';
 import { testResourceInstance, testClusterServiceVersion } from '../../../../mocks';
 import { ClusterServiceVersionModel } from '../../../models';
 import {
@@ -19,7 +19,7 @@ jest.mock('react-router', () => ({
   useLocation: jest.fn(),
 }));
 
-jest.mock('@console/shared/src/hooks/useK8sModels', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sModels: () => [
     {
       'testapp.coreos.com~v1alpha1~TestResource': {
@@ -40,7 +40,7 @@ jest.mock('@console/shared/src/hooks/useK8sModels', () => ({
   ],
 }));
 
-jest.mock('@console/shared/src/hooks/useK8sModel', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useK8sModel: () => [
     {
       abbr: 'TR',
@@ -59,12 +59,12 @@ jest.mock('@console/shared/src/hooks/useK8sModel', () => ({
   ],
 }));
 
-jest.mock('@console/shared/src/hooks/useConsoleDispatch', () => ({
+jest.mock('@openshift-console/dynamic-plugin-sdk', () => ({
   useConsoleDispatch: () => jest.fn(),
 }));
 
-jest.mock('@console/internal/components/factory', () => ({
-  ...jest.requireActual('@console/internal/components/factory'),
+jest.mock('../../../../utils/factory-shims', () => ({
+  ...jest.requireActual('../../../utils/factory-shims'),
   DetailsPage: jest.fn(() => null),
 }));
 
