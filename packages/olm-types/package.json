@@ -1,0 +1,11 @@
+{
+  "name": "@openshift-console/olm-types",
+  "version": "0.0.0-fixed",
+  "description": "Shared OLM types, models, and constants for OpenShift Console and its dynamic plugins",
+  "main": "src/index.ts",
+  "private": true,
+  "sideEffects": false,
+  "peerDependencies": {
+    "@openshift-console/dynamic-plugin-sdk": ">=4.19.0"
+  }
+}
