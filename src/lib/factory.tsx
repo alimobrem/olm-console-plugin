@@ -121,35 +121,31 @@ export type MultiListPageProps = {
 /*  DetailsPage — wraps HorizontalNav with K8s resource loading        */
 /* ------------------------------------------------------------------ */
 
+const EMPTY_PAGES: Page[] = [];
+
 /**
  * Compatibility wrapper for the legacy DetailsPage pattern.
- * Loads a single K8s resource by name/namespace and renders HorizontalNav
- * with the specified pages/tabs. Supports pre-loaded resources via `obj` prop
- * and dynamic tab computation via `pagesFor`.
+ * Renders HorizontalNav with the specified pages/tabs. Supports pre-loaded
+ * resources via `obj` and dynamic tab computation via `pagesFor`.
  */
 export const DetailsPage: FC<DetailsPageProps> = ({
   kind,
-  pages = [],
+  pages = EMPTY_PAGES,
   pagesFor,
   obj,
-  menuActions,
-  customActionMenu,
-  breadcrumbsFor,
-  icon,
-  resources,
-  customData,
   ...rest
 }) => {
   const params = useParams<{ name: string; ns?: string }>();
   const name = rest.name || params.name;
   const namespace = rest.namespace || params.ns;
 
-  // Use pre-loaded resource if provided, otherwise construct a minimal one
-  const resource = obj?.data || ({ kind, metadata: { name, namespace } } as K8sResourceCommon);
+  const resource = useMemo(
+    () => obj?.data || ({ kind, metadata: { name, namespace } } as K8sResourceCommon),
+    [obj?.data, kind, name, namespace],
+  );
   const loaded = obj ? obj.loaded : true;
   const loadError = obj?.loadError;
 
-  // Compute pages: use pagesFor(resource) if available, else static pages
   const resolvedPages = useMemo(() => {
     if (pagesFor && loaded && resource) {
       return pagesFor(resource);
@@ -157,7 +153,6 @@ export const DetailsPage: FC<DetailsPageProps> = ({
     return pages;
   }, [pagesFor, loaded, resource, pages]);
 
-  // Convert legacy pages format to HorizontalNav pages
   const navPages = useMemo(() =>
     resolvedPages.map((page) => ({
       href: page.href,
