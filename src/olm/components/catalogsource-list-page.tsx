@@ -104,9 +104,6 @@ export const CatalogSourcesPage: FC<any> = () => {
 
 export default CatalogSourcesPage;
 
-// Placeholder details page
-export const CatalogSourceDetailsPage = CatalogSourcesPage;
-
-// Placeholder create pages
-export const CreateSubscriptionYAML: FC = () => <div>Create Subscription YAML placeholder</div>;
-export const CreateCatalogSource: FC = () => <div>Create Catalog Source placeholder</div>;
+// Wire up full detail and create pages from migrated components
+export { CatalogSourceDetailsPage, CreateSubscriptionYAML } from './catalog-source';
+export { CreateCatalogSource } from './create-catalog-source';

@@ -177,5 +177,5 @@ export const SubscriptionsPage: FC<any> = () => {
 
 export default SubscriptionsPage;
 
-// Placeholder details page
-export const SubscriptionDetailsPage = SubscriptionsPage;
+// Wire up full detail page from migrated component
+export { SubscriptionDetailsPage } from './subscription';

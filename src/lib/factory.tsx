@@ -7,7 +7,9 @@
  */
 
 import type { ComponentType, FC, ReactNode } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'react-router';
+import { Spinner } from '@patternfly/react-core';
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
 import {
   HorizontalNav,
@@ -84,8 +86,12 @@ export type DetailsPageProps = {
   name?: string;
   namespace?: string;
   pages?: Page[];
+  pagesFor?: (obj: any) => Page[];
+  obj?: { data: any; loaded: boolean; loadError: any };
   menuActions?: any[];
+  customActionMenu?: ReactNode | ((kindObj: any, obj: any) => ReactNode);
   breadcrumbsFor?: (obj: any) => any[];
+  icon?: any;
   resources?: any[];
   customData?: any;
   [key: string]: any;
@@ -118,13 +124,18 @@ export type MultiListPageProps = {
 /**
  * Compatibility wrapper for the legacy DetailsPage pattern.
  * Loads a single K8s resource by name/namespace and renders HorizontalNav
- * with the specified pages/tabs.
+ * with the specified pages/tabs. Supports pre-loaded resources via `obj` prop
+ * and dynamic tab computation via `pagesFor`.
  */
 export const DetailsPage: FC<DetailsPageProps> = ({
   kind,
   pages = [],
+  pagesFor,
+  obj,
   menuActions,
+  customActionMenu,
   breadcrumbsFor,
+  icon,
   resources,
   customData,
   ...rest
@@ -133,17 +144,53 @@ export const DetailsPage: FC<DetailsPageProps> = ({
   const name = rest.name || params.name;
   const namespace = rest.namespace || params.ns;
 
+  // Use pre-loaded resource if provided, otherwise construct a minimal one
+  const resource = obj?.data || ({ kind, metadata: { name, namespace } } as K8sResourceCommon);
+  const loaded = obj ? obj.loaded : true;
+  const loadError = obj?.loadError;
+
+  // Compute pages: use pagesFor(resource) if available, else static pages
+  const resolvedPages = useMemo(() => {
+    if (pagesFor && loaded && resource) {
+      return pagesFor(resource);
+    }
+    return pages;
+  }, [pagesFor, loaded, resource, pages]);
+
   // Convert legacy pages format to HorizontalNav pages
-  const navPages = pages.map((page) => ({
-    href: page.href,
-    name: page.nameKey || page.name,
-    component: page.component,
-  }));
+  const navPages = useMemo(() =>
+    resolvedPages.map((page) => ({
+      href: page.href,
+      name: page.nameKey || page.name,
+      component: page.component,
+    })),
+    [resolvedPages],
+  );
+
+  if (loadError) {
+    return (
+      <div className="co-m-pane__body">
+        <div className="pf-v6-u-text-align-center pf-v6-u-p-xl">
+          Error loading resource: {loadError.message || String(loadError)}
+        </div>
+      </div>
+    );
+  }
+
+  if (!loaded) {
+    return (
+      <div className="co-m-pane__body">
+        <div className="pf-v6-u-text-align-center pf-v6-u-p-xl">
+          <Spinner size="lg" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <HorizontalNav
       pages={navPages}
-      resource={{ kind, metadata: { name, namespace } } as K8sResourceCommon}
+      resource={resource}
     />
   );
 };

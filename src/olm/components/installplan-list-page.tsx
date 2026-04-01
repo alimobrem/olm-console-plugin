@@ -169,5 +169,5 @@ export const InstallPlansPage: FC<any> = () => {
 
 export default InstallPlansPage;
 
-// Placeholder details page
-export const InstallPlanDetailsPage = InstallPlansPage;
+// Wire up full detail page from migrated component
+export { InstallPlanDetailsPage } from './install-plan';

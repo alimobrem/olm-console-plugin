@@ -161,5 +161,5 @@ export const ClusterServiceVersionsPage: FC<any> = () => {
 
 export default ClusterServiceVersionsPage;
 
-// Re-export details page from dedicated module
-export { ClusterServiceVersionDetailsPage } from './csv-detail-page';
+// Wire up full detail page from migrated component
+export { ClusterServiceVersionDetailsPage } from './clusterserviceversion';
