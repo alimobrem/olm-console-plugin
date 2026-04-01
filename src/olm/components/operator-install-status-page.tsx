@@ -7,8 +7,7 @@ import {
   Spinner,
   Title,
   PageSection,
-  TextContent,
-  Text,
+  Content,
 } from '@patternfly/react-core';
 
 export const OperatorInstallStatusPage: FC = () => {
@@ -17,12 +16,10 @@ export const OperatorInstallStatusPage: FC = () => {
   return (
     <PageSection>
       <Title headingLevel="h1">Installing Operator</Title>
-      <TextContent style={{ marginTop: '1rem' }}>
-        <Text>
-          Installing <strong>{name || 'operator'}</strong>
-          {namespace ? ` in namespace ${namespace}` : ''}...
-        </Text>
-      </TextContent>
+      <Content style={{ marginTop: '1rem' }}>
+        Installing <strong>{name || 'operator'}</strong>
+        {namespace ? ` in namespace ${namespace}` : ''}...
+      </Content>
       <div style={{ marginTop: '2rem' }}>
         <Spinner size="xl" />
       </div>

@@ -5,10 +5,11 @@ export const ExternalLink: FC<ExternalLinkProps> = ({
   text,
   children,
   additionalClassName = '',
+  className,
   dataTestID,
 }) => (
   <a
-    className={`co-external-link ${additionalClassName}`}
+    className={`co-external-link ${className || additionalClassName}`}
     href={href}
     target="_blank"
     rel="noopener noreferrer"
@@ -18,10 +19,11 @@ export const ExternalLink: FC<ExternalLinkProps> = ({
   </a>
 );
 
-type ExternalLinkProps = {
+export type ExternalLinkProps = {
   href: string;
   text?: string;
   children?: ReactNode;
   additionalClassName?: string;
+  className?: string;
   dataTestID?: string;
 };

@@ -14,7 +14,6 @@ import { useK8sWatchResource } from '@openshift-console/dynamic-plugin-sdk';
 import { CustomResourceDefinitionModel } from '../../../lib/models';
 import type { K8sResourceKind, CustomResourceDefinitionKind } from '../../../lib/k8s';
 import { kindForReference, nameForModel, definitionFor } from '../../../lib/k8s';
-import { getBadgeFromType } from '@patternfly/react-core';
 import { DocumentTitle } from '../DocumentTitle';
 import {
   getSchemaErrors,
@@ -87,7 +86,7 @@ export const CreateOperand: FC<CreateOperandProps> = ({
   const [schema, FormComponent] = useMemo(() => {
     const useFallback =
       getSchemaErrors(baseSchema).length ||
-      hasNoFields((baseSchema?.properties?.spec ?? {}) as JSONSchema7);
+      hasNoFields(((baseSchema as any)?.properties?.spec ?? {}) as JSONSchema7);
     return useFallback
       ? // eslint-disable-next-line @typescript-eslint/naming-convention
         [baseSchema, DEPRECATED_CreateOperandForm]
@@ -120,7 +119,7 @@ export const CreateOperand: FC<CreateOperandProps> = ({
     <StatusBox loaded={loaded} loadError={loadError} data={csv}>
       <PageHeading
         title={t('olm~Create {{item}}', { item: model.label })}
-        badge={getBadgeFromType(model.badge)}
+        badge={undefined}
         helpText={helpText}
       />
       <SyncedEditor
@@ -157,7 +156,7 @@ const CreateOperandPage: FC = () => {
       <ModelStatusBox groupVersionKind={params.plural}>
         {createResourceExtension ? (
           <AsyncComponent
-            loader={createResourceExtension.properties.component}
+            loader={(createResourceExtension as any).properties.component}
             namespace={params.ns}
           />
         ) : (

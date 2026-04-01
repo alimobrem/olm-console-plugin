@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams, useLocation } from 'react-router';
 import type { K8sResourceKind, WatchK8sResultsObject } from '@openshift-console/dynamic-plugin-sdk';
 import { PopoverStatus, StatusIconAndText } from '../../lib/sdk-compat';
-const CreateYAML = () => null;
+const CreateYAML = (_props: { plural: string; template: string }) => null;
 import type {
   TableProps,
   MultiListPageProps,
@@ -28,7 +28,7 @@ import { asAccessReview } from '../../lib/k8s';
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
 import i18n from 'i18next';
 import { ConfigMapModel } from '../../lib/models';
-import type { K8sModel, K8sModel } from '../../lib/k8s';
+import type { K8sModel } from '../../lib/k8s';
 import { referenceForModel, k8sPatch } from '../../lib/k8s';
 import { LazyActionMenu, KEBAB_COLUMN_CLASS, ActionMenuVariant } from '../../lib/sdk-compat';
 import { withFallback } from './error-components';
@@ -340,43 +340,43 @@ const CatalogSourceList: FC<TableProps> = (props) => {
     return [
       {
         title: t('public~Name'),
-        sortField: 'name',
+        sort: 'name',
         transforms: [sortable],
         props: { className: tableColumnClasses[0] },
       },
       {
         title: t('public~Status'),
-        sortField: 'status',
+        sort: 'status',
         transforms: [sortable],
         props: { className: tableColumnClasses[1] },
       },
       {
         title: t('olm~Publisher'),
-        sortField: 'publisher',
+        sort: 'publisher',
         transforms: [sortable],
         props: { className: tableColumnClasses[2] },
       },
       {
         title: t('olm~Availability'),
-        sortField: 'availabilitySort',
+        sort: 'availabilitySort',
         transforms: [sortable],
         props: { className: tableColumnClasses[3] },
       },
       {
         title: t('olm~Endpoint'),
-        sortField: 'endpoint',
+        sort: 'endpoint',
         transforms: [sortable],
         props: { className: tableColumnClasses[4] },
       },
       {
         title: t('olm~Registry poll interval'),
-        sortField: 'registryPollInterval',
+        sort: 'registryPollInterval',
         transforms: [sortable],
         props: { className: tableColumnClasses[5] },
       },
       {
         title: t('olm~# of Operators'),
-        sortField: 'operatorCount',
+        sort: 'operatorCount',
         transforms: [sortable],
         props: { className: tableColumnClasses[6] },
       },

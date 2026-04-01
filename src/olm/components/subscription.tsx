@@ -37,7 +37,7 @@ import {
   ResourceSummary,
   SectionHeading,
 } from '../../lib/console-components';
-import type { K8sModel, K8sModel, K8sResourceCommon } from '../../lib/k8s';
+import type { K8sModel, K8sResourceCommon } from '../../lib/k8s';
 import { k8sUpdate, referenceFor, referenceForModel } from '../../lib/k8s';
 import {
   GreenCheckCircleIcon,
@@ -54,8 +54,7 @@ import {
   WarningStatus,
 } from '../../lib/status-icons';
 import { DescriptionListTermHelp } from './DescriptionListTermHelp';
-import PaneBody from './PaneBody';
-import PaneBodyGroup from './PaneBody';
+import PaneBody, { PaneBodyGroup } from './PaneBody';
 import { useQueryParamsMutator } from '../../lib/sdk-compat';
 import {
   SubscriptionModel,
@@ -198,6 +197,7 @@ export const SubscriptionStatus: FC<{ subscription: SubscriptionKind }> = ({ sub
 
 export const SubscriptionTableRow: FC<RowFunctionArgs> = ({ obj }) => {
   const { t } = useTranslation();
+  const subscription = obj as any as SubscriptionKind;
   return (
     <>
       <TableData className={tableColumnClasses[0]}>
@@ -211,13 +211,13 @@ export const SubscriptionTableRow: FC<RowFunctionArgs> = ({ obj }) => {
         <ResourceLink kind="Namespace" name={obj.metadata.namespace} />
       </TableData>
       <TableData className={tableColumnClasses[2]}>
-        <SubscriptionStatus subscription={obj} />
+        <SubscriptionStatus subscription={subscription} />
       </TableData>
       <TableData className={css(tableColumnClasses[3], 'co-truncate', 'co-select-to-copy')}>
-        {obj.spec.channel || 'default'}
+        {subscription.spec.channel || 'default'}
       </TableData>
       <TableData className={tableColumnClasses[4]}>
-        {obj.spec.installPlanApproval || t('olm~Automatic')}
+        {subscription.spec.installPlanApproval || t('olm~Automatic')}
       </TableData>
       <TableData className={tableColumnClasses[5]}>
         <LazyActionMenu
@@ -236,13 +236,13 @@ export const SubscriptionsList = requireOperatorGroup((props: SubscriptionsListP
     return [
       {
         title: t('olm~Name'),
-        sortField: 'metadata.name',
+        sort: 'metadata.name',
         transforms: [sortable],
         props: { className: tableColumnClasses[0] },
       },
       {
         title: t('olm~Namespace'),
-        sortField: 'metadata.namespace',
+        sort: 'metadata.namespace',
         transforms: [sortable],
         props: { className: tableColumnClasses[1] },
       },

@@ -18,7 +18,7 @@ import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, Link, useNavigate } from 'react-router';
 import { useActiveNamespace } from '@openshift-console/dynamic-plugin-sdk';
-import { Radio as RadioGroup } from '@patternfly/react-core';
+import { RadioGroup } from '../../../lib/legacy-components';
 import {
   documentationURLs,
   FieldLevelHelp,
@@ -714,13 +714,13 @@ export const OperatorHubSubscribeForm: FC<OperatorHubSubscribeFormProps> = (prop
         }
       >
         {suggestedNamespaceExists ? (
-          <Trans ns="olm">
-            Namespace <b>{{ operatorSuggestedNamespace }}</b> already exists and will be used. Other
+          <Trans ns="olm" values={{ operatorSuggestedNamespace } as any}>
+            Namespace <b>{'{{ operatorSuggestedNamespace }}'}</b> already exists and will be used. Other
             users can already have access to this namespace.
           </Trans>
         ) : (
-          <Trans ns="olm">
-            Namespace <b>{{ operatorSuggestedNamespace }}</b> does not exist and will be created.
+          <Trans ns="olm" values={{ operatorSuggestedNamespace } as any}>
+            Namespace <b>{'{{ operatorSuggestedNamespace }}'}</b> does not exist and will be created.
           </Trans>
         )}
       </Alert>
@@ -1152,9 +1152,9 @@ export const OperatorHubSubscribeForm: FC<OperatorHubSubscribeFormProps> = (prop
                       variant="info"
                       title={t('olm~Manual approval applies to all operators in a namespace')}
                     >
-                      <Trans ns="olm">
+                      <Trans ns="olm" values={{ selectedTargetNamespace } as any}>
                         Installing an operator with manual approval causes all operators installed
-                        in namespace <strong>{{ selectedTargetNamespace }}</strong> to function as
+                        in namespace <strong>{'{{ selectedTargetNamespace }}'}</strong> to function as
                         manual approval strategy and will be updated altogether. Install operators
                         into separate namespaces for handling their updates independently. To allow
                         automatic approval, all operators installed in the namespace must use

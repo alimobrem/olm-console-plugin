@@ -7,7 +7,6 @@ import type { JSONSchema7 } from 'json-schema';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams, useLocation, useNavigate } from 'react-router';
-import type { K8sModel } from '@openshift-console/dynamic-plugin-sdk';
 import { ListPageBody } from '../../../lib/sdk-compat';
 import { getResources } from '../../../lib/legacy-components';
 import { Conditions } from '../../../lib/Conditions';
@@ -20,8 +19,8 @@ import {
   ListPageCreateDropdown,
   ListPageCreateLink,
   ListPageHeader,
+  ListPageFilter,
 } from '../../../lib/factory';
-import ListPageFilter from '../../../lib/factory';
 import {
   LabelList,
   ConsoleEmptyState,
@@ -67,9 +66,11 @@ import {
   useActiveNamespace,
   useK8sModel,
   useK8sModels,
-  useResourceDetailsPage,
-  useResourceListPage,
 } from '@openshift-console/dynamic-plugin-sdk';
+
+// Stub hooks for missing SDK functions
+const useResourceDetailsPage = (plural?: string) => null;
+const useResourceListPage = (kind?: string) => null;
 import { getNamespace } from '../../../lib/utils';
 import { ErrorAlert } from '../../../lib/status-icons';
 import PaneBody from '../PaneBody';
@@ -169,7 +170,7 @@ const getOperandStatusText = (operand: K8sResourceKind): string => {
 
 export const OperandTableRow: FC<OperandTableRowProps> = ({ obj, showNamespace }) => {
   const objReference = referenceFor(obj);
-  const context = { [objReference]: obj, 'operand-actions': { resource: obj } };
+  const context: any = { [objReference]: obj, 'operand-actions': { resource: obj } };
   return (
     <>
       <TableData className={tableColumnClasses[0]}>
@@ -218,13 +219,13 @@ export const OperandList: FC<OperandListProps> = (props) => {
 
   const nameHeader: Header = {
     title: t('public~Name'),
-    sortField: 'metadata.name',
+    sort: 'metadata.name',
     transforms: [sortable],
     props: { className: tableColumnClasses[0] },
   };
   const kindHeader: Header = {
     title: t('public~Kind'),
-    sortField: 'kind',
+    sort: 'kind',
     transforms: [sortable],
     props: { className: tableColumnClasses[1] },
   };
@@ -242,13 +243,13 @@ export const OperandList: FC<OperandListProps> = (props) => {
   };
   const labelsHeader: Header = {
     title: t('public~Labels'),
-    sortField: 'metadata.labels',
+    sort: 'metadata.labels',
     transforms: [sortable],
     props: { className: tableColumnClasses[4] },
   };
   const lastUpdatedHeader: Header = {
     title: t('public~Last updated'),
-    sortField: 'metadata.creationTimestamp',
+    sort: 'metadata.creationTimestamp',
     transforms: [sortable],
     props: { className: tableColumnClasses[5] },
   };
@@ -520,7 +521,7 @@ const DefaultProvidedAPIPage: FC<DefaultProvidedAPIPageProps> = (props) => {
         hideFavoriteButton
         helpText={managesAllNamespaces && <ShowOperandsInAllNamespacesRadioGroup />}
       >
-        <ListPageCreateLink to={createPath}>
+        <ListPageCreateLink {...({ to: createPath } as any)}>
           {t('public~Create {{label}}', { label })}
         </ListPageCreateLink>
       </ListPageHeader>
@@ -902,6 +903,7 @@ export type OperandResourceDetailsProps = {
 
 type Header = {
   title: string;
+  sort?: string;
   sortField?: string;
   sortFunc?: string;
   transforms?: any;

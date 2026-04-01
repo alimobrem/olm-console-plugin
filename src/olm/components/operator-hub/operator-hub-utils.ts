@@ -142,16 +142,16 @@ export const getClusterServiceVersionPlugins: AnnotationParser<string[]> = (
   annotations,
   options,
 ): string[] =>
-  parseJSONAnnotation<string[]>(annotations, OLMAnnotation.OperatorPlugins, {
+  (parseJSONAnnotation<string[]>(annotations, OLMAnnotation.OperatorPlugins, {
     validate: isArrayOfStrings,
     ...options,
-  }) ?? [];
+  } as any) ?? []);
 
 export const getInternalObjects: AnnotationParser<string[]> = (annotations, options) =>
-  parseJSONAnnotation<string[]>(annotations, OLMAnnotation.InternalObjects, {
+  (parseJSONAnnotation<string[]>(annotations, OLMAnnotation.InternalObjects, {
     validate: isArrayOfStrings,
     ...options,
-  }) ?? [];
+  } as any) ?? []);
 
 export const getSuggestedNamespaceTemplate: AnnotationParser<K8sResourceKind> = (
   annotations,
@@ -160,7 +160,7 @@ export const getSuggestedNamespaceTemplate: AnnotationParser<K8sResourceKind> = 
   parseJSONAnnotation<K8sResourceKind>(annotations, OLMAnnotation.SuggestedNamespaceTemplate, {
     validate: isK8sResource,
     ...options,
-  });
+  } as any);
 
 export const getInitializationResource: AnnotationParser<K8sResourceKind> = (
   annotations,
@@ -169,16 +169,16 @@ export const getInitializationResource: AnnotationParser<K8sResourceKind> = (
   parseJSONAnnotation<K8sResourceKind>(annotations, OLMAnnotation.InitializationResource, {
     validate: isK8sResource,
     ...options,
-  });
+  } as any);
 
 export const getInitializationLink: AnnotationParser<string> = (annotations) =>
   annotations?.[OLMAnnotation.InitializationLink];
 
 const parseValidSubscriptionAnnotation: AnnotationParser<string[]> = (annotations, options) =>
-  parseJSONAnnotation<string[]>(annotations, OLMAnnotation.ValidSubscription, {
+  (parseJSONAnnotation<string[]>(annotations, OLMAnnotation.ValidSubscription, {
     validate: isArrayOfStrings,
     ...options,
-  }) ?? [];
+  } as any) ?? []);
 
 export const validSubscriptionReducer = (validSubscriptions: string[]): [string[], string[]] => {
   if (!validSubscriptions) {
@@ -225,10 +225,10 @@ export const getValidSubscription: AnnotationParser<[string[], string[]]> = (
 ) => validSubscriptionReducer(parseValidSubscriptionAnnotation(annotations, options));
 
 const parseInfrastructureFeaturesAnnotation: AnnotationParser<string[]> = (annotations, options) =>
-  parseJSONAnnotation<InfrastructureFeature[]>(annotations, OLMAnnotation.InfrastructureFeatures, {
+  (parseJSONAnnotation<InfrastructureFeature[]>(annotations, OLMAnnotation.InfrastructureFeatures, {
     validate: isArrayOfStrings,
     ...options,
-  }) ?? [];
+  } as any) ?? []);
 
 export const getInfrastructureFeatures: AnnotationParser<
   InfrastructureFeature[],

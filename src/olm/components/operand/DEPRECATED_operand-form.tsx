@@ -28,7 +28,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router';
 import { SyncMarkdownView } from '../../../lib/MarkdownView';
 import { ConfigureUpdateStrategy } from '../../../lib/modals';
-import { Radio as RadioGroup } from '@patternfly/react-core';
+import { RadioGroup } from '../../../lib/legacy-components';
 import {
   NumberSpinner,
   SelectorInput,
@@ -568,7 +568,7 @@ export const DEPRECATED_CreateOperandForm: FC<OperandFormProps> = ({
 
   const labelTags = useMemo(() => {
     const formValue = immutableFormData.getIn(['metadata', 'labels']);
-    return SelectorInput.arrayify(_.isFunction(formValue?.toJS) ? formValue.toJS() : {});
+    return SelectorInput.arrayify(_.isFunction((formValue as any)?.toJS) ? (formValue as any).toJS() : {});
   }, [immutableFormData]);
 
   const [error, setError] = useState<string>();
@@ -1082,8 +1082,8 @@ export const DEPRECATED_CreateOperandForm: FC<OperandFormProps> = ({
     advancedFields.length > 0 && (
       <div>
         <ExpandCollapse
-          textExpanded={t('olm~Advanced configuration')}
-          textCollapsed={t('olm~Advanced configuration')}
+          toggleTextExpanded={t('olm~Advanced configuration')}
+          toggleTextCollapsed={t('olm~Advanced configuration')}
         >
           {_.map(advancedFields, (field) => (
             <OperandFormInputGroup key={field.path} field={field} input={inputFor(field)} />
@@ -1133,7 +1133,7 @@ export const DEPRECATED_CreateOperandForm: FC<OperandFormProps> = ({
                     onChange={({ target: { value } }) =>
                       handleFormDataUpdate('metadata.name', value)
                     }
-                    value={immutableFormData.getIn(['metadata', 'name']) || 'example'}
+                    value={(immutableFormData.getIn(['metadata', 'name']) as string) || 'example'}
                     id="DEPRECATED_root_metadata_name"
                     required
                   />

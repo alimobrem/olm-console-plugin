@@ -47,49 +47,53 @@ const tableColumnClasses = [
   'pf-m-hidden pf-m-visible-on-sm',
 ];
 
-export const ResourceTableRow: FC<RowFunctionArgs<
-  K8sResourceKind,
-  {
-    linkFor: (obj: K8sResourceKind, providedAPI: ProvidedAPI) => JSX.Element;
-    providedAPI: ProvidedAPI;
+export const ResourceTableRow: FC<
+  RowFunctionArgs<K8sResourceKind> & {
+    customData?: {
+      linkFor: (obj: K8sResourceKind, providedAPI: ProvidedAPI) => JSX.Element;
+      providedAPI: ProvidedAPI;
+    };
   }
->> = ({ obj, customData: { linkFor, providedAPI } }) => (
-  <>
-    <TableData className={tableColumnClasses[0]}>{linkFor(obj, providedAPI)}</TableData>
-    <TableData className={tableColumnClasses[1]}>{obj.kind}</TableData>
-    <TableData className={tableColumnClasses[2]}>
-      <Status status={obj?.status?.phase ?? 'Created'} />
-    </TableData>
-    <TableData className={tableColumnClasses[3]}>
-      <Timestamp timestamp={obj.metadata.creationTimestamp} />
-    </TableData>
-  </>
-);
+> = ({ obj, customData }) => {
+  const { linkFor, providedAPI } = customData || {} as any;
+  return (
+    <>
+      <TableData className={tableColumnClasses[0]}>{linkFor(obj, providedAPI)}</TableData>
+      <TableData className={tableColumnClasses[1]}>{obj.kind}</TableData>
+      <TableData className={tableColumnClasses[2]}>
+        <Status status={obj?.status?.phase ?? 'Created'} />
+      </TableData>
+      <TableData className={tableColumnClasses[3]}>
+        <Timestamp timestamp={obj.metadata.creationTimestamp} />
+      </TableData>
+    </>
+  );
+};
 
 export const ResourceTable: FC<ResourceTableProps> = (props) => {
   const { t } = useTranslation();
   const ResourceTableHeader = () => [
     {
       title: t('olm~Name'),
-      sortField: 'metadata.name',
+      sort: 'metadata.name',
       transforms: [sortable],
       props: { className: tableColumnClasses[0] },
     },
     {
       title: t('olm~Kind'),
-      sortField: 'kind',
+      sort: 'kind',
       transforms: [sortable],
       props: { className: tableColumnClasses[1] },
     },
     {
       title: t('olm~Status'),
-      sortField: 'status.phase',
+      sort: 'status.phase',
       transforms: [sortable],
       props: { className: tableColumnClasses[2] },
     },
     {
       title: t('olm~Created'),
-      sortField: 'metadata.creationTimestamp',
+      sort: 'metadata.creationTimestamp',
       transforms: [sortable],
       props: { className: tableColumnClasses[3] },
     },
@@ -113,7 +117,7 @@ export const ResourceTable: FC<ResourceTableProps> = (props) => {
 
 export const flattenCsvResources = (
   parentObj: K8sResourceCommon,
-): Flatten<{ [key: string]: K8sResourceCommon[] }, K8sResourceCommon[]> => (resources) => {
+): Flatten<K8sResourceCommon> => (resources) => {
   return _.flatMap(resources, (resource, kind: string) =>
     _.map(resource.data, (item) => ({ ...item, kind })),
   ).reduce((owned, resource) => {

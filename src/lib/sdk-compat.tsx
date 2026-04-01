@@ -106,14 +106,16 @@ export const GreenCheckCircleIcon: FC<{ className?: string; title?: string }> = 
   />
 );
 
-export const YellowExclamationTriangleIcon: FC<{ className?: string; title?: string }> = ({
+export const YellowExclamationTriangleIcon: FC<{ className?: string; title?: string; dataTest?: string }> = ({
   className,
   title,
+  dataTest,
 }) => (
   <ExclamationTriangleIcon
     className={className}
     color="var(--pf-t--color--gold--default, #f0ab00)"
     title={title}
+    data-test={dataTest}
   />
 );
 
@@ -223,9 +225,15 @@ export const SuccessStatus: FC<{ title?: string }> = ({ title }) => (
 export const PopoverStatus: FC<{
   title?: string;
   statusBody?: ReactNode;
+  isVisible?: boolean;
+  shouldClose?: () => void;
   children?: ReactNode;
-}> = ({ title, statusBody, children }) => (
-  <Popover bodyContent={children || statusBody}>
+}> = ({ title, statusBody, isVisible, shouldClose, children }) => (
+  <Popover
+    bodyContent={children || statusBody}
+    isVisible={isVisible}
+    onHide={shouldClose}
+  >
     <button type="button" className="pf-v6-c-button pf-m-link pf-m-inline" style={{ padding: 0 }}>
       <StatusIconAndText title={title} />
     </button>
@@ -239,6 +247,8 @@ export const PopoverStatus: FC<{
 export const LazyActionMenu: FC<{
   context?: any;
   variant?: ActionMenuVariant;
+  label?: string;
+  isDisabled?: boolean;
   actions?: Array<{
     id: string;
     label: string;
@@ -246,7 +256,7 @@ export const LazyActionMenu: FC<{
     disabled?: boolean;
     tooltip?: string;
   }>;
-}> = ({ actions = [], variant }) => {
+}> = ({ actions = [], variant, label: menuLabel, isDisabled }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggle = useCallback(() => setIsOpen((prev) => !prev), []);
   const onSelect = useCallback(() => setIsOpen(false), []);
@@ -318,9 +328,10 @@ export const asAccessReview = (
   model: K8sModel,
   obj: K8sResourceCommon,
   verb: string,
+  subresource?: string,
 ): { group: string; resource: string; namespace?: string; name?: string; verb: any } => ({
   group: model.apiGroup || '',
-  resource: model.plural,
+  resource: subresource ? `${model.plural}/${subresource}` : model.plural,
   namespace: obj?.metadata?.namespace,
   name: obj?.metadata?.name,
   verb,
@@ -614,6 +625,11 @@ export const useActivePerspective = (): [string, (p: string) => void] => {
  * useQueryParamsMutator — hook to read and mutate URL query parameters.
  */
 export const useQueryParamsMutator = () => {
+  const getQueryArgument = useCallback((key: string): string | null => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(key);
+  }, []);
+
   const setQueryArgument = useCallback((key: string, value: string) => {
     const params = new URLSearchParams(window.location.search);
     params.set(key, value);
@@ -632,8 +648,8 @@ export const useQueryParamsMutator = () => {
   }, []);
 
   return useMemo(
-    () => ({ setQueryArgument, removeQueryArgument }),
-    [setQueryArgument, removeQueryArgument],
+    () => ({ getQueryArgument, setQueryArgument, removeQueryArgument }),
+    [getQueryArgument, setQueryArgument, removeQueryArgument],
   );
 };
 

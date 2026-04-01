@@ -14,7 +14,7 @@ const ALL_OPERATORS: MatchExpression['operator'][] = [
   Operator.Equals,
   Operator.Exists,
   Operator.In,
-  Operator.NotEqual,
+  Operator.NotEquals,
   Operator.NotIn,
 ];
 

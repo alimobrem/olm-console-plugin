@@ -19,7 +19,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import type { OverlayComponent } from '../../../lib/modals';
 import { useOverlay } from '../../../lib/modals';
-import { k8sGetResource, settleAllPromises } from '../../../lib/sdk-compat';
+import { k8sGetResource } from '../../../lib/sdk-compat';
 import { getActiveNamespace } from '../../../lib/actions';
 import { coFetchJSON } from '../../../lib/legacy-components';
 import {
@@ -301,7 +301,7 @@ export const UninstallOperatorModal: FC<UninstallOperatorModalProps> = ({
         return k8sKill(model, operand, {}, {}, deleteOptions);
       });
       // eslint-disable-next-line promise/catch-or-return
-      settleAllPromises(operandDeletionPromises).then(([, , results]) => {
+      Promise.allSettled(operandDeletionPromises).then((results) => {
         const operandErrors: OperandError[] = results.reduce((acc: OperandError[], curr, i) => {
           return curr.status === 'rejected'
             ? acc.concat({ operand: operands[i], errorMessage: curr.reason })
@@ -431,9 +431,9 @@ export const UninstallOperatorModal: FC<UninstallOperatorModalProps> = ({
           {showInstructions && (
             <>
               <p>
-                <Trans t={t} ns="olm">
-                  Operator <strong>{{ name }}</strong> will be removed from{' '}
-                  <strong>{{ namespace }}</strong>.
+                <Trans t={t} ns="olm" values={{ name, namespace }}>
+                  Operator <strong>{'{{ name }}'}</strong> will be removed from{' '}
+                  <strong>{'{{ namespace }}'}</strong>.
                 </Trans>
               </p>
               {!optedOut && <>{instructions}</>}
@@ -540,9 +540,9 @@ const OperatorUninstallSuccessAlert: FC<{ name: string; namespace: string }> = (
       isInline
     >
       <p>
-        <Trans t={t} ns="olm">
-          Operator <strong>{{ name }}</strong> successfully uninstalled from{' '}
-          <strong>{{ namespace }}</strong>.
+        <Trans t={t} ns="olm" values={{ name, namespace }}>
+          Operator <strong>{'{{ name }}'}</strong> successfully uninstalled from{' '}
+          <strong>{'{{ namespace }}'}</strong>.
         </Trans>
       </p>
     </Alert>
@@ -602,9 +602,9 @@ const OperandDeletionSuccessAlert: FC<{ name: string; namespace: string }> = ({
       isInline
     >
       <p>
-        <Trans t={t} ns="olm">
-          All Operand instances for Operator <strong>{{ name }}</strong> in{' '}
-          <strong>{{ namespace }}</strong> have been deleted.
+        <Trans t={t} ns="olm" values={{ name, namespace }}>
+          All Operand instances for Operator <strong>{'{{ name }}'}</strong> in{' '}
+          <strong>{'{{ namespace }}'}</strong> have been deleted.
         </Trans>
       </p>
     </Alert>

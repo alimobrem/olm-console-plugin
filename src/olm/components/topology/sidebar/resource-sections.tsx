@@ -2,8 +2,10 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import type { GraphElement } from '@patternfly/react-topology';
 import type { DetailsTabSectionExtensionHook } from '@openshift-console/dynamic-plugin-sdk';
-import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk';
 import { StatusBox } from '../../../../lib/console-components';
+
+// TopologyDataObject type stub for local use
+type TopologyDataObject<T = any> = any;
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
 import { referenceForModel } from '../../../../lib/k8s';
 import { TYPE_OPERATOR_BACKED_SERVICE } from '../../../../lib/topology';

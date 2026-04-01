@@ -99,4 +99,57 @@ export const ConsoleOperatorConfigModel: K8sModel = {
   plural: 'consoles',
 };
 
+export const JobModel: K8sModel = {
+  kind: 'Job',
+  label: 'Job',
+  labelPlural: 'Jobs',
+  apiGroup: 'batch',
+  apiVersion: 'v1',
+  abbr: 'J',
+  namespaced: true,
+  plural: 'jobs',
+};
+
+export const PodModel: K8sModel = {
+  kind: 'Pod',
+  label: 'Pod',
+  labelPlural: 'Pods',
+  apiVersion: 'v1',
+  abbr: 'P',
+  namespaced: true,
+  plural: 'pods',
+};
+
+export const ReplicaSetModel: K8sModel = {
+  kind: 'ReplicaSet',
+  label: 'ReplicaSet',
+  labelPlural: 'ReplicaSets',
+  apiGroup: 'apps',
+  apiVersion: 'v1',
+  abbr: 'RS',
+  namespaced: true,
+  plural: 'replicasets',
+};
+
+export const ServiceModel: K8sModel = {
+  kind: 'Service',
+  label: 'Service',
+  labelPlural: 'Services',
+  apiVersion: 'v1',
+  abbr: 'S',
+  namespaced: true,
+  plural: 'services',
+};
+
+export const RoleModel: K8sModel = {
+  kind: 'Role',
+  label: 'Role',
+  labelPlural: 'Roles',
+  apiGroup: 'rbac.authorization.k8s.io',
+  apiVersion: 'v1',
+  abbr: 'R',
+  namespaced: true,
+  plural: 'roles',
+};
+
 export { InfrastructureModel, AuthenticationModel, CloudCredentialModel } from './k8s';

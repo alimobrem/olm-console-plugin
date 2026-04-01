@@ -119,14 +119,14 @@ export const useOperatorCatalogItems: ExtensionHook<CatalogItem[], CatalogExtens
 
   const loadError = useMemo(
     () =>
-      strConcat(
-        operatorGroupsLoadError,
-        operatorHubPackageManifestsLoadError,
-        subscriptionsLoadError,
-        clusterServiceVersionsLoadError,
-        infrastructureLoadError,
-        authenticationLoadError,
-      ),
+      strConcat([
+        operatorGroupsLoadError?.message || '',
+        operatorHubPackageManifestsLoadError?.message || '',
+        subscriptionsLoadError?.message || '',
+        clusterServiceVersionsLoadError?.message || '',
+        infrastructureLoadError?.message || '',
+        authenticationLoadError?.message || '',
+      ]),
     [
       authenticationLoadError,
       clusterServiceVersionsLoadError,

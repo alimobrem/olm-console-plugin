@@ -7,17 +7,22 @@ import { DescriptionListTerm, Popover, Button } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
 export const DescriptionListTermHelp: FC<{
-  term: string;
+  term?: string;
+  text?: string;
   help?: ReactNode;
-}> = ({ term, help }) => {
+  textHelp?: string;
+  popoverProps?: Record<string, unknown>;
+}> = ({ term, text, help, textHelp, popoverProps }) => {
+  const label = term || text || '';
+  const helpContent = help || textHelp;
   return (
     <DescriptionListTerm>
-      {term}
-      {help && (
-        <Popover bodyContent={help}>
+      {label}
+      {helpContent && (
+        <Popover bodyContent={helpContent} {...popoverProps}>
           <Button
             variant="plain"
-            aria-label={`Help for ${term}`}
+            aria-label={`Help for ${label}`}
             className="pf-v6-u-p-0 pf-v6-u-ml-xs"
           >
             <OutlinedQuestionCircleIcon />

@@ -154,7 +154,7 @@ export const descriptorsToUISchema = (
           const advancedPropertyName = _.last(uiSchemaPath);
           const pathToAdvanced = [...uiSchemaPath.slice(0, -1), 'ui:advanced'];
           const currentAdvanced = mutable.getIn(pathToAdvanced) ?? Immutable.List();
-          mutable.setIn(pathToAdvanced, currentAdvanced.push(advancedPropertyName));
+          mutable.setIn(pathToAdvanced, (currentAdvanced as any).push(advancedPropertyName));
         }
 
         mutable.mergeDeepIn(

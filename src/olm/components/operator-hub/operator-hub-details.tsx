@@ -22,7 +22,7 @@ const OperatorHubDetails: FC<OperatorHubDetailsProps> = ({ obj: operatorHub }) =
   const { t } = useTranslation();
   const launchModal = useOverlay();
 
-  const canEditDefaultSources = useAccessReview({
+  const [canEditDefaultSources] = useAccessReview({
     group: OperatorHubModel.apiGroup,
     resource: OperatorHubModel.plural,
     verb: 'patch',
@@ -35,7 +35,7 @@ const OperatorHubDetails: FC<OperatorHubDetailsProps> = ({ obj: operatorHub }) =
         <GridItem sm={6}>
           <ResourceSummary
             resource={operatorHub}
-            podSelector="spec.podSelector"
+            showPodSelector={false}
             showNodeSelector={false}
           />
         </GridItem>

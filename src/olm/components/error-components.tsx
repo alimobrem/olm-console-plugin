@@ -1,4 +1,5 @@
-import type { FC, ReactNode } from 'react';
+import type { ComponentType, FC, ReactNode } from 'react';
+import { Component } from 'react';
 import { Alert, AlertVariant } from '@patternfly/react-core';
 
 export const ErrorMessage: FC<{ message: string }> = ({ message }) => (
@@ -29,3 +30,49 @@ export const ErrorPage404: FC<{ message?: string; children?: ReactNode }> = ({
     {children}
   </div>
 );
+
+export const ErrorBoundaryFallbackPage: FC<{ errorMessage: string; componentStack?: string }> = ({
+  errorMessage,
+}) => (
+  <div className="co-m-pane__body">
+    <Alert variant={AlertVariant.danger} isInline title="Something went wrong">
+      {errorMessage}
+    </Alert>
+  </div>
+);
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends Component<
+  { FallbackComponent?: ComponentType<{ errorMessage: string; componentStack?: string }>; children?: ReactNode },
+  ErrorBoundaryState
+> {
+  state: ErrorBoundaryState = { hasError: false, error: null };
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      const Fallback = this.props.FallbackComponent || ErrorBoundaryFallbackPage;
+      return <Fallback errorMessage={this.state.error?.message || 'Unknown error'} />;
+    }
+    return this.props.children;
+  }
+}
+
+export function withFallback<P extends object>(
+  WrappedComponent: ComponentType<P>,
+  FallbackComponent?: ComponentType<{ errorMessage: string; componentStack?: string }>,
+): FC<P> {
+  const WithFallback: FC<P> = (props) => (
+    <ErrorBoundary FallbackComponent={FallbackComponent}>
+      <WrappedComponent {...props} />
+    </ErrorBoundary>
+  );
+  return WithFallback;
+}

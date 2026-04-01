@@ -13,7 +13,7 @@ export const PageHeading: FC<PageHeadingProps> = ({
   breadcrumbs,
   children,
 }) => (
-  <PageSection variant="light">
+  <PageSection variant="default">
     {breadcrumbs?.length > 0 && (
       <Breadcrumb className="co-breadcrumb">
         {breadcrumbs.map((crumb, i) => (
@@ -39,5 +39,6 @@ type PageHeadingProps = {
   title: string | ReactNode;
   helpText?: string | ReactNode;
   breadcrumbs?: { name: string; path: string }[];
+  badge?: ReactNode;
   children?: ReactNode;
 };

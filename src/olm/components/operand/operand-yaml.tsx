@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-const CreateYAML = () => null;
+const CreateYAML = (_props: { hideHeader?: boolean; onChange?: (yaml: string) => void; template?: string; resourceObjPath?: () => string }) => null;
 
 /**
  * Component which wraps the YAML editor to ensure the templates are added from the `ClusterServiceVersion` annotations.

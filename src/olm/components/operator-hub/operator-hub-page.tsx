@@ -13,7 +13,7 @@ import type {
 } from '../../../lib/k8s';
 import { referenceForModel } from '../../../lib/k8s';
 import { fromRequirements } from '../../../lib/k8s';
-const isCatalogTypeEnabled = () => true;
+const isCatalogTypeEnabled = (catalogTypeId?: string) => true;
 const useIsSoftwareCatalogEnabled = () => true;
 import { DocumentTitle } from '../DocumentTitle';
 import { EmptyState, EmptyStateBody } from '@patternfly/react-core';
@@ -26,7 +26,7 @@ import {
   CloudCredentialModel,
   AuthenticationModel,
   InfrastructureModel,
-} from '../../../../../public/models';
+} from '../../../lib/k8s';
 import { NON_STANDALONE_ANNOTATION_VALUE } from '../../const';
 import {
   ClusterServiceVersionModel,

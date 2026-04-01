@@ -17,15 +17,29 @@ import {
   ModalVariant,
   Radio,
   FormGroup,
-  NumberInput,
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
-import type { OverlayComponent } from '@openshift-console/dynamic-plugin-sdk/src/app/modal-support/OverlayProvider';
-import { useOverlay } from './modals';
-export type { OverlayComponent };
-export { useOverlay };
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
-import type { ModalComponentProps } from './shared-types';
+
+// OverlayComponent type — matches the SDK's overlay pattern
+export type OverlayComponent<P = {}> = FC<P & { closeOverlay: () => void }>;
+
+export type ModalComponentProps = {
+  closeOverlay: () => void;
+};
+
+// Simple overlay launcher hook
+export const useOverlay = () => {
+  return useCallback(
+    <P extends object>(Component: OverlayComponent<P>, props: P) => {
+      // In the real console host, this opens the overlay via module federation.
+      // This stub logs a warning for standalone dev.
+      // eslint-disable-next-line no-console
+      console.warn('useOverlay: stub — overlay not fully implemented in standalone mode');
+    },
+    [],
+  );
+};
 
 /* ------------------------------------------------------------------ */
 /*  ErrorModal                                                         */
@@ -34,7 +48,7 @@ import type { ModalComponentProps } from './shared-types';
 export type ErrorModalProps = {
   error: string | ReactNode;
   title?: string;
-} & ModalComponentProps;
+} & Partial<ModalComponentProps>;
 
 export const ErrorModal: OverlayComponent<ErrorModalProps> = (props) => {
   const { t } = useTranslation();
@@ -87,7 +101,7 @@ export type DeleteModalProps = {
   message?: JSX.Element;
   btnText?: ReactNode;
   deleteAllResources?: () => Promise<K8sResourceCommon[]>;
-} & ModalComponentProps;
+} & Partial<ModalComponentProps>;
 
 export const DeleteModalOverlay: OverlayComponent<DeleteModalProps> = (props) => {
   // The real implementation lives in the console host and is shared via
@@ -134,6 +148,8 @@ export type ConfigureUpdateStrategyProps = {
   strategyType: string;
   maxUnavailable: string | number;
   maxSurge: string | number;
+  replicas?: number;
+  uid?: string;
   onChangeStrategyType: (type: string) => void;
   onChangeMaxUnavailable: (value: string) => void;
   onChangeMaxSurge: (value: string) => void;
@@ -203,10 +219,14 @@ export type ConfigureCountModalProps = {
   defaultValue: number;
   titleKey?: string;
   titleVariables?: Record<string, string>;
+  labelKey?: string;
   message?: string;
+  messageKey?: string;
+  messageVariables?: Record<string, any>;
   path: string;
   buttonTextKey?: string;
   buttonTextVariables?: Record<string, string>;
+  opts?: { path?: string };
 } & Partial<ModalComponentProps>;
 
 /**
@@ -269,3 +289,14 @@ export const LazyConsolePluginModalOverlay: OverlayComponent<ConsolePluginModalO
   );
 };
 LazyConsolePluginModalOverlay.displayName = 'LazyConsolePluginModalOverlay';
+
+/* ------------------------------------------------------------------ */
+/*  Lazy modal overlay stubs                                           */
+/*  These are placeholders for modals provided by the console host.    */
+/* ------------------------------------------------------------------ */
+
+export const LazyAnnotationsModalOverlay: OverlayComponent<any> = ({ closeOverlay }) => null;
+export const LazyDeleteModalOverlay: OverlayComponent<any> = ({ closeOverlay }) => null;
+export const LazyLabelsModalOverlay: OverlayComponent<any> = ({ closeOverlay }) => null;
+export const LazyTaintsModalOverlay: OverlayComponent<any> = ({ closeOverlay }) => null;
+export const LazyTolerationsModalOverlay: OverlayComponent<any> = ({ closeOverlay }) => null;

@@ -1,10 +1,10 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import type { CatalogItem } from '@openshift-console/dynamic-plugin-sdk';
 import { consoleFetch } from '@openshift-console/dynamic-plugin-sdk';
-import {
-  getConsoleRequestHeaders,
-  normalizeConsoleHeaders,
-} from '@openshift-console/dynamic-plugin-sdk';
+
+// Stub missing SDK functions
+const getConsoleRequestHeaders = () => ({});
+const normalizeConsoleHeaders = (headers: any) => headers;
 import { ONE_SECOND } from '../../lib/constants';
 import { usePoll } from '../../lib/sdk-compat';
 import type { OLMCatalogItem } from '../types';

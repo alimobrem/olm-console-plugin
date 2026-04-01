@@ -10,7 +10,7 @@ import type { Page } from '../../../lib/factory';
 /* ---- Inlined MultiTabListPage ---- */
 interface MultiTabListPagePage {
   href: string;
-  name: string;
+  name?: string;
   component?: ComponentType<any> | (() => ReactNode);
   badge?: ReactNode;
   [key: string]: any;
@@ -28,7 +28,7 @@ const MultiTabListPage: FC<MultiTabListPageProps> = ({ title, badge, pages }) =>
 
   return (
     <>
-      <PageSection variant="light">
+      <PageSection variant="default">
         <Title headingLevel="h1" size="2xl">
           {title} {badge}
         </Title>

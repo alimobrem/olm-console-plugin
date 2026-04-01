@@ -20,7 +20,6 @@ import {
   ListPageFilter as SDKListPageFilter,
   useListPageFilter as sdkUseListPageFilter,
   useActiveColumns,
-  useK8sWatchResource,
   useK8sWatchResources,
 } from '@openshift-console/dynamic-plugin-sdk';
 
@@ -32,7 +31,16 @@ export {
   useActiveColumns,
 };
 
-export const TableData = SDKTableData;
+// Wrapper that makes id/activeColumnIDs optional for legacy call sites
+const ALL_COLUMNS = new Set<string>();
+export const TableData: FC<{
+  id?: string;
+  activeColumnIDs?: Set<string>;
+  className?: string;
+  children?: ReactNode;
+}> = ({ id = '', activeColumnIDs = ALL_COLUMNS, ...rest }) => (
+  <SDKTableData id={id} activeColumnIDs={activeColumnIDs} {...rest} />
+);
 export const ListPageHeader = SDKListPageHeader;
 export const ListPageFilter = SDKListPageFilter;
 export const ListPageCreateDropdown = SDKListPageCreateDropdown;
@@ -60,9 +68,9 @@ export type Filter = {
   filter?: (items: string[], obj: any) => boolean;
 };
 
-export type Page = {
+export type Page<T = any> = {
   href: string;
-  name: string;
+  name?: string;
   component?: ComponentType<any>;
   nameKey?: string;
   badge?: ReactNode;

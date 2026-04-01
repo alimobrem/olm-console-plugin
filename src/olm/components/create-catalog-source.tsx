@@ -13,7 +13,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import type { RadioGroupItems } from '../../lib/legacy-components';
-import { Radio as RadioGroup } from '@patternfly/react-core';
+import { RadioGroup } from '../../lib/legacy-components';
 import { ButtonBar, NsDropdown } from '../../lib/console-components';
 import { k8sCreate } from '../../lib/k8s';
 import { DocumentTitle } from './DocumentTitle';

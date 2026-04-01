@@ -42,7 +42,7 @@ export const PackageManifestTableHeader = () => [
   },
   {
     title: i18n.t('public~Created'),
-    sortField: 'metadata.creationTimestamp',
+    sort: 'metadata.creationTimestamp',
     transforms: [sortable],
     props: { className: tableColumnClasses[2] },
   },
@@ -52,16 +52,17 @@ export const PackageManifestTableHeaderWithCatalogSource = () => [
   ...PackageManifestTableHeader(),
   {
     title: i18n.t('olm~CatalogSource'),
-    sortField: 'status.catalogSource',
+    sort: 'status.catalogSource',
     transforms: [sortable],
     props: { className: tableColumnClasses[3] },
   },
 ];
 
-export const PackageManifestTableRow: FC<RowFunctionArgs<
-  PackageManifestKind,
-  { catalogSource: CatalogSourceKind }
->> = ({ obj: packageManifest, customData }) => {
+export const PackageManifestTableRow: FC<
+  RowFunctionArgs<PackageManifestKind> & {
+    customData?: { catalogSource: CatalogSourceKind };
+  }
+> = ({ obj: packageManifest, customData }) => {
   const channel = defaultChannelFor(packageManifest);
 
   const { displayName, version, provider } = channel?.currentCSVDesc;
@@ -201,6 +202,12 @@ export const PackageManifestsPage: FC<PackageManifestsPageProps> = (props) => {
 export type PackageManifestsPageProps = {
   catalogSource: CatalogSourceKind;
   namespace?: string;
+  showTitle?: boolean;
+  obj?: any;
+  resources?: any[];
+  rowFilters?: any[];
+  flatten?: any;
+  ListComponent?: any;
 };
 
 export type PackageManifestListProps = {

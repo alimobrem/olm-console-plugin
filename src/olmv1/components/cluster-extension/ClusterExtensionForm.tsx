@@ -17,8 +17,8 @@ import {
   ActionGroup,
   Alert,
   PageSection,
+  Popover,
 } from '@patternfly/react-core';
-import { Alert, Popover } from '@patternfly/react-core';
 import type { TextInputProps } from '@patternfly/react-core';
 import { HelpIcon, PencilAltIcon } from '@patternfly/react-icons';
 import * as _ from 'lodash';

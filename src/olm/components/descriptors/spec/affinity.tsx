@@ -408,7 +408,7 @@ export const PodAffinity: FC<PodAffinityProps> = ({ affinity, onChange, uid = ''
       ...affinity,
       preferredDuringSchedulingIgnoredDuringExecution: preferredRules.map((current, index) =>
         index === atIndex ? next : current,
-      ),
+      ) as Array<{ weight: number; podAffinityTerm: PodAffinityTerm }>,
     });
 
   return (

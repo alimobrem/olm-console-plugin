@@ -539,7 +539,7 @@ const CSVListEmptyMsg = () => {
 
 const CSVListNoDataEmptyMsg = () => {
   const { t } = useTranslation();
-  const project = useActiveNamespace();
+  const [project] = useActiveNamespace();
   const noOperatorsInSingleNamespaceMessage = t(
     'olm~No Operators are available for project {{project}}.',
     { project },
@@ -587,10 +587,10 @@ export const ClusterServiceVersionList: FC<ClusterServiceVersionListProps> = ({
   ...rest
 }) => {
   const { t } = useTranslation();
-  const activeNamespace = useActiveNamespace();
+  const [activeNamespace] = useActiveNamespace();
   const nameHeader: Header = {
     title: t('olm~Name'),
-    sortField: 'metadata.name',
+    sort: 'metadata.name',
     transforms: [sortable],
     props: { className: nameColumnClass },
   };
@@ -1421,13 +1421,14 @@ type ConsolePluginStatusProps = {
 };
 
 type InstalledOperatorTableRowProps = RowFunctionArgs<
-  ClusterServiceVersionKind | SubscriptionKind,
-  {
+  ClusterServiceVersionKind | SubscriptionKind
+> & {
+  customData?: {
     activeNamespace: string;
     catalogSources: CatalogSourceKind[];
     subscriptions: SubscriptionKind[];
-  }
->;
+  };
+};
 
 export type ClusterServiceVersionTableRowProps = {
   obj: ClusterServiceVersionKind;
@@ -1459,6 +1460,7 @@ type InitializationResourceAlertProps = {
 
 type Header = {
   title: string;
+  sort?: string;
   sortField?: string;
   sortFunc?: string;
   transforms?: any;

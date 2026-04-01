@@ -90,6 +90,7 @@ export const InstallPlanHint: FC<InstallPlanHintProps> = ({ title, body, footer 
 
 export const InstallPlanTableRow: FC<RowFunctionArgs> = ({ obj }) => {
   const { t } = useTranslation();
+  const installPlan = obj as any as InstallPlanKind;
   const phaseFor = (phase: InstallPlanKind['status']['phase']) => <Status status={phase} />;
   return (
     <>
@@ -109,15 +110,15 @@ export const InstallPlanTableRow: FC<RowFunctionArgs> = ({ obj }) => {
 
       {/* Status */}
       <TableData className={tableColumnClasses[2]}>
-        {phaseFor(obj.status?.phase ?? 'Unknown')}
+        {phaseFor((installPlan.status?.phase ?? 'Unknown') as any)}
       </TableData>
 
       {/* Components */}
       <TableData className={tableColumnClasses[3]}>
         <ul className="pf-v6-c-list pf-m-plain">
-          {obj.spec.clusterServiceVersionNames.map((csvName) => (
+          {installPlan.spec.clusterServiceVersionNames.map((csvName) => (
             <li key={csvName}>
-              {obj.status?.phase === 'Complete' ? (
+              {installPlan.status?.phase === 'Complete' ? (
                 <ResourceLink
                   kind={referenceForModel(ClusterServiceVersionModel)}
                   name={csvName}
@@ -176,19 +177,19 @@ export const InstallPlansList = requireOperatorGroup((props: InstallPlansListPro
     return [
       {
         title: t('olm~Name'),
-        sortField: 'metadata.name',
+        sort: 'metadata.name',
         transforms: [sortable],
         props: { className: tableColumnClasses[0] },
       },
       {
         title: t('olm~Namespace'),
-        sortField: 'metadata.namespace',
+        sort: 'metadata.namespace',
         transforms: [sortable],
         props: { className: tableColumnClasses[1] },
       },
       {
         title: t('olm~Status'),
-        sortField: 'status.phase',
+        sort: 'status.phase',
         transforms: [sortable],
         props: { className: tableColumnClasses[2] },
       },
@@ -221,12 +222,12 @@ export const InstallPlansList = requireOperatorGroup((props: InstallPlansListPro
 const getCatalogSources = (
   installPlan: InstallPlanKind,
 ): { sourceName: string; sourceNamespace: string }[] =>
-  _.reduce(
+  (_.reduce(
     installPlan?.status?.plan || [],
     (accumulator, { resource: { sourceName, sourceNamespace } }) =>
       accumulator.add(fromJS({ sourceName, sourceNamespace })),
     ImmutableSet(),
-  ).toJS();
+  ).toJS() as any) as { sourceName: string; sourceNamespace: string }[];
 
 export const InstallPlansPage: FC<InstallPlansPageProps> = (props) => {
   const { t } = useTranslation();
@@ -420,7 +421,8 @@ export const InstallPlanPreview: FC<InstallPlanPreviewProps> = ({ obj, hideAppro
       (acc, step) => acc.update(step.resolving, [], (steps) => steps.concat([step])),
       ImmutableMap<string, Step[]>(),
     )
-    .toArray();
+    .valueSeq()
+    .toArray() as Step[][];
 
   const approve = () =>
     k8sPatch(InstallPlanModel, obj, [{ op: 'replace', path: '/spec/approved', value: true }])

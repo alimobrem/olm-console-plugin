@@ -72,7 +72,7 @@ SecretValue.displayName = 'SecretValue';
 export const ManagedByOperatorLink: FC<{ obj: any }> = () => null;
 ManagedByOperatorLink.displayName = 'ManagedByOperatorLink';
 
-export const ManagedByOperatorResourceLink: FC<{ obj: any }> = () => null;
+export const ManagedByOperatorResourceLink: FC<{ obj?: any; csvName?: any; namespace?: any; owner?: any }> = () => null;
 ManagedByOperatorResourceLink.displayName = 'ManagedByOperatorResourceLink';
 
 /* ------------------------------------------------------------------ */
@@ -141,8 +141,38 @@ export const authSvc = {
 /* ------------------------------------------------------------------ */
 
 export type RadioGroupItems = {
-  title: string;
+  title?: string;
+  label?: string;
+  name?: string;
   value: string;
   desc?: string;
+  description?: string;
   disabled?: boolean;
 }[];
+
+export const RadioGroup: FC<{
+  currentValue: string;
+  items: RadioGroupItems;
+  onChange: (e: any) => void;
+  id?: string;
+}> = ({ currentValue, items, onChange, id }) => (
+  <div id={id}>
+    {items.map((item) => (
+      <label key={item.value} className="pf-v6-c-radio" style={{ display: 'block', marginBottom: '0.5rem' }}>
+        <input
+          type="radio"
+          className="pf-v6-c-radio__input"
+          name={item.name || 'radio-group'}
+          value={item.value}
+          checked={currentValue === item.value}
+          onChange={onChange}
+          disabled={item.disabled}
+        />
+        <span className="pf-v6-c-radio__label">{item.label || item.title}</span>
+        {(item.description || item.desc) && (
+          <span className="pf-v6-c-radio__description">{item.description || item.desc}</span>
+        )}
+      </label>
+    ))}
+  </div>
+);

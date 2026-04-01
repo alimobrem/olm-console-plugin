@@ -80,3 +80,25 @@ export type ResourceRequirementsProps = {
 };
 
 ResourceRequirements.displayName = 'ResourceRequirements';
+
+// Stub for ResourceRequirementsModalLink (simplified version without modal)
+export const ResourceRequirementsModalLink: FC<{
+  type: 'limits' | 'requests';
+  obj: any;
+  path: string;
+}> = ({ type, obj, path }) => {
+  const values = path.split('.').reduce((acc, key) => acc?.[key], obj);
+  const resources = values?.[type];
+
+  if (!resources) {
+    return <span>-</span>;
+  }
+
+  return (
+    <span>
+      {Object.entries(resources).map(([key, value]) => `${key}: ${value}`).join(', ')}
+    </span>
+  );
+};
+
+ResourceRequirementsModalLink.displayName = 'ResourceRequirementsModalLink';

@@ -2,8 +2,10 @@ import type { ReactElement, FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import type { TopologyDataObject } from '@openshift-console/dynamic-plugin-sdk';
 import { ResourceIcon, StatusBox } from '../../../../lib/console-components';
+
+// TopologyDataObject type stub for local use
+type TopologyDataObject = any;
 import { useK8sWatchResources } from '@openshift-console/dynamic-plugin-sdk';
 import type { GroupVersionKind, K8sResourceKind } from '../../../../lib/k8s';
 import {
@@ -23,7 +25,6 @@ import {
   linkForCsvResource,
 } from '../../k8s-resource';
 import { TopologyGroupResourcesPanel } from '../../../../lib/topology';
-import type { OperatorGroupData } from './types';
 
 type OperatorResourcesProps = {
   namespace: string;
@@ -126,7 +127,7 @@ const OperatorResourcesGetter: FC<OperatorResourcesGetterProps> = ({
 };
 
 type TopologyOperatorBackedResourcesProps = {
-  item: TopologyDataObject<OperatorGroupData>;
+  item: TopologyDataObject;
   csv: ClusterServiceVersionKind;
 };
 

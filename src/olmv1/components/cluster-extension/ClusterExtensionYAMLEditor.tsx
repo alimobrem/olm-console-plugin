@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-const CreateYAML = () => null;
+const CreateYAML = (_props: { hideHeader?: boolean; onChange?: (yaml: string) => void; template?: string }) => null;
 
 export const ClusterExtensionYAMLEditor: FC<ClusterExtensionYAMLEditorProps> = ({
   initialYAML = '',

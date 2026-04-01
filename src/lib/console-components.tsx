@@ -19,7 +19,7 @@ import {
 } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import type { K8sResourceCommon } from '@openshift-console/dynamic-plugin-sdk';
-import { ResourceLink, ResourceIcon, Timestamp } from '@openshift-console/dynamic-plugin-sdk';
+import { ResourceLink, Timestamp } from '@openshift-console/dynamic-plugin-sdk';
 
 /* Re-export SDK primitives so consumers can import from one place */
 export { ResourceLink, ResourceIcon } from '@openshift-console/dynamic-plugin-sdk';
@@ -150,8 +150,9 @@ SectionHeading.displayName = 'SectionHeading';
 /* ------------------------------------------------------------------ */
 
 // Inline ConsoleEmptyState replacement
-export const ConsoleEmptyState: FC<{ children?: ReactNode }> = ({ children }) => (
+export const ConsoleEmptyState: FC<{ title?: string; children?: ReactNode }> = ({ title, children }) => (
   <EmptyState>
+    {title && <Title headingLevel="h2" size="lg">{title}</Title>}
     <EmptyStateBody>{children}</EmptyStateBody>
   </EmptyState>
 );
@@ -233,7 +234,8 @@ export const navFactory = {
 export const DetailsItem: FC<{
   label: string;
   obj?: any;
-  path?: string;
+  path?: string | string[];
+  description?: string;
   children?: ReactNode;
   editAsGroup?: boolean;
   hideEmpty?: boolean;
@@ -374,12 +376,15 @@ export const NumberSpinner: FC<{
   changeValueBy: (delta: number) => void;
   min?: number;
   max?: number;
-}> = ({ value, onChange, changeValueBy, min, max }) => (
+  id?: string;
+  autoFocus?: boolean;
+  required?: boolean;
+}> = ({ value, onChange, changeValueBy, min, max, id, autoFocus, required }) => (
   <div className="co-m-number-spinner">
     <button type="button" onClick={() => changeValueBy(-1)} disabled={min !== undefined && value <= min}>
       -
     </button>
-    <input type="number" value={value} onChange={onChange} min={min} max={max} />
+    <input type="number" value={value} onChange={onChange} min={min} max={max} id={id} autoFocus={autoFocus} required={required} />
     <button type="button" onClick={() => changeValueBy(1)} disabled={max !== undefined && value >= max}>
       +
     </button>
@@ -396,33 +401,51 @@ export const SelectorInput: FC<{
   tags?: string[];
   labelClassName?: string;
   inputProps?: any;
-}> = ({ onChange, tags = [] }) => {
-  const [inputValue, setInputValue] = useState('');
-  return (
-    <div>
-      {tags.map((t) => (
-        <span key={t} className="co-m-label">
-          {t}
-          <button type="button" onClick={() => onChange(tags.filter((tag) => tag !== t))}>
-            x
-          </button>
-        </span>
-      ))}
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' && inputValue.trim()) {
-            e.preventDefault();
-            onChange([...tags, inputValue.trim()]);
-            setInputValue('');
-          }
-        }}
-      />
-    </div>
-  );
-};
+}> & {
+  arrayify: (obj: Record<string, string>) => string[];
+  objectify: (arr: string[]) => Record<string, string>;
+} = Object.assign(
+  ({ onChange, tags = [] }) => {
+    const [inputValue, setInputValue] = useState('');
+    return (
+      <div>
+        {tags.map((t) => (
+          <span key={t} className="co-m-label">
+            {t}
+            <button type="button" onClick={() => onChange(tags.filter((tag) => tag !== t))}>
+              x
+            </button>
+          </span>
+        ))}
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && inputValue.trim()) {
+              e.preventDefault();
+              onChange([...tags, inputValue.trim()]);
+              setInputValue('');
+            }
+          }}
+        />
+      </div>
+    );
+  },
+  {
+    arrayify: (obj: Record<string, string>): string[] => {
+      return Object.entries(obj || {}).map(([key, value]) => `${key}=${value}`);
+    },
+    objectify: (arr: string[]): Record<string, string> => {
+      const result: Record<string, string> = {};
+      (arr || []).forEach((item) => {
+        const [key, value] = item.split('=');
+        if (key) result[key] = value || '';
+      });
+      return result;
+    },
+  },
+);
 SelectorInput.displayName = 'SelectorInput';
 
 /* ------------------------------------------------------------------ */
@@ -560,6 +583,8 @@ export const DOC_URL_OPERATORFRAMEWORK_SDK =
 
 export const documentationURLs = {
   defined: (url: string) => url,
+  operators: '',
+  configuringMonitoring: '',
 };
 
 export const getDocumentationURL = (url: string): string => url;

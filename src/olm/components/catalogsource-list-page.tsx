@@ -22,12 +22,12 @@ import type {
 } from '@openshift-console/dynamic-plugin-sdk';
 
 const columns: TableColumn<K8sResourceCommon>[] = [
-  { title: 'Name', id: 'name', sortField: 'metadata.name' },
-  { title: 'Namespace', id: 'namespace', sortField: 'metadata.namespace' },
+  { title: 'Name', id: 'name', sort: 'metadata.name' },
+  { title: 'Namespace', id: 'namespace', sort: 'metadata.namespace' },
   { title: 'Display Name', id: 'displayName' },
   { title: 'Publisher', id: 'publisher' },
   { title: 'Type', id: 'type' },
-  { title: 'Created', id: 'created', sortField: 'metadata.creationTimestamp' },
+  { title: 'Created', id: 'created', sort: 'metadata.creationTimestamp' },
 ];
 
 const CatalogSourceRow: FC<RowProps<K8sResourceCommon>> = ({ obj, activeColumnIDs }) => (
