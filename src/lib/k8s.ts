@@ -22,37 +22,21 @@ export {
   useK8sModels,
 } from '@openshift-console/dynamic-plugin-sdk';
 
-// Compatibility wrappers that accept both old multi-arg and new single-arg calling conventions.
-// Old: k8sPatch(model, resource, patches)
-// New: k8sPatch({ model, resource, data })
+// Backward-compat: old OLM code calls k8sPatch(model, resource, patches) but the SDK
+// takes a single options object. These wrappers detect the calling convention at runtime.
+const wrapK8s = (sdkFn: (opts: any) => any, argMapper: (...a: any[]) => any) =>
+  (...args: any[]): any => args.length === 1 ? sdkFn(args[0]) : sdkFn(argMapper(...args));
 
-export const k8sPatch = (...args: any[]): any => {
-  if (args.length === 1) return sdkK8sPatch(args[0]);
-  const [model, resource, data] = args;
-  return sdkK8sPatch({ model, resource, data });
-};
+export const k8sPatch = wrapK8s(sdkK8sPatch, (model, resource, data) => ({ model, resource, data }));
+export const k8sGet = wrapK8s(sdkK8sGet, (model, name, ns) => ({ model, name, ns }));
+export const k8sCreate = wrapK8s(sdkK8sCreate, (model, data) => ({ model, data }));
+export const k8sUpdate = wrapK8s(sdkK8sUpdate, (model, data) => ({ model, data }));
+export const k8sList = wrapK8s(sdkK8sList, (model, params) => ({ model, queryParams: params }));
 
-export const k8sGet = (...args: any[]): any => {
-  if (args.length === 1) return sdkK8sGet(args[0]);
-  const [model, name, ns] = args;
-  return sdkK8sGet({ model, name, ns });
-};
-
-export const k8sCreate = (...args: any[]): any => {
-  if (args.length === 1) return sdkK8sCreate(args[0]);
-  const [model, data] = args;
-  return sdkK8sCreate({ model, data });
-};
-
-export const k8sUpdate = (...args: any[]): any => {
-  if (args.length === 1) return sdkK8sUpdate(args[0]);
-  const [model, data] = args;
-  return sdkK8sUpdate({ model, data });
-};
-
+// k8sDelete has special handling for deleteOptions in the 5th argument
 export const k8sDelete = (...args: any[]): any => {
   if (args.length === 1) return sdkK8sDelete(args[0]);
-  const [model, resource, _reqOpts, _json, deleteOptions] = args;
+  const [model, resource, , , deleteOptions] = args;
   return sdkK8sDelete({
     model,
     resource,
@@ -61,13 +45,6 @@ export const k8sDelete = (...args: any[]): any => {
 };
 
 export const k8sKill = k8sDelete;
-
-export const k8sList = (...args: any[]): any => {
-  if (args.length === 1) return sdkK8sList(args[0]);
-  const [model, params] = args;
-  return sdkK8sList({ model, queryParams: params });
-};
-
 export const k8sListPartialMetadata = k8sList;
 
 export type {
@@ -249,7 +226,8 @@ export const kindForReference = (ref: string): string => ref.split('~').pop() ||
 /**
  * Look up a K8sModel by reference string.
  * In the console host, this queries the global model store. In standalone mode,
- * we return a synthetic model built from the reference parts.
+ * we return a synthetic model with naive pluralization (kind + "s") — this won't
+ * handle irregular plurals but suffices for CRD-based resources.
  */
 export const modelFor = (ref: string): K8sModel | undefined => {
   if (!ref) return undefined;
@@ -314,20 +292,21 @@ export const resourceURL = (
  * Compare API versions for sorting (e.g., v1 > v1beta1 > v1alpha1).
  * Replaces `apiVersionCompare` from @console/internal/module/k8s
  */
+const VERSION_REGEX = /^v(\d+)(?:(alpha|beta)(\d+)?)?$/;
+const STABILITY_ORDER: Record<string, number> = { alpha: 0, beta: 1 };
+
 export const apiVersionCompare = (a: string, b: string): number => {
   if (a === b) return 0;
-  const versionRegex = /^v(\d+)(?:(alpha|beta)(\d+)?)?$/;
-  const aMatch = a?.match(versionRegex);
-  const bMatch = b?.match(versionRegex);
+  const aMatch = a?.match(VERSION_REGEX);
+  const bMatch = b?.match(VERSION_REGEX);
   if (!aMatch && !bMatch) return a?.localeCompare(b) || 0;
   if (!aMatch) return 1;
   if (!bMatch) return -1;
   const aMajor = parseInt(aMatch[1], 10);
   const bMajor = parseInt(bMatch[1], 10);
   if (aMajor !== bMajor) return aMajor - bMajor;
-  const stability: Record<string, number> = { alpha: 0, beta: 1 };
-  const aStability = aMatch[2] ? stability[aMatch[2]] ?? 0 : 2;
-  const bStability = bMatch[2] ? stability[bMatch[2]] ?? 0 : 2;
+  const aStability = aMatch[2] ? STABILITY_ORDER[aMatch[2]] ?? 0 : 2;
+  const bStability = bMatch[2] ? STABILITY_ORDER[bMatch[2]] ?? 0 : 2;
   if (aStability !== bStability) return aStability - bStability;
   const aMinor = parseInt(aMatch[3] || '0', 10);
   const bMinor = parseInt(bMatch[3] || '0', 10);

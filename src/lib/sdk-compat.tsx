@@ -321,21 +321,8 @@ export const ListPageBody: FC<{ children?: ReactNode }> = ({ children }) => (
 /*  Functions                                                          */
 /* ================================================================== */
 
-/**
- * Build an access-review object for checking permissions.
- */
-export const asAccessReview = (
-  model: K8sModel,
-  obj: K8sResourceCommon,
-  verb: string,
-  subresource?: string,
-): { group: string; resource: string; namespace?: string; name?: string; verb: any } => ({
-  group: model.apiGroup || '',
-  resource: subresource ? `${model.plural}/${subresource}` : model.plural,
-  namespace: obj?.metadata?.namespace,
-  name: obj?.metadata?.name,
-  verb,
-});
+// Re-export from k8s.ts to avoid duplicate definition
+export { asAccessReview } from './k8s';
 
 /**
  * Build a URL path from a K8s resource object.
